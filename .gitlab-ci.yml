@@ -1,0 +1,35 @@
+stages:
+    - License
+    - Build
+    - Build [Release]
+    - Deploy
+    - Release
+
+variables:
+    PROJECT_NAME: "GameDevWeekBase"
+    UNITY_VERSION: "2018.3.7f1"
+    NEXTCLOUD_SHARE_PATH: "$NEXTCLOUD_DEPLOY_BASE_PATH/$PROJECT_NAME"
+    NEXTCLOUD_DEPLOY_PATH: "$NEXTCLOUD_USERNAME/$NEXTCLOUD_DEPLOY_BASE_PATH/$PROJECT_NAME"
+
+.non_release_build:
+    only:
+        variables:
+            - $RUN_NON_RELEASE_BUILDS
+
+include:
+# Base
+    - https://gitlab.dragonixx.de/Dragonixx/gitlab-ci-toolbox/raw/master/scripts/unity/build-base.yml
+    - https://gitlab.dragonixx.de/Dragonixx/gitlab-ci-toolbox/raw/master/scripts/unity/license.yml
+
+# Platforms
+    - https://gitlab.dragonixx.de/Dragonixx/gitlab-ci-toolbox/raw/master/scripts/unity/platforms/windows64.yml
+    - https://gitlab.dragonixx.de/Dragonixx/gitlab-ci-toolbox/raw/master/scripts/unity/platforms/osx.yml
+    - https://gitlab.dragonixx.de/Dragonixx/gitlab-ci-toolbox/raw/master/scripts/unity/platforms/linux.yml
+    - https://gitlab.dragonixx.de/Dragonixx/gitlab-ci-toolbox/raw/master/scripts/unity/platforms/webgl.yml
+
+# Deploy
+    - https://gitlab.dragonixx.de/Dragonixx/gitlab-ci-toolbox/raw/master/scripts/unity/deploy/all-to-nextcloud.yml
+    - https://gitlab.dragonixx.de/Dragonixx/gitlab-ci-toolbox/raw/master/scripts/unity/deploy/webgl-to-pages.yml
+
+# Release
+    - https://gitlab.dragonixx.de/Dragonixx/gitlab-ci-toolbox/raw/master/scripts/unity/release/all-nextcloud.yml
