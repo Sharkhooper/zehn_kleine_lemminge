@@ -15,17 +15,13 @@ public class LemmingMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
-	
+
     void FixedUpdate()
     {
-        
-    }
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
 
-	public void MoveHorizontal(float horizontal)
-	{
-		Vector3 movement = new Vector3(horizontal, 0.0f, 0.0f);
-		rb.AddForce(movement * speed * Time.deltaTime);
-	}
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
 	public void MoveVertical(float vertical)
 	{
