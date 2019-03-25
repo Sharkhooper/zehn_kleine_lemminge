@@ -8,6 +8,16 @@ public class InputTouch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		
+		if(Input.GetMouseButtonDown(1))
+		{
+			Vector3 start = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0f);
+			start = Camera.main.ScreenToWorldPoint(start);
+			Debug.Log(start.x+" "+start.y);
+		}
+
+
+
 		if (Input.touchCount > 0)
 		{
 			Touch touch = Input.GetTouch(0);
