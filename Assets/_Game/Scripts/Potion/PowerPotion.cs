@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class PowerPotion : TileBase
+public class PowerPotion : MonoBehaviour
 {
     private GameManager inventory;
     private string name;

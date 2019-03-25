@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class JumpPotion : TileBase
+public class JumpPotion : MonoBehaviour
 {
     private GameManager inventory;
     private string name;
