@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class LemmingMovement : MonoBehaviour
 {
-     [SerializeField] public float speed;
-    private Rigidbody rb;
-	public bool isCrouching
+     [SerializeField] public float speed = 1;
+    private Rigidbody2D rb;
+	public bool IsCrouching
+	{ get; set; }
+	public Vector2 WindConstant
 	{ get; set; }
 
-	public bool inGroupe { set; get; }
+
+	public bool InGroupe { set; get; }
 
 	private GameManager gameManager;
 
@@ -18,31 +21,28 @@ public class LemmingMovement : MonoBehaviour
     void Start()
     {
 		gameManager = FindObjectOfType<GameManager>();
-        rb = GetComponent<Rigidbody>();
-		inGroupe = false;
+        rb = GetComponent<Rigidbody2D>();
+		InGroupe = false;
     }
 
 	void FixedUpdate()
 	{
-		float moveHorizontal = Input.GetAxis("Horizontal");
-		float moveVertical = Input.GetAxis("Vertical");
-
-		Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+		rb.AddForce(WindConstant);
 	}
 
 	public void Jump(float vertical)
 	{
-		if (!inGroupe)
+		if (!InGroupe)
 		{
-			Vector3 movement = new Vector3( 0.0f, vertical, 0.0f);
-			rb.AddForce(movement * Time.deltaTime, ForceMode.Impulse);
+			Vector2 movement = new Vector2( 0.0f, vertical);
+			rb.AddForce(movement * Time.deltaTime, ForceMode2D.Impulse);
 		}
 
 	}
 
 	public void MoveHorizontal(float horizontal)
 	{
-		Vector3 movement = new Vector3(horizontal,0.0f, 0.0f);
+		Vector2 movement = new Vector2(horizontal,0.0f);
 		rb.AddForce(movement * speed * Time.deltaTime);
 	}
 
