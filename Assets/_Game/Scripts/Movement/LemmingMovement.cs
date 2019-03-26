@@ -5,6 +5,8 @@ using UnityEngine;
 public class LemmingMovement : MonoBehaviour
 {
      [SerializeField] public float speed = 1;
+	[SerializeField] public float maxSpeed = 100;
+	private bool IsGrounded;
     private Rigidbody2D rb;
 	public bool IsCrouching
 	{ get; set; }
@@ -25,9 +27,20 @@ public class LemmingMovement : MonoBehaviour
 		InGroupe = false;
     }
 
+	
+
 	void FixedUpdate()
 	{
+		
+		//IsGrounded = GetComponentInChildren<CapsuleCollider2D>().
+		Debug.Log((GetComponentInChildren<CapsuleCollider2D>()));
+
 		rb.AddForce(WindConstant);
+
+		if(rb.velocity.magnitude > maxSpeed)
+		{
+			rb.velocity = rb.velocity.normalized * maxSpeed;
+		}
 	}
 
 	public void Jump(float vertical)
@@ -46,5 +59,9 @@ public class LemmingMovement : MonoBehaviour
 		rb.AddForce(movement * speed * Time.deltaTime);
 	}
 
-
+	public void TouchVector(Vector2 movement)
+	{
+		Jump(movement.y);
+		MoveHorizontal(movement.x);
+	}
 }
