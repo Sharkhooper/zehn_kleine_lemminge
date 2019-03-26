@@ -4,27 +4,23 @@ using UnityEngine;
 
 public class WindTilemap : MonoBehaviour, ITrigger
 {
-	private LemmingMovement playerMove;
+	public void OnLemmingEnter()
+	{
+		throw new System.NotImplementedException();
+	}
 
-    // Start is called before the first frame update
-    void Start()
-    {
-	    playerMove = GameObject.FindGameObjectWithTag("Player").GetComponent<LemmingMovement>();
-    }
+	public void OnLemmingExit()
+	{
+		throw new System.NotImplementedException();
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
+	public void OnGroupEnter()
+	{
+		throw new System.NotImplementedException();
+	}
 
-    }
-
-    public void OnPlayerEnter()
-    {
-	    // TODO: Modify wind property in LemmingMovement
-    }
-
-    public void OnPlayerExit()
-    {
-	    // TODO: Reset wind property in LemmingMovement
-    }
+	public void OnGroupExit()
+	{
+		throw new System.NotImplementedException();
+	}
 }
