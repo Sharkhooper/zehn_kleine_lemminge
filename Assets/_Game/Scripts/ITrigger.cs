@@ -4,6 +4,8 @@ using UnityEngine;
 
 public interface ITrigger
 {
-	void OnPlayerEnter();
-	void OnPlayerExit();
+	void OnLemmingEnter();
+	void OnLemmingExit();
+	void OnGroupEnter();
+	void OnGroupExit();
 }

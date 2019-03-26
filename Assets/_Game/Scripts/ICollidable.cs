@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface ICollidable
 {
-	void OnCollisionWithPlayer(GameObject player);
+	void OnCollisionWithLemming();
 	void OnCollisionWithGroup();
 }
