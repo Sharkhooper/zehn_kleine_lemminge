@@ -30,7 +30,7 @@ public class InputPC : MonoBehaviour
 		float vertical = Input.GetAxis("Vertical");
 		if(vertical != 0)
 		{
-			lemmingMovement.Jump(vertical);
+			lemmingMovement.Jump();
 		}
         
     }
