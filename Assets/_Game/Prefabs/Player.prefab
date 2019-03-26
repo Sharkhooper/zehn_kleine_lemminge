@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6721667773647334816}
   - component: {fileID: 6721667773647334831}
   - component: {fileID: 6721667773647334821}
-  - component: {fileID: 3080617725374712850}
+  - component: {fileID: 1137342614266757089}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -164,7 +164,7 @@ CapsuleCollider2D:
   m_Offset: {x: -0.010566771, y: 0.040136218}
   m_Size: {x: 0.5477427, y: 0.88592887}
   m_Direction: 0
---- !u!95 &3080617725374712850
+--- !u!95 &1137342614266757089
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -194,7 +194,6 @@ GameObject:
   - component: {fileID: 6721667774665779717}
   - component: {fileID: 6721667774665779719}
   - component: {fileID: 6721667774665779718}
-  - component: {fileID: 6721667774665779768}
   m_Layer: 0
   m_Name: Foot
   m_TagString: Untagged
@@ -280,15 +279,3 @@ CapsuleCollider2D:
   m_Offset: {x: 0.008449731, y: 4.622004e-16}
   m_Size: {x: 0.24650781, y: 0.99999964}
   m_Direction: 0
---- !u!114 &6721667774665779768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6721667774665779716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d02ba22b9fc59734b8429a2def9a4b21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

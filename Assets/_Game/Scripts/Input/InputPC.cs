@@ -26,7 +26,7 @@ public class InputPC : MonoBehaviour
 		lemmingMovement.MoveHorizontal(horizontal);
 
 		float vertical = Input.GetAxis("Vertical");
-		if(vertical != 0)
+		if(vertical > 0)
 		{
 			lemmingMovement.Jump();
 		}
