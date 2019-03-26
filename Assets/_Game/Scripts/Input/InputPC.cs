@@ -6,6 +6,7 @@ using UnityEngine;
 public class InputPC : MonoBehaviour
 {
 	private LemmingMovement lemmingMovement;
+	private Rigidbody2D rb;
 
 	void Awake()
 	{
@@ -15,23 +16,20 @@ public class InputPC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+	    rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
 		float horizontal = Input.GetAxis("Horizontal");
-		if(horizontal != 0)
-		{
-			lemmingMovement.MoveHorizontal(new Vector2(horizontal, 0.0f));
-		}
+		lemmingMovement.MoveHorizontal(horizontal);
 
 		float vertical = Input.GetAxis("Vertical");
 		if(vertical != 0)
 		{
 			lemmingMovement.Jump();
 		}
-        
+
     }
 }

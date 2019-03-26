@@ -5,16 +5,19 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	public bool IsGroupSelected;
-	private LemmingMovement[] lemmings;
+	private GameObject[] lemmings;
 	public LemmingMovement ActiveLemming { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
-	    lemmings = transform.GetComponentsInChildren<LemmingMovement>();
-	    // DEBUG
+	    lemmings = new GameObject[transform.childCount];
+	    for (int i = 0; i < transform.childCount; i++)
+	    {
+		    lemmings[i] = transform.GetChild(i).gameObject;
+	    }
+
 	    ActiveLemming = GetComponent<LemmingMovement>();
-	    Debug.Log("Active: " + ActiveLemming);
     }
 
     // Update is called once per frame
@@ -37,6 +40,11 @@ public class PlayerController : MonoBehaviour
     }
 
     public void KillActiveLemming()
+    {
+
+    }
+
+    public void ToggleMovementGroup()
     {
 
     }

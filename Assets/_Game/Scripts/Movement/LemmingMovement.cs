@@ -1,25 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class LemmingMovement : MonoBehaviour
 {
 	[SerializeField] public float jumpForce = 1;
 	[SerializeField] public float speed = 1;
-	[SerializeField] public float minSpeed = 1;
-	[SerializeField] public float maxSpeed = 1;
+	[SerializeField] public float maxSpeed = 5;
 	[SerializeField] public float breakingForceMulitplier = 10;
 
-	public bool IsGrounded { get; set; }
+	[SerializeField] public bool isGrounded;
 	private Rigidbody2D rb;
 	public bool IsCrouching { get; set; }
 	public Vector2 WindConstant { get; set; }
-
-
-	public bool InGroupe { set; get; }
+	public bool InGroup { set; get; }
 
 	private GameManager gameManager;
-
 
 	// Start is called before the first frame update
 	void Start()
@@ -27,10 +24,8 @@ public class LemmingMovement : MonoBehaviour
 		gameManager = FindObjectOfType<GameManager>();
 		rb = GetComponent<Rigidbody2D>();
 		rb.freezeRotation = true;
-		InGroupe = false;
+		InGroup = false;
 	}
-
-
 
 	void FixedUpdate()
 	{
@@ -39,66 +34,59 @@ public class LemmingMovement : MonoBehaviour
 
 	public void Jump()
 	{
-		if (!InGroupe && IsGrounded)
+		if (!InGroup && isGrounded)
 		{
-			Vector2 movement = new Vector2(0.0f, jumpForce * 100);
-			rb.AddForce(movement * Time.deltaTime, ForceMode2D.Impulse);
+			rb.AddForce(Vector2.up * jumpForce * 3); //, ForceMode2D.Impulse
 		}
 
 	}
 
 	private void BrakeMovement()
 	{
-		if ((rb.velocity.x > 0.3f)||(rb.velocity.x < 0.3f))
+		if (rb.velocity.x < -0.3f && rb.velocity.x > 0.3f)
 		{
-			rb.AddForce(new Vector2(-rb.velocity.x * breakingForceMulitplier, 0.0f));
+			Vector2 velo = rb.velocity;
+			rb.velocity = new Vector2(velo.x * 0.01f, velo.y);
 		}
 		else
 		{
-			rb.velocity = new Vector2(0, 0);
+			rb.velocity = new Vector2(0f, rb.velocity.y);
 		}
 	}
 
-
-	public void MoveHorizontal(Vector2 direction)
+	public void MoveHorizontal(float direction)
 	{
-		Vector2 movement = new Vector2(direction.x, 0.0f);
+		if (direction < 0.1f && direction > -0.1f)
+		{
+			BrakeMovement();
+			return;
+		}
 
-		if (direction.x < 0)
+		if (direction < 0f)
 		{
 			transform.rotation = new Quaternion(0, 0, 0, 0);
 		}
-		else
+		else if(direction > 0f)
 		{
 			transform.rotation = new Quaternion(0, 180, 0, 0);
 		}
 
-		//if ((rb.velocity.x < 0) && (rb.velocity.x > -1))
-		//{
-		//	rb.velocity = new Vector2(-minSpeed, rb.velocity.y);
-		//}
-		//else if ((rb.velocity.x > 0) && (rb.velocity.x < 1))
-		//{
-		//	rb.velocity = new Vector2(minSpeed, rb.velocity.y);
-		//}
-
-		if (((rb.velocity.x > 0) && (movement.x < 0)) || ((rb.velocity.x < 0) && (movement.x > 0)))
+		if ((rb.velocity.x > 0 && direction < 0) ||(rb.velocity.x < 0 && direction > 0))
 		{
-			Debug.Log("Brake :" + ((rb.velocity.x > 0) && (movement.x < 0)));
 			BrakeMovement();
 		}
-		else
+		else if(rb.velocity.x < maxSpeed && rb.velocity.x > -maxSpeed)
 		{
-			rb.AddForce(movement * speed * 100 * Time.deltaTime);
+			rb.AddForce(new Vector2(direction, 0f) * speed * 100 * Time.deltaTime);
 		}
 
-
+		/*
 		if ((rb.velocity.x > maxSpeed) || (rb.velocity.x < -maxSpeed))
 		{
 			Vector2 movement2 = new Vector2(maxSpeed, rb.velocity.y);
-
 			rb.velocity = movement2;
 		}
+		*/
 	}
 
 	private void OnCollisionEnter2D(Collision2D other)
@@ -107,6 +95,40 @@ public class LemmingMovement : MonoBehaviour
 		if (collidable != null)
 		{
 			collidable.OnCollisionWithLemming();
+		}
+		else if (other.gameObject.tag.Equals("Ground"))
+		{
+			isGrounded = true;
+		}
+	}
+
+	private void OnCollisionExit2D(Collision2D other)
+	{
+		if (other.gameObject.tag.Equals("Ground"))
+		{
+			isGrounded = false;
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		ITrigger trigger = other.gameObject.GetComponent<ITrigger>();
+		if (trigger != null)
+		{
+			trigger.OnLemmingEnter();
+		}
+		else if(other.tag.Equals("Ground"))
+		{
+			isGrounded = true;
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D other)
+	{
+		ITrigger trigger = other.gameObject.GetComponent<ITrigger>();
+		if (trigger != null)
+		{
+			trigger.OnLemmingExit();
 		}
 	}
 }
