@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class FirePotion : MonoBehaviour
 {
-    private GameManager inventory;
+    private GameManager gameManager;
     private string name;
     private void Awake()
     {
-        inventory = FindObjectOfType<GameManager>(); 
     }
 
 
     void Start()
     {
 
+        gameManager = FindObjectOfType<GameManager>(); 
         name = "Fire";
         
             
@@ -24,7 +24,7 @@ public class FirePotion : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        inventory.UnlockAbility(name);
+        gameManager.UnlockAbility(name);
         Destroy(gameObject);
 
     }
