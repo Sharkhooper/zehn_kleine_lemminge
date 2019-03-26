@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class DeadlyTilemapController : MonoBehaviour, ICollidable
+public class DeadlyTilemap : MonoBehaviour, ICollidable
 {
 	public void OnCollisionWithLemming()
 	{
-		throw new System.NotImplementedException();
+		Debug.Log("This is so great");
 	}
 
 	public void OnCollisionWithGroup()

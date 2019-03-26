@@ -24,13 +24,13 @@ public class InputPC : MonoBehaviour
 		float horizontal = Input.GetAxis("Horizontal");
 		if(horizontal != 0)
 		{
-			lemmingMovement.MoveHorizontal(horizontal);
+			lemmingMovement.MoveHorizontal(new Vector2(horizontal, 0.0f));
 		}
 
 		float vertical = Input.GetAxis("Vertical");
 		if(vertical != 0)
 		{
-			lemmingMovement.Jump(vertical);
+			lemmingMovement.Jump();
 		}
         
     }
