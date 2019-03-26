@@ -4,44 +4,62 @@ using UnityEngine;
 
 public class InputTouch : MonoBehaviour
 {
-    
-    // Update is called once per frame
-    void Update()
-    {
-		
-		if(Input.GetMouseButtonDown(1))
-		{
-			Vector3 start = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0f);
-			start = Camera.main.ScreenToWorldPoint(start);
-			Debug.Log(start.x+" "+start.y);
-		}
+	int i = 0;
+	int doubleTap = 0;
+	float startZeit = 0;
+	Vector3 start, end, movement, richtungsvector;
+	Touch touch;
 
-
-
+	// Update is called once per frame
+	void Update()
+	{
 		if (Input.touchCount > 0)
 		{
-			Touch touch = Input.GetTouch(0);
-			Vector3 start, movement, end;
-				start = Camera.main.ScreenToWorldPoint(touch.position);
+			if (Input.GetTouch(0).phase == TouchPhase.Began)
+			{
+				touch = Input.GetTouch(0);
+				start = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
 				Debug.Log("Touch gestartet: " + start);
-			
-			 if (touch.phase == TouchPhase.Ended)
-			{
-				end = Camera.main.ScreenToWorldPoint(touch.position);
-				Debug.Log("Touch beendet: " + end);
+				if (doubleTap == 0)
+				{
+					startZeit = Time.time;
+				}
 			}
-			else if(touch.phase == TouchPhase.Moved)
+			else if (Input.GetTouch(0).phase == TouchPhase.Ended)
 			{
-				movement = Camera.main.ScreenToWorldPoint(touch.position);
-				Vector3 richtungsVector = movement-start; //new Vector3(movement.x - start.x, movement.y - start.y,0)
-				Debug.Log("Touch movement: " + richtungsVector);
+				//	end = Camera.main.ScreenToWorldPoint(touch.position);
+				end = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
+				Debug.Log("Touch beendet: " + end);
+				if (doubleTap == 0)
+				{
+					doubleTap++;
+				}
+				else if (doubleTap == 1 && Time.time - startZeit < 0.5f)
+				{
+					doubleTap = 0;
+					Debug.Log("DoppelKlick erfolgt");
+					//=> Vector sollte übergeen werden
+				}
+				else
+				{
+					doubleTap = 0;
+				}
+			}
+			else if (Input.GetTouch(0).phase == TouchPhase.Moved)
+			{
+				//movement = Camera.main.ScreenToWorldPoint(touch.position);
+				movement = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
+				Vector3 richtungsVector = movement - start; //new Vector3(movement.x - start.x, movement.y - start.y,0)
+				Debug.Log("Touch movement: " + movement);
+				transform.position = movement;
 			}
 
 
 		}
 
 
-    }
+	}
 
 
 }//class
+
