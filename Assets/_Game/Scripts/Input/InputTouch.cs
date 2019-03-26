@@ -6,6 +6,7 @@ public class InputTouch : MonoBehaviour
 {
 	int doubleTap = 0;
 	float startZeit = 0;
+	float oldMovementX = 0;
 	Vector3 start, end, movement, richtungsVector, touchStart;
 	Touch touch;
 	private LemmingMovement lemming;
@@ -25,15 +26,15 @@ public class InputTouch : MonoBehaviour
 			if (Input.GetTouch(0).phase == TouchPhase.Began)
 			{
 				start = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
-				Debug.Log("Touch gestartet: " + start);
+				//Debug.Log("Touch gestartet: " + start);
 				if (doubleTap == 0)
 				{
 					startZeit = Time.time;
 					touchStart = start;
 				}
-				else if(!(Mathf.Abs(touchStart.x-start.x) <= 1f && Mathf.Abs(touchStart.y-start.y)<=1f))
+				else if (!(Mathf.Abs(touchStart.x - start.x) <= 1f && Mathf.Abs(touchStart.y - start.y) <= 1f))
 				{
-					Debug.Log("DoppelTap Fail");
+					//		Debug.Log("DoppelTap Fail");
 					doubleTap = 0;
 				}
 			}
@@ -41,7 +42,7 @@ public class InputTouch : MonoBehaviour
 			else if (Input.GetTouch(0).phase == TouchPhase.Ended)
 			{
 				end = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
-				Debug.Log("Touch beendet: " + end);
+				//Debug.Log("Touch beendet: " + end);
 				if (doubleTap == 0)
 				{
 					doubleTap++;
@@ -49,7 +50,7 @@ public class InputTouch : MonoBehaviour
 				else if (doubleTap == 1 && Time.time - startZeit < 0.5f)
 				{
 					doubleTap = 0;
-					Debug.Log("DoppelKlick erfolgt");
+					//				Debug.Log("DoppelTap erfolgt");
 
 					//=> Vector sollte übergeen werden, testen ob da LemmingGruppe ist
 				}
@@ -59,12 +60,13 @@ public class InputTouch : MonoBehaviour
 				}
 				lemming.MoveHorizontal(0);
 				richtungsVector = end - start;
-				Debug.Log("Richtung: " + richtungsVector.y);
+				//		Debug.Log("Richtung: " + richtungsVector.y);
 				if (richtungsVector.y > 3)
 				{
 					float tan = richtungsVector.y / richtungsVector.x;
 					if (!(tan < 1 && tan > -1 && tan != 0))
 					{
+						Debug.Log("Tan: " + tan + "   x-Wert: " + richtungsVector.x);
 						lemming.Jump();
 						//Aufstehen
 					}
@@ -74,6 +76,7 @@ public class InputTouch : MonoBehaviour
 					float tan = richtungsVector.y / richtungsVector.x;
 					if (!(tan < 1 && tan > -1 && tan != 0))
 					{
+						Debug.Log("Bück dich du Luder!");
 						//bücken
 					}
 				}
@@ -82,9 +85,13 @@ public class InputTouch : MonoBehaviour
 			else if (Input.GetTouch(0).phase == TouchPhase.Moved)
 			{
 				movement = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
-				richtungsVector = movement - start; 
-				Debug.Log("Touch movement: " + movement);
-				lemming.MoveHorizontal(richtungsVector.x);
+				//richtungsVector = movement - start; 
+				//	Debug.Log("Touch movement: " + movement);
+				if (Mathf.Abs(movement.x - start.x) >= 1) oldMovementX = movement.x - start.x;
+
+				Debug.Log("Touch movement: " + oldMovementX);
+
+				lemming.MoveHorizontal(oldMovementX / 20);
 			}
 		}
 	}
