@@ -6,7 +6,6 @@ public class Elevator  : MonoBehaviour,ITrigger
 {
     // Start is called before the first frame update
 
-    private GameObject player;
     private Vector3 positionEnd;
     private Vector3 positionStart;
     private bool forward = true;
@@ -16,9 +15,11 @@ public class Elevator  : MonoBehaviour,ITrigger
     private float timer;
     private bool left = true;
     [SerializeField] public float delay = 1f;
-    [SerializeField] public float speed = 1.0f;
-    private Vector3 oldPosition;
-    private Vector3 velocity;
+   // [SerializeField] public float speed = 1f;
+    [SerializeField] public float duration = 3.0f;
+    private Rigidbody2D rigiBody;
+    private float eTime = 0;
+   // private bool isMoving = false;
     
     
     void Start()
@@ -28,38 +29,65 @@ public class Elevator  : MonoBehaviour,ITrigger
         parent.GetChild(1).gameObject.GetComponent<SpriteRenderer>().enabled = false;
 
         timer = delay;
-        
+        //eTime = duration;
         positionStart = parent.position;
         positionEnd = parent.GetChild(1).position;
-        player = GameObject.FindWithTag("Player");
-        oldPosition = positionStart;
+        rigiBody = GetComponent<Rigidbody2D>();
 
 
     }
 
+   
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        
-        
+        //if(isMoving) return;
         
         if (forward && entered)
-        {
-           
-            
-            transform.position = Vector3.MoveTowards(transform.position, positionEnd, Time.deltaTime * speed);
-            
+        {/*
+            isMoving = true;
+            rigiBody.DOMove(positionEnd, duration).onComplete += () => { isMoving = false; };
+            */
+           if ( eTime>3)
+           {
+               rigiBody.position = positionEnd;
+           }
+           else
+           {
+               rigiBody.MovePosition(Vector3.Lerp(positionStart, positionEnd, eTime / duration));
+               eTime += Time.fixedDeltaTime;
+           }
+           //transform.position = Vector3.MoveTowards(transform.position, positionEnd, Time.deltaTime * speed);
+
         }
 
         else if(top)
         {
-            transform.position = Vector3.MoveTowards(transform.position, positionStart, Time.deltaTime * speed);
+           /* isMoving = true;
+            rigiBody.DOMove(positionStart, duration).onComplete += () => { isMoving = false; };
+            /**/
+           // transform.position = Vector3.MoveTowards(transform.position, positionStart, Time.deltaTime * speed);
+
+           if (eTime<0)
+           {
+               rigiBody.position=positionStart;
+           }
+           else
+           {
+
+               rigiBody.MovePosition(Vector3.Lerp(positionStart, positionEnd, eTime / duration));
+               eTime -= Time.fixedDeltaTime;
+           }
+
         }
 
+        
         if ( transform.position == positionStart)
         {
             forward = true;
             top = false;
+           // eTime = 0;
             timer = delay;
 
             if (left)
@@ -73,23 +101,28 @@ public class Elevator  : MonoBehaviour,ITrigger
             top = false;
             
             forward = false;
-          
-            Debug.Log(timer);
+            //eTime = 0;
 
             timer -= Time.deltaTime;
         }
         else
         {
-            Debug.Log(timer);
+            
             top = true;
         }
 
       
-        var position = transform.position;
-        velocity = position - oldPosition;
-        oldPosition = position;
+     
+
+       
+        
 
 
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
     }
 
 
