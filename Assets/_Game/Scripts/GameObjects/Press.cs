@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Press  : MonoBehaviour, SwitchableObject
+public class Press  : MonoBehaviour
 {
     // Start is called before the first frame update
 
@@ -11,7 +11,8 @@ public class Press  : MonoBehaviour, SwitchableObject
     private Vector3 positionStart;
     private bool forward = true;
     [SerializeField] public float speed = 1.0f;
-    
+
+    private bool moving=true;
     
     void Start()
     {
@@ -31,16 +32,17 @@ public class Press  : MonoBehaviour, SwitchableObject
     // Update is called once per frame
     void FixedUpdate()
     {
-        
-        
+        if (moving)
+        {
+
         Transform child = transform.GetChild(0);
-        
+
         if (forward)
         {
-           
-            
+
+
             child.position = Vector3.MoveTowards(transform.GetChild(0).position, positionEnd, Time.deltaTime * speed);
-            
+
         }
 
         else
@@ -48,29 +50,43 @@ public class Press  : MonoBehaviour, SwitchableObject
             child.position = Vector3.MoveTowards(transform.GetChild(0).position, positionStart, Time.deltaTime * speed);
         }
 
-        if ( child.position == positionStart)
+        if (child.position == positionStart)
         {
             forward = true;
         }
 
-        if ( child.position==positionEnd)
+        if (child.position == positionEnd)
         {
             forward = false;
         }
-        
-        
 
 
     }
+    else
 
-
-    public void switchActivated()
     {
-        throw new System.NotImplementedException();
+            Transform child = transform.GetChild(0);
+
+            if (child.position != positionStart)
+            {
+               
+
+                child.position = Vector3.MoveTowards(transform.GetChild(0).position, positionStart, Time.deltaTime * speed);
+
+
+
+            }
+        }
+
     }
 
-    public void switchDeactivated()
+    public void switchPressStatus(bool status)
     {
-        throw new System.NotImplementedException();
+        moving = status;
+
+        Debug.Log("status ist "+status);
+        transform.GetChild(0).GetChild(1).GetComponent<DeadlyTrigger>().statusActive=status;
     }
+
+
 }

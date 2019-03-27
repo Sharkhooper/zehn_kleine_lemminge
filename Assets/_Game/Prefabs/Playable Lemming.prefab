@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1537675050}
   - component: {fileID: 1537675052}
   - component: {fileID: 1537675051}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 3154503392202662251}
   - component: {fileID: 9133135212281118022}
   - component: {fileID: 8739096752964580133}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Playable Lemming
   m_TagString: Player
   m_Icon: {fileID: 0}

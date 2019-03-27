@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8671139320042682693}
   - component: {fileID: 8671139320042682692}
   - component: {fileID: 8671139320042682699}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ChainsawBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8671139320877819018}
   - component: {fileID: 8066652121001474152}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Chainsaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
