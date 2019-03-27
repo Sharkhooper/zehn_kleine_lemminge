@@ -48,11 +48,11 @@ public class LemmingMovement : MonoBehaviour
 	public void Jump()
 	{
 		Vector2 jump;
-		if (manager.SuperJumpActivated)
+		/*if (manager.SuperJumpActivated)
 		{
 			 jump = new Vector2(0, 1 * jumpForce * superJumpForce * 5f);
 		}
-		else
+		else*/
 		{
 			 jump = new Vector2(0, 1 * jumpForce * 5f);
 		}
