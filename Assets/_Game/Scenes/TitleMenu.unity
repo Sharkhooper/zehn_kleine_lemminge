@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -340,7 +340,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Steuerung
+  m_Text: Optionen/Steuerung
 --- !u!222 &359426194
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -453,7 +453,7 @@ Camera:
   m_GameObject: {fileID: 466414703}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 3
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
@@ -512,6 +512,7 @@ GameObject:
   - component: {fileID: 540911341}
   - component: {fileID: 540911340}
   - component: {fileID: 540911339}
+  - component: {fileID: 540911342}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -537,7 +538,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 461, y: -400}
-  m_SizeDelta: {x: 300, y: 100}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &540911339
 MonoBehaviour:
@@ -578,7 +579,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 540911340}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 540911342}
+        m_MethodName: credit_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &540911340
@@ -618,6 +630,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 540911337}
   m_CullTransparentMesh: 0
+--- !u!114 &540911342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540911337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ee056eeb489eb4ca9ced6fe97be312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  leben: 3
+  lemminge: 10
+  newGameText: {fileID: 186796170}
+  continueGameText: {fileID: 0}
+  optionText: {fileID: 0}
+  creditText: {fileID: 1766091279}
 --- !u!1 &638119994
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,8 +763,9 @@ GameObject:
   - component: {fileID: 833172914}
   - component: {fileID: 833172913}
   - component: {fileID: 833172912}
+  - component: {fileID: 833172915}
   m_Layer: 5
-  m_Name: Steuerung
+  m_Name: Optionen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -757,7 +789,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 461, y: -300}
-  m_SizeDelta: {x: 300, y: 100}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &833172912
 MonoBehaviour:
@@ -798,7 +830,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 833172913}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 833172915}
+        m_MethodName: option_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &833172913
@@ -838,6 +881,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833172910}
   m_CullTransparentMesh: 0
+--- !u!114 &833172915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833172910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ee056eeb489eb4ca9ced6fe97be312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  leben: 3
+  lemminge: 10
+  newGameText: {fileID: 186796170}
+  continueGameText: {fileID: 0}
+  optionText: {fileID: 359426193}
+  creditText: {fileID: 0}
 --- !u!1 &1116441877
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,6 +912,7 @@ GameObject:
   - component: {fileID: 1116441881}
   - component: {fileID: 1116441880}
   - component: {fileID: 1116441879}
+  - component: {fileID: 1116441882}
   m_Layer: 5
   m_Name: ContinueGame
   m_TagString: Untagged
@@ -875,7 +938,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 461, y: -200}
-  m_SizeDelta: {x: 300, y: 100}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1116441879
 MonoBehaviour:
@@ -916,7 +979,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1116441880}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1116441882}
+        m_MethodName: continueGame_Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1116441880
@@ -956,6 +1030,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116441877}
   m_CullTransparentMesh: 0
+--- !u!114 &1116441882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116441877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ee056eeb489eb4ca9ced6fe97be312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  leben: 3
+  lemminge: 10
+  newGameText: {fileID: 186796170}
+  continueGameText: {fileID: 208711324}
+  optionText: {fileID: 0}
+  creditText: {fileID: 0}
+--- !u!1 &1651176415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1651176417}
+  - component: {fileID: 1651176416}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1651176416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651176415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ee056eeb489eb4ca9ced6fe97be312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  leben: 3
+  lemminge: 10
+  newGameText: {fileID: 186796170}
+  continueGameText: {fileID: 208711324}
+  optionText: {fileID: 359426193}
+  creditText: {fileID: 1766091279}
+--- !u!4 &1651176417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651176415}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 461, y: 308, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1766091277
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,7 +1149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1073,7 +1216,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 461, y: -100}
-  m_SizeDelta: {x: 300, y: 100}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2034985325
 MonoBehaviour:
@@ -1177,6 +1320,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4ee056eeb489eb4ca9ced6fe97be312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 1
+  leben: 3
+  lemminge: 10
+  newGameText: {fileID: 186796170}
+  continueGameText: {fileID: 0}
+  optionText: {fileID: 0}
+  creditText: {fileID: 0}
 --- !u!1 &2095353397
 GameObject:
   m_ObjectHideFlags: 0
