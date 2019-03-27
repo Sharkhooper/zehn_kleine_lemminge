@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class LemmingMovement : MonoBehaviour
@@ -8,20 +9,21 @@ public class LemmingMovement : MonoBehaviour
 	[SerializeField] public float jumpForce = 1;
 	[SerializeField] public float speed = 1;
 	[SerializeField] public float maxSpeed = 5;
-	[SerializeField] public float breakingForceMulitplier = 10;
+	[SerializeField] public float landingDelay = 100;
 
-	[SerializeField] public bool isGrounded;
-	private Rigidbody2D rb;
+	public bool IsGrounded { get; set; }
 	public bool IsCrouching { get; set; }
 	public Vector2 WindConstant { get; set; }
 	public bool InGroup { set; get; }
 
-	private GameManager gameManager;
+	private Rigidbody2D rb;
+	[SerializeField] private float landingTimer;
+
+	[SerializeField] public Animator animator;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		gameManager = FindObjectOfType<GameManager>();
 		rb = GetComponent<Rigidbody2D>();
 		rb.freezeRotation = true;
 		InGroup = false;
@@ -30,23 +32,30 @@ public class LemmingMovement : MonoBehaviour
 	void FixedUpdate()
 	{
 		rb.AddForce(WindConstant);
+
+		if (IsGrounded && landingTimer >= 0f)
+		{
+			landingTimer -= Time.deltaTime;
+		}
 	}
 
 	public void Jump()
 	{
-		if (!InGroup && isGrounded)
+		if (!InGroup && landingTimer <= 0f && IsGrounded)
 		{
-			rb.AddForce(Vector2.up * jumpForce * 3); //, ForceMode2D.Impulse
+			rb.AddForce(Vector2.up * jumpForce * 5f, ForceMode2D.Impulse);
+			IsGrounded = false;
+			landingTimer = landingDelay / 1000;
 		}
-
 	}
 
+	// Intensity on a scale from 1 to 10
 	private void BrakeMovement()
 	{
-		if (rb.velocity.x < -0.3f && rb.velocity.x > 0.3f)
+		if (rb.velocity.x < -0.1f && rb.velocity.x > 0.1f)
 		{
-			Vector2 velo = rb.velocity;
-			rb.velocity = new Vector2(velo.x * 0.01f, velo.y);
+			Vector2 velocity = rb.velocity;
+			rb.velocity = new Vector2(velocity.x * 0.1f, velocity.y);
 		}
 		else
 		{
@@ -56,12 +65,23 @@ public class LemmingMovement : MonoBehaviour
 
 	public void MoveHorizontal(float direction)
 	{
+		if (rb.velocity.y == 0)
+		{
+			animator.SetFloat("Speed", Mathf.Abs(direction));
+		}
+		else
+		{
+			animator.SetFloat("Speed", 0);
+		}
+
+		// If no movement input exists, auto brake
 		if (direction < 0.1f && direction > -0.1f)
 		{
 			BrakeMovement();
 			return;
 		}
 
+		// Rotates character to face direction it's moving
 		if (direction < 0f)
 		{
 			transform.rotation = new Quaternion(0, 0, 0, 0);
@@ -71,22 +91,32 @@ public class LemmingMovement : MonoBehaviour
 			transform.rotation = new Quaternion(0, 180, 0, 0);
 		}
 
-		if ((rb.velocity.x > 0 && direction < 0) ||(rb.velocity.x < 0 && direction > 0))
+		Vector2 velocity = rb.velocity;
+
+		// Brake movement when changing direction
+		if (velocity.x > 0 && direction < 0 ||velocity.x < 0 && direction > 0)
 		{
 			BrakeMovement();
 		}
+		// Accelerate in movement direction
 		else if(rb.velocity.x < maxSpeed && rb.velocity.x > -maxSpeed)
 		{
-			rb.AddForce(new Vector2(direction, 0f) * speed * 100 * Time.deltaTime);
+			// Acceleration on ground is faster than in air
+			if (IsGrounded)
+			{
+				rb.AddForce(new Vector2(direction, 0f) * speed * 100 * Time.deltaTime);
+			}
+			else
+			{
+				rb.AddForce(new Vector2(direction, 0f) * speed * 40 * Time.deltaTime);
+			}
 		}
 
-		/*
-		if ((rb.velocity.x > maxSpeed) || (rb.velocity.x < -maxSpeed))
+		// Reduce velocity to maxSpeed if too fast
+		if (velocity.x > maxSpeed || velocity.x < -maxSpeed)
 		{
-			Vector2 movement2 = new Vector2(maxSpeed, rb.velocity.y);
-			rb.velocity = movement2;
+			rb.velocity = new Vector2(direction * maxSpeed, rb.velocity.y);
 		}
-		*/
 	}
 
 	private void OnCollisionEnter2D(Collision2D other)
@@ -96,18 +126,6 @@ public class LemmingMovement : MonoBehaviour
 		{
 			collidable.OnCollisionWithLemming();
 		}
-		else if (other.gameObject.tag.Equals("Ground"))
-		{
-			isGrounded = true;
-		}
-	}
-
-	private void OnCollisionExit2D(Collision2D other)
-	{
-		if (other.gameObject.tag.Equals("Ground"))
-		{
-			isGrounded = false;
-		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -116,10 +134,6 @@ public class LemmingMovement : MonoBehaviour
 		if (trigger != null)
 		{
 			trigger.OnLemmingEnter();
-		}
-		else if(other.tag.Equals("Ground"))
-		{
-			isGrounded = true;
 		}
 	}
 
