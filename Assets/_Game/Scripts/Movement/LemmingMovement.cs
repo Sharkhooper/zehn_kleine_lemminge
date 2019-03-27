@@ -31,6 +31,7 @@ public class LemmingMovement : MonoBehaviour
 
 		rb = GetComponent<Rigidbody2D>();
 		rb.freezeRotation = true;
+		
 		InGroup = false;
 	}
 
@@ -47,18 +48,19 @@ public class LemmingMovement : MonoBehaviour
 	public void Jump()
 	{
 		Vector2 jump;
-		if (manager.SuperJumpActivated)
+		/*if (manager.SuperJumpActivated)
 		{
 			 jump = new Vector2(0, 1 * jumpForce * superJumpForce * 5f);
 		}
-		else
+		else*/
 		{
 			 jump = new Vector2(0, 1 * jumpForce * 5f);
 		}
 
 		if (!InGroup && landingTimer <= 0f && IsGrounded)
 		{
-			rb.AddForce(jump, ForceMode2D.Impulse);
+			//rb.AddForce(jump, ForceMode2D.Impulse);
+			rb.velocity = jump;
 			IsGrounded = false;
 			landingTimer = landingDelay / 1000;
 		}
@@ -139,11 +141,13 @@ public class LemmingMovement : MonoBehaviour
 			// Acceleration on ground is faster than in air
 			if (IsGrounded)
 			{
-				rb.AddForce(new Vector2(direction, 0f) * speed * 100 * Time.deltaTime);
+				//rb.AddForce(new Vector2(direction, 0f) * speed * 100 * Time.deltaTime);
+				rb.velocity = new Vector2(direction, 0f) * speed * 100 * Time.deltaTime;
 			}
 			else
 			{
-				rb.AddForce(new Vector2(direction, 0f) * speed * 40 * Time.deltaTime);
+				//rb.AddForce(new Vector2(direction, 0f) * speed * 40 * Time.deltaTime);
+				rb.velocity = new Vector2(direction * speed * 40 * Time.deltaTime, rb.velocity.y);
 			}
 		}
 

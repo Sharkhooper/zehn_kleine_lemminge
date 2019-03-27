@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 9133135212281118022}
   - component: {fileID: 8739096752964580133}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Playable Lemming
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,14 +100,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3154503392202662250}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1537675050}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!212 &3154503392202662247
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -145,7 +145,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 712980acc89beec49ae9b1e16e447e45, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a402658ebc6c24c48842bf88ba0e91d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -196,6 +196,7 @@ MonoBehaviour:
   speed: 10
   maxSpeed: 10
   landingDelay: 50
+  superJumpForce: 2
   landingTimer: 0
   animator: {fileID: 8739096752964580133}
 --- !u!50 &3154503392202662251
