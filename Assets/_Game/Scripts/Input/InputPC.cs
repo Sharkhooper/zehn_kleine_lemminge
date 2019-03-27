@@ -7,6 +7,7 @@ public class InputPC : MonoBehaviour
 {
 	private LemmingMovement lemmingMovement;
 	private Rigidbody2D rb;
+	private bool nonZeroHorizontal;
 
 	void Awake()
 	{
@@ -23,7 +24,17 @@ public class InputPC : MonoBehaviour
     void Update()
     {
 		float horizontal = Input.GetAxis("Horizontal");
-		lemmingMovement.MoveHorizontal(horizontal);
+
+		if (horizontal != 0)
+		{
+			nonZeroHorizontal = true;
+			lemmingMovement.MoveHorizontal(horizontal);
+		}
+		else if (nonZeroHorizontal)
+		{
+			lemmingMovement.MoveHorizontal(horizontal);
+			nonZeroHorizontal = false;
+		}
 
 		float vertical = Input.GetAxis("Vertical");
 		if(vertical > 0)

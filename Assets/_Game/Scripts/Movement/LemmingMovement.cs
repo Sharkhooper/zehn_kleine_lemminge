@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class LemmingMovement : MonoBehaviour
@@ -11,11 +10,11 @@ public class LemmingMovement : MonoBehaviour
 	[SerializeField] public float maxSpeed = 5;
 	[SerializeField] public float landingDelay = 100;
 	[SerializeField] public float superJumpForce = 2;
+	[SerializeField] public bool InGroup = true;
 
 	public bool IsGrounded { get; set; }
 	public bool IsCrouching { get; set; }
 	public Vector2 WindConstant { get; set; }
-	public bool InGroup { set; get; }
 	public Vector2 AdditionalVelocity { get; set; }
 
 	private GameManager manager;
@@ -102,30 +101,26 @@ public class LemmingMovement : MonoBehaviour
 
 	public void MoveHorizontal(float direction)
 	{
-		if (rb.velocity.y == 0)
-		{
-			animator.SetFloat("Speed", Mathf.Abs(direction));
-		}
-		else
-		{
-			animator.SetFloat("Speed", 0);
-		}
+		if (direction > 0) direction = 1;
+		else if (direction < 0) direction = -1;
+
+		Debug.Log(direction);
+		animator.SetFloat("Speed", Mathf.Abs(direction));
 
 		// If no movement input exists, auto brake
 		if (direction < 0.1f && direction > -0.1f)
 		{
-			BrakeMovement();
 			return;
 		}
 
 		// Rotates character to face direction it's moving
 		if (direction < 0f)
 		{
-			transform.rotation = new Quaternion(0, 0, 0, 0);
+			transform.rotation = Quaternion.identity;
 		}
 		else if (direction > 0f)
 		{
-			transform.rotation = new Quaternion(0, 180, 0, 0);
+			transform.rotation = Quaternion.Euler(0,180,0);
 		}
 
 		Vector2 velocity = rb.velocity;

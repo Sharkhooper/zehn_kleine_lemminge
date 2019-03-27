@@ -7,7 +7,7 @@ public class InputTouch : MonoBehaviour
 	int doubleTap = 0;
 	float startZeit = 0;
 	float oldMovementX = 0;
-	Vector3 start, end, movement, richtungsVector, touchStart;
+	Vector3 start, end, movement, richtungsVector, touchStart, originStart;
 	Touch touch;
 	private LemmingMovement lemming;
 
@@ -17,7 +17,7 @@ public class InputTouch : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 		if (Input.touchCount > 0)
 		{
@@ -26,7 +26,10 @@ public class InputTouch : MonoBehaviour
 			if (Input.GetTouch(0).phase == TouchPhase.Began)
 			{
 				start = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
-				Debug.Log("Input START: " + start);
+				originStart = start;
+				//start = touch.position;
+
+				//Debug.Log("Input START: " + start);
 				if (doubleTap == 0)
 				{
 					startZeit = Time.time;
@@ -42,7 +45,8 @@ public class InputTouch : MonoBehaviour
 			else if (Input.GetTouch(0).phase == TouchPhase.Ended)
 			{
 				end = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
-				Debug.Log("Input END: " + end);
+				//end = touch.position;
+				//Debug.Log("Input END: " + end);
 
 				//DoubleTap
 				{
@@ -56,7 +60,7 @@ public class InputTouch : MonoBehaviour
 						//				Debug.Log("DoppelTap erfolgt");
 
 						//=> Vector sollte übergeen werden, testen ob da LemmingGruppe ist
-
+						//RichtigeMethode
 						lemming.MoveHorizontal(0);
 					}
 					else
@@ -67,10 +71,11 @@ public class InputTouch : MonoBehaviour
 				}
 
 
-				richtungsVector = end - start;
+				richtungsVector = end - originStart;
 				//		Debug.Log("Richtung: " + richtungsVector.y);
 
 				//Jump/Croach
+
 				{
 					if (richtungsVector.y > 3)
 					{
@@ -94,36 +99,46 @@ public class InputTouch : MonoBehaviour
 						}
 					}
 					//Vlt nicht auf nem Button möglich
-					else if (Mathf.Abs(richtungsVector.x) <= 1 && Mathf.Abs(richtungsVector.y) <= 1)
+					else if (Mathf.Abs(richtungsVector.x) <= 2 && Mathf.Abs(richtungsVector.y) <= 2)
 					{
-						lemming.MoveHorizontal(end.x * 5);
+						Debug.Log("Input Punkt Richtung: " + -((Camera.main.gameObject.transform.position - end).x));
+						lemming.MoveHorizontal(-((Camera.main.gameObject.transform.position - end).x));
 					}
 				}
+				lemming.MoveHorizontal(0);
+
 			}
 
 			else if (Input.GetTouch(0).phase == TouchPhase.Moved)
 			{
+				if ((Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10)) - movement).x > 0) start = movement;
+
 				movement = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
-				Debug.Log("Input MOVEMENT: " + movement);
-				richtungsVector = movement - start;
-				Debug.Log("Input RICHTUNGSVECTOR: " + richtungsVector);
+				//movement = touch.position;
+				//Debug.Log("Input MOVEMENT: " + movement);
+				//richtungsVector = movement - start;
+				//Debug.Log("Input RICHTUNGSVECTOR: " + richtungsVector);
 				//lemming.MoveHorizontal(richtungsVector.x);
 				//	Debug.Log("Touch movement: " + movement);
 				//if (movement.x < 0 && start.x > 0)
 				//{
+				//	Debug.Log("Start -1");
 				//	start = movement;
 				//	lemming.MoveHorizontal(-1);
 				//}
 				//else if (movement.x > 0 && start.x < 0)
 				//{
+				//	Debug.Log("Start +1");
 				//	start = movement;
 				//	lemming.MoveHorizontal(1);
 				//}
-				if (Mathf.Abs(movement.x - start.x) > 1) oldMovementX = movement.x - start.x;
-				//if (oldMovementX == 1 || oldMovementX == -1) oldMovementX = 0;
-				lemming.MoveHorizontal(oldMovementX*5);
-				//Debug.Log(oldMovementX);
-
+				//else
+				{
+					//if (Mathf.Abs(movement.x - start.x) > 1) oldMovementX = movement.x - start.x;
+					//if (oldMovementX == 1 || oldMovementX == -1) oldMovementX = 0;
+					//Debug.Log("MovementX: " + oldMovementX);
+					lemming.MoveHorizontal((movement.x - start.x));
+				}
 			}
 		}
 	}
