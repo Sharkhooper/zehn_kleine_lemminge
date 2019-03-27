@@ -82,6 +82,11 @@ public class InputTouch : MonoBehaviour
 						//bücken
 					}
 				}
+				else if(Mathf.Abs(richtungsVector.x)<=1 && Mathf.Abs(richtungsVector.y)<=1)
+				{
+					lemming.MoveHorizontal(end.x);
+				}
+
 			}
 
 			else if (Input.GetTouch(0).phase == TouchPhase.Moved)
@@ -91,7 +96,7 @@ public class InputTouch : MonoBehaviour
 				//	Debug.Log("Touch movement: " + movement);
 				if (Mathf.Abs(movement.x - start.x) >= 1) oldMovementX = movement.x - start.x;
 
-				//Debug.Log("Touch movement: " + oldMovementX);
+				Debug.Log("Touch movement: " + oldMovementX);
 
 				lemming.MoveHorizontal(oldMovementX);
 			}
