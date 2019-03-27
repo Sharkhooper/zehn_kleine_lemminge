@@ -79,7 +79,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00000023841858, y: -0.40720952}
+  m_Offset: {x: 0.070494175, y: -0.40720952}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -90,7 +90,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.0170279, y: 1.3277628}
+  m_Size: {x: 3.1580167, y: 1.3277628}
   m_EdgeRadius: 0
 --- !u!114 &3450176123358320513
 MonoBehaviour:
@@ -529,6 +529,11 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 3154503392202662251, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}
 --- !u!4 &4253378167811214838 stripped
@@ -603,6 +608,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154503392202662251, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}
@@ -694,6 +704,11 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 3154503392202662251, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}
 --- !u!4 &7614418580890627958 stripped
@@ -784,6 +799,11 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 3154503392202662251, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}
 --- !u!4 &8553706441999294546 stripped
@@ -859,6 +879,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3154503392202662251, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}
 --- !u!4 &5668933161381337257 stripped
@@ -933,6 +958,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154503392202662251, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}
@@ -1023,6 +1053,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154503392202662251, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}

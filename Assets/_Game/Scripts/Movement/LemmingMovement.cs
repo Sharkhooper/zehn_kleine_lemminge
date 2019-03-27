@@ -102,6 +102,7 @@ public class LemmingMovement : MonoBehaviour
 
 	public void MoveHorizontal(float direction)
 	{
+		Debug.Log(direction);
 		if (rb.velocity.y == 0)
 		{
 			animator.SetFloat("Speed", Mathf.Abs(direction));
