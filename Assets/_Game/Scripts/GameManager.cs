@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
 	public Dictionary<string, bool> UnlockedAbilities { get; private set; }
+	public bool SuperJumpActivated { get; set; }
 
 	private void Awake()
 	{
