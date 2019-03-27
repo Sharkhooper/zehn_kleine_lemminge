@@ -8,11 +8,13 @@ public class Chainsaw : MonoBehaviour
     private Vector3 positionEnd;
     private Vector3 positionStart;
     private bool forward = true;
-    [SerializeField] public float speed = 4.0f;
+    [SerializeField] public float speed = 5.0f;
+    [SerializeField] public bool circle ;
     [SerializeField] public Vector2[] vectorList;
     private int nextPoint;
     private int vecListLength;
     private Vector3[] vec3List;
+    
     
     
     
@@ -22,14 +24,7 @@ public class Chainsaw : MonoBehaviour
         
         positionStart = transform.position;
 
-        if (vectorList.Length <= 1)
-        {
-
-            positionEnd = transform.GetChild(1).position;
-
-        }
-        else
-        {
+     
             vecListLength = vectorList.Length;
             nextPoint = 1;
             
@@ -37,11 +32,11 @@ public class Chainsaw : MonoBehaviour
 
             for (int num = 0;num<vecListLength;num++) {
                 
-                vec3List[num]= new Vector3( vectorList[num].x, vectorList[num].y,0f);
+                vec3List[num]= new Vector3( vectorList[num].x + transform.GetChild(0).position.x, vectorList[num].y + transform.GetChild(0).position.y,0f);
                 
             }
 
-        }
+       
 
 
     }
@@ -50,33 +45,40 @@ public class Chainsaw : MonoBehaviour
     void FixedUpdate()
     {
         Transform child = transform.GetChild(0);
-        if (vectorList.Length <= 1)
+        if (!circle)
         {
 
-            if (forward)
-            {
 
 
-                child.position =
-                    Vector3.MoveTowards(transform.GetChild(0).position, positionEnd, Time.deltaTime * speed);
 
-            }
+            child.position =
+                Vector3.MoveTowards(child.position, vec3List[nextPoint], Time.deltaTime * speed);
 
-            else
-            {
-                child.position =
-                    Vector3.MoveTowards(transform.GetChild(0).position, positionStart, Time.deltaTime * speed);
-            }
 
-            if (child.position == positionStart)
+            if (child.position == vec3List[0])
             {
                 forward = true;
             }
 
-            if (child.position == positionEnd)
+            if (child.position == vec3List[vecListLength-1])
             {
                 forward = false;
             }
+
+            if (child.position == vec3List[nextPoint])
+            {
+                if (forward)
+                {
+                    nextPoint += 1;
+                }
+
+                else
+                {
+                    nextPoint -= 1;
+                }
+            }
+
+        
         }
 
         else
@@ -89,9 +91,11 @@ public class Chainsaw : MonoBehaviour
 
             }
 
+            child.position =
+                Vector3.MoveTowards(child.position, vec3List[nextPoint], Time.deltaTime * speed);
 
 
-        }
+       }
 
 
     }
