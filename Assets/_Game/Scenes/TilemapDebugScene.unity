@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -630,6 +630,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!95 &731185085 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8739096752964580133, guid: d60af0043699aaf44a1e028585e60427,
+    type: 3}
+  m_PrefabInstance: {fileID: 6921237401795624982}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &731185092 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3154503392202662240, guid: d60af0043699aaf44a1e028585e60427,
+    type: 3}
+  m_PrefabInstance: {fileID: 6921237401795624982}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &873576882
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,6 +653,7 @@ GameObject:
   - component: {fileID: 873576885}
   - component: {fileID: 873576884}
   - component: {fileID: 873576883}
+  - component: {fileID: 873576886}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -712,6 +725,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &873576886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873576882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34fed772f2dc699469c95ff29ead1252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 731185092}
+  offset: {x: 0, y: 1, z: -7}
 --- !u!1 &989189627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,29 +1315,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662244, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3154503392202662244, guid: d60af0043699aaf44a1e028585e60427,
-        type: 3}
-      propertyPath: landingDelay
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 9133135212281118022, guid: d60af0043699aaf44a1e028585e60427,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.04855135
-      objectReference: {fileID: 0}
-    - target: {fileID: 9133135212281118022, guid: d60af0043699aaf44a1e028585e60427,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.8252236
-      objectReference: {fileID: 0}
-    - target: {fileID: 9133135212281118022, guid: d60af0043699aaf44a1e028585e60427,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3154503392202662241, guid: d60af0043699aaf44a1e028585e60427, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 731185085}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}

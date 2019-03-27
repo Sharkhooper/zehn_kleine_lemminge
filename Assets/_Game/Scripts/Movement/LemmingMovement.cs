@@ -19,6 +19,8 @@ public class LemmingMovement : MonoBehaviour
 	private Rigidbody2D rb;
 	[SerializeField] private float landingTimer;
 
+	[SerializeField] public Animator animator;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -63,6 +65,15 @@ public class LemmingMovement : MonoBehaviour
 
 	public void MoveHorizontal(float direction)
 	{
+		if (rb.velocity.y == 0)
+		{
+			animator.SetFloat("Speed", Mathf.Abs(direction));
+		}
+		else
+		{
+			animator.SetFloat("Speed", 0);
+		}
+
 		// If no movement input exists, auto brake
 		if (direction < 0.1f && direction > -0.1f)
 		{
