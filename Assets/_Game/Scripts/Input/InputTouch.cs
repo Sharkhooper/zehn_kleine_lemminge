@@ -91,7 +91,7 @@ public class InputTouch : MonoBehaviour
 				//	Debug.Log("Touch movement: " + movement);
 				if (Mathf.Abs(movement.x - start.x) >= 1) oldMovementX = movement.x - start.x;
 
-				Debug.Log("Touch movement: " + oldMovementX);
+				//Debug.Log("Touch movement: " + oldMovementX);
 
 				lemming.MoveHorizontal(oldMovementX);
 			}
