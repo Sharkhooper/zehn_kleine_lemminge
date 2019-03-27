@@ -10,12 +10,15 @@ public class LemmingMovement : MonoBehaviour
 	[SerializeField] public float speed = 1;
 	[SerializeField] public float maxSpeed = 5;
 	[SerializeField] public float landingDelay = 100;
+	[SerializeField] public float superJumpForce = 2;
 
 	public bool IsGrounded { get; set; }
 	public bool IsCrouching { get; set; }
 	public Vector2 WindConstant { get; set; }
 	public bool InGroup { set; get; }
+	public Vector2 AdditionalVelocity { get; set; }
 
+	private GameManager manager;
 	private Rigidbody2D rb;
 	[SerializeField] private float landingTimer;
 
@@ -24,6 +27,8 @@ public class LemmingMovement : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+		manager = FindObjectOfType<GameManager>();
+
 		rb = GetComponent<Rigidbody2D>();
 		rb.freezeRotation = true;
 		InGroup = false;
@@ -31,7 +36,7 @@ public class LemmingMovement : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		rb.AddForce(WindConstant);
+		rb.AddForce(WindConstant + AdditionalVelocity);
 
 		if (IsGrounded && landingTimer >= 0f)
 		{
@@ -41,9 +46,39 @@ public class LemmingMovement : MonoBehaviour
 
 	public void Jump()
 	{
+		Vector2 jump;
+		if (manager.SuperJumpActivated)
+		{
+			 jump = new Vector2(0, 1 * jumpForce * superJumpForce * 5f);
+		}
+		else
+		{
+			 jump = new Vector2(0, 1 * jumpForce * 5f);
+		}
+
 		if (!InGroup && landingTimer <= 0f && IsGrounded)
 		{
-			rb.AddForce(Vector2.up * jumpForce * 5f, ForceMode2D.Impulse);
+			rb.AddForce(jump, ForceMode2D.Impulse);
+			IsGrounded = false;
+			landingTimer = landingDelay / 1000;
+		}
+	}
+
+	public void JumpWithHorizontal(float direction)
+	{
+		Vector2 jump;
+		if (manager.SuperJumpActivated)
+		{
+			jump = new Vector2(direction, 1 * jumpForce * superJumpForce * 5f);
+		}
+		else
+		{
+			jump = new Vector2(direction, 1 * jumpForce * 5f);
+		}
+
+		if (!InGroup && landingTimer <= 0f && IsGrounded)
+		{
+			rb.AddForce(jump, ForceMode2D.Impulse);
 			IsGrounded = false;
 			landingTimer = landingDelay / 1000;
 		}
@@ -86,7 +121,7 @@ public class LemmingMovement : MonoBehaviour
 		{
 			transform.rotation = new Quaternion(0, 0, 0, 0);
 		}
-		else if(direction > 0f)
+		else if (direction > 0f)
 		{
 			transform.rotation = new Quaternion(0, 180, 0, 0);
 		}
@@ -94,12 +129,12 @@ public class LemmingMovement : MonoBehaviour
 		Vector2 velocity = rb.velocity;
 
 		// Brake movement when changing direction
-		if (velocity.x > 0 && direction < 0 ||velocity.x < 0 && direction > 0)
+		if (velocity.x > 0 && direction < 0 || velocity.x < 0 && direction > 0)
 		{
 			BrakeMovement();
 		}
 		// Accelerate in movement direction
-		else if(rb.velocity.x < maxSpeed && rb.velocity.x > -maxSpeed)
+		else if (rb.velocity.x < maxSpeed && rb.velocity.x > -maxSpeed)
 		{
 			// Acceleration on ground is faster than in air
 			if (IsGrounded)

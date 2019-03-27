@@ -193,10 +193,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 1
-  speed: 5
-  maxSpeed: 5
+  speed: 10
+  maxSpeed: 10
   landingDelay: 50
   landingTimer: 0
+  animator: {fileID: 8739096752964580133}
 --- !u!50 &3154503392202662251
 Rigidbody2D:
   serializedVersion: 4
