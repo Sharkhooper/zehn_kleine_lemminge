@@ -66,8 +66,10 @@ public class InputTouch : MonoBehaviour
 					float tan = richtungsVector.y / richtungsVector.x;
 					if (!(tan < 1 && tan > -1 && tan != 0))
 					{
-						Debug.Log("Tan: " + tan + "   x-Wert: " + richtungsVector.x);
+						//Debug.Log("Tan: " + tan + "   x-Wert: " + richtungsVector.x);
 						lemming.Jump();
+						lemming.MoveHorizontal(richtungsVector.x);
+						
 						//Aufstehen
 					}
 				}
@@ -91,7 +93,7 @@ public class InputTouch : MonoBehaviour
 
 				Debug.Log("Touch movement: " + oldMovementX);
 
-				lemming.MoveHorizontal(oldMovementX / 20);
+				lemming.MoveHorizontal(oldMovementX);
 			}
 		}
 	}
