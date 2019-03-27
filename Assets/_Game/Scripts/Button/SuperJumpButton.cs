@@ -34,8 +34,7 @@ public class SuperJumpButton : MonoBehaviour
 	public void OnAction()
 	{
 		active = !active;
-
-		Debug.Log("Super Jump: " + active);
+		
 		manager.SuperJumpActivated = active;
 	}
 }
