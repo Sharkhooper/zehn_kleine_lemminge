@@ -8,7 +8,7 @@ stages:
 variables:
     PROJECT_NAME: "GameDevWeekBase"
     UNITY_VERSION: "2018.3.7f1"
-    NEXTCLOUD_SHARE_PATH: "$NEXTCLOUD_DEPLOY_BASE_PATH/$PROJECT_NAME"
+    NEXTCLOUD_FILE_BASE_URL: "$NEXTCLOUD_DOWNLOAD_BASE_URL/$PROJECT_NAME"
     NEXTCLOUD_DEPLOY_PATH: "$NEXTCLOUD_USERNAME/$NEXTCLOUD_DEPLOY_BASE_PATH/$PROJECT_NAME"
 
 .non_release_build:
@@ -32,4 +32,4 @@ include:
     - https://gitlab.dragonixx.de/Dragonixx/gitlab-ci-toolbox/raw/master/scripts/unity/deploy/webgl-to-pages.yml
 
 # Release
-    - https://gitlab.dragonixx.de/Dragonixx/gitlab-ci-toolbox/raw/master/scripts/unity/release/all-nextcloud.yml
+    - https://gitlab.dragonixx.de/Dragonixx/gitlab-ci-toolbox/raw/master/scripts/unity/release/all-nextcloud-no-share.yml
