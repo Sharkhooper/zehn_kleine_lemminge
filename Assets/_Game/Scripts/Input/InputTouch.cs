@@ -19,6 +19,11 @@ public class InputTouch : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if(Input.GetMouseButton(1))
+		{
+			Debug.Log(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)).y);
+		}
+
 		if (Input.touchCount > 0)
 		{
 			touch = Input.GetTouch(0);
@@ -82,6 +87,7 @@ public class InputTouch : MonoBehaviour
 						//bücken
 					}
 				}
+				//Vlt nicht auf nem Button möglich
 				else if(Mathf.Abs(richtungsVector.x)<=1 && Mathf.Abs(richtungsVector.y)<=1)
 				{
 					lemming.MoveHorizontal(end.x);
