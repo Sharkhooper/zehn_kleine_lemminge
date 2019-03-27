@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class LemmingMovement : MonoBehaviour
@@ -11,11 +10,11 @@ public class LemmingMovement : MonoBehaviour
 	[SerializeField] public float maxSpeed = 5;
 	[SerializeField] public float landingDelay = 100;
 	[SerializeField] public float superJumpForce = 2;
+	[SerializeField] public bool InGroup = true;
 
 	public bool IsGrounded { get; set; }
 	public bool IsCrouching { get; set; }
 	public Vector2 WindConstant { get; set; }
-	public bool InGroup { set; get; }
 	public Vector2 AdditionalVelocity { get; set; }
 
 	private GameManager manager;
