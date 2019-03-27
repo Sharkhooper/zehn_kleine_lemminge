@@ -17,6 +17,8 @@ public class Elevator  : MonoBehaviour,ITrigger
     private bool left = true;
     [SerializeField] public float delay = 1f;
     [SerializeField] public float speed = 1.0f;
+    private Vector3 oldPosition;
+    private Vector3 velocity;
     
     
     void Start()
@@ -30,6 +32,7 @@ public class Elevator  : MonoBehaviour,ITrigger
         positionStart = parent.position;
         positionEnd = parent.GetChild(1).position;
         player = GameObject.FindWithTag("Player");
+        oldPosition = positionStart;
 
 
     }
@@ -80,6 +83,12 @@ public class Elevator  : MonoBehaviour,ITrigger
             Debug.Log(timer);
             top = true;
         }
+
+      
+        var position = transform.position;
+        velocity = position - oldPosition;
+        oldPosition = position;
+
 
     }
 

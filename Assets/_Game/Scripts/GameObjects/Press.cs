@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Press  : MonoBehaviour
+public class Press  : MonoBehaviour, SwitchableObject
 {
     // Start is called before the first frame update
 
@@ -57,12 +57,20 @@ public class Press  : MonoBehaviour
         {
             forward = false;
         }
+        
+        
 
 
     }
 
-    
 
+    public void switchActivated()
+    {
+        throw new System.NotImplementedException();
+    }
 
-   
+    public void switchDeactivated()
+    {
+        throw new System.NotImplementedException();
+    }
 }
