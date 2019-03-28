@@ -6,12 +6,11 @@ public class Press  : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private GameObject player;
     private Vector3 positionEnd;
     private Vector3 positionStart;
     private bool forward = true;
     [SerializeField] public float speed = 1.0f;
-
+    private Transform child;
     private bool moving=true;
     
     void Start()
@@ -22,9 +21,9 @@ public class Press  : MonoBehaviour
         
         
         
+        child = transform.GetChild(0);
         positionStart = transform.position;
         positionEnd = transform.GetChild(1).position;
-        player = GameObject.FindWithTag("Player");
 
 
     }
@@ -35,7 +34,6 @@ public class Press  : MonoBehaviour
         if (moving)
         {
 
-        Transform child = transform.GetChild(0);
 
         if (forward)
         {
@@ -65,7 +63,6 @@ public class Press  : MonoBehaviour
     else
 
     {
-            Transform child = transform.GetChild(0);
 
             if (child.position != positionStart)
             {
@@ -80,12 +77,12 @@ public class Press  : MonoBehaviour
 
     }
 
-    public void switchPressStatus(bool status)
+    public void SwitchPressStatus(bool status)
     {
         moving = status;
 
         Debug.Log("status ist "+status);
-        transform.GetChild(0).GetChild(1).GetComponent<DeadlyTrigger>().statusActive=status;
+        transform.GetChild(0).GetChild(1).GetComponent<Deadly>().isActive=status;
     }
 
 
