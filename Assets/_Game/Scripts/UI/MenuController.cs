@@ -29,6 +29,7 @@ public class MenuController : MonoBehaviour
 	    {
 		    Button continueButton = transform.GetChild(1).GetComponent<Button>();
 		    continueButton.enabled = false;
+		    continueButton.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.grey;
 	    }
 
 	    menuUI = gameObject;
@@ -40,7 +41,6 @@ public class MenuController : MonoBehaviour
 
     public void NewGameButton_Click()
     {
-	    Debug.Log("test");
 	    gm.ResetProgress();
 	    SceneManager.LoadScene("Level 1", LoadSceneMode.Single);
 
@@ -49,8 +49,6 @@ public class MenuController : MonoBehaviour
 
     public void ContinueGame_Click()
     {
-	    Debug.Log("continue");
-
 	    SceneManager.LoadScene("Level " + gm.level, LoadSceneMode.Single);
 
 	    gm.EnableIngameUI(true);
