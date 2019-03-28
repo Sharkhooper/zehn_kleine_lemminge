@@ -24,9 +24,20 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
+		Object.DontDestroyOnLoad(this);
+		//wenn ein GameManager existiert keinen neuen Laden FEHLT NOCH!!!!!
+
 		if (continueGameText != null)
 		{
 			if (level == 1) continueGameText.color = new Color32(142, 146, 183, 100);
+		}
+	}
+
+	private void Update()
+	{
+		if(SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByName("TitleMenu")))
+		{
+			Debug.Log("Buttons ausblenden");
 		}
 	}
 

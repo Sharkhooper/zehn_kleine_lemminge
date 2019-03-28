@@ -192,7 +192,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 930041585}
-        m_MethodName: option_Click
+        m_MethodName: Option_Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -649,7 +649,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 930041585}
-        m_MethodName: newGameButton_Click
+        m_MethodName: NewGameButton_Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -778,7 +778,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 930041585}
-        m_MethodName: continueGame_Click
+        m_MethodName: ContinueGame_Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -894,6 +894,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5039903204970821658, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6970042148868717515, guid: bf18cb00ef043184eb50a0f82e61aba6,
         type: 3}
       propertyPath: newGameText
@@ -914,11 +919,6 @@ PrefabInstance:
       propertyPath: creditText
       value: 
       objectReference: {fileID: 367998310}
-    - target: {fileID: 5039903204970821658, guid: bf18cb00ef043184eb50a0f82e61aba6,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5250470055608143728, guid: bf18cb00ef043184eb50a0f82e61aba6,
         type: 3}
       propertyPath: m_IsActive
@@ -1649,7 +1649,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 930041585}
-        m_MethodName: credit_Click
+        m_MethodName: Credit_Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

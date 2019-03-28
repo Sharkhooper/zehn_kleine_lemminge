@@ -1091,7 +1091,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6970042148868717515}
-        m_MethodName: action_Click
+        m_MethodName: ActionButton_Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1220,7 +1220,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6970042148868717515}
-        m_MethodName: menuButton_Click
+        m_MethodName: MenuButton_Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1704,6 +1704,7 @@ MonoBehaviour:
   level: 1
   leben: 3
   lemminge: 10
+  existSingleLemming: 0
   newGameText: {fileID: 0}
   continueGameText: {fileID: 0}
   optionText: {fileID: 0}
