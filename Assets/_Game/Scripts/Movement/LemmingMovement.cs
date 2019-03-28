@@ -23,6 +23,8 @@ public class LemmingMovement : MonoBehaviour
 	void Start()
 	{
 		rb.freezeRotation = true;
+		animator = GetComponent<Animator>();
+		InGroup = false;
 	}
 
 	void FixedUpdate()
@@ -109,4 +111,5 @@ public class LemmingMovement : MonoBehaviour
 			rb.velocity = new Vector2(direction * maxSpeed, rb.velocity.y);
 		}
 	}
+
 }
