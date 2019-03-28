@@ -12,7 +12,7 @@ public class LemmingMovement : MonoBehaviour
 	[SerializeField] public float landingDelay = 50;
 	[SerializeField] public float superJumpForce = 2;
 
-	public bool IsGrounded { get; set; }
+	[SerializeField] public bool IsGrounded;
 	public bool IsCrouching { get; set; }
 	public Vector2 WindConstant { get; set; }
 	public Vector2 AdditionalVelocity { get; set; }
