@@ -11,7 +11,6 @@ public class LemmingMovement : MonoBehaviour
 	[SerializeField] public float maxSpeed = 2;
 	[SerializeField] public float landingDelay = 50;
 	[SerializeField] public float superJumpForce = 2;
-	[SerializeField] public bool InGroup = true;
 
 	public bool IsGrounded { get; set; }
 	public bool IsCrouching { get; set; }
@@ -19,8 +18,6 @@ public class LemmingMovement : MonoBehaviour
 	public Vector2 AdditionalVelocity { get; set; }
 
 	[SerializeField] private float landingTimer;
-
-	[SerializeField] public Animator animator;
 
 	// Start is called before the first frame update
 	void Start()
@@ -52,7 +49,7 @@ public class LemmingMovement : MonoBehaviour
 			 jump = new Vector2(0, 1 * jumpForce * 5f);
 		}
 
-		if (!InGroup && landingTimer <= 0f && IsGrounded)
+		if (landingTimer <= 0f && IsGrounded)
 		{
 			//rb.AddForce(jump, ForceMode2D.Impulse);
 			rb.velocity = jump;
@@ -81,22 +78,10 @@ public class LemmingMovement : MonoBehaviour
 		if (direction > 0) direction = 1;
 		else if (direction < 0) direction = -1;
 
-		animator.SetFloat("Speed", Mathf.Abs(direction));
-
 		// If no movement input exists, auto brake
 		if (direction < 0.1f && direction > -0.1f)
 		{
 			return;
-		}
-
-		// Rotates character to face direction it's moving
-		if (direction < 0f)
-		{
-			transform.rotation = Quaternion.identity;
-		}
-		else if (direction > 0f)
-		{
-			transform.rotation = Quaternion.Euler(0, 180, 0);
 		}
 
 		Vector2 velocity = rb.velocity;
