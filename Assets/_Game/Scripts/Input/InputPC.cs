@@ -25,7 +25,7 @@ public class InputPC : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-		Debug.Log(ActionCoolDown);
+		//Debug.Log(ActionCoolDown);
 		if (ActionCoolDown > 0)
 		{
 			ActionCoolDown -= 0.1f;

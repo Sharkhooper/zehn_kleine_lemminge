@@ -14,7 +14,14 @@ public class InteractebaleSwitch : MonoBehaviour
     private bool switchActiv=true;
     private bool groupIn = false;
     private bool playerIn = false;
-    
+    private GameManager gameManagerScript;
+
+    private void Start()
+    {
+        gameManagerScript = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+    }
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
       
@@ -28,7 +35,7 @@ public class InteractebaleSwitch : MonoBehaviour
             groupIn = true;
             Debug.Log("Group Enter Trigger");
             playerIn = true;
-
+            gameManagerScript.ActionButtonEnable(playerIn,this);
 
         }
         else
@@ -37,6 +44,7 @@ public class InteractebaleSwitch : MonoBehaviour
 
             Debug.Log("Lemming Enter Trigger");
             playerIn = true;
+            gameManagerScript.ActionButtonEnable(playerIn,this);
 
 
         }
@@ -51,6 +59,7 @@ public class InteractebaleSwitch : MonoBehaviour
         {
             groupIn = false;
             playerIn = false;
+            gameManagerScript.ActionButtonEnable(playerIn,this);
         }
         else
         {
@@ -58,14 +67,19 @@ public class InteractebaleSwitch : MonoBehaviour
 
             if (groupIn) return;
             playerIn = false;
+            gameManagerScript.ActionButtonEnable(playerIn,this);
 
 
         }
+        
+        
     }
 
 
     public void ActionButtonPressed()
     {
+        Debug.Log("Button pressed");
+        
         if (playerIn)
         {
 

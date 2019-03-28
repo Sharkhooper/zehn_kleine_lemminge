@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 	public TextMeshProUGUI groupText;
 
 	public Button actionButton;
+	private InteractebaleSwitch interactebaleSwitch;
+	
 
 
 	private void Start()
@@ -28,6 +30,8 @@ public class GameManager : MonoBehaviour
 		{
 			if (level == 1) continueGameText.color = new Color32(142, 146, 183, 100);
 		}
+
+		actionButton.enabled = false;
 	}
 
 
@@ -41,8 +45,9 @@ public class GameManager : MonoBehaviour
 			{{"Fire", false}, {"SuperJump", false}, {"Power", false}};
 	}
 
-	public void ActionButtonEnable(bool b)
+	public void ActionButtonEnable(bool b,InteractebaleSwitch switchScript)
 	{
+		interactebaleSwitch = switchScript;
 		actionButton.enabled = b;
 	}
 
@@ -106,7 +111,8 @@ public class GameManager : MonoBehaviour
 
 	public void ActionButton_Click()
 	{
-		Debug.Log("Schalter wird umgelegt");
+		Debug.Log("Button clicked");
+		interactebaleSwitch.ActionButtonPressed();
 	}
 
 	public void GroupButton_Click()
