@@ -6,22 +6,22 @@ using UnityEngine.Tilemaps;
 public class WindTilemap : MonoBehaviour, ITrigger
 {
 	[SerializeField] private Vector2 windDirection;
-	private PlayerController playerController;
+	private GroupController groupController;
 
 	private void Start()
 	{
-		playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+		groupController = GameObject.FindGameObjectWithTag("Player").GetComponent<GroupController>();
 	}
 
 	public void OnLemmingEnter()
 	{
-		LemmingMovement lemming = playerController.ActiveLemming;
+		LemmingMovement lemming = groupController.ActiveLemming;
 		lemming.WindConstant = windDirection;
 	}
 
 	public void OnLemmingExit()
 	{
-		LemmingMovement lemming = playerController.ActiveLemming;
+		LemmingMovement lemming = groupController.ActiveLemming;
 		lemming.WindConstant = Vector2.zero;
 	}
 
