@@ -124,29 +124,14 @@ public class Elevator  : MonoBehaviour,ITrigger
     private void OnTriggerEnter2D(Collider2D other)
     {
         
-        
-    }
-
-
-    public void OnLemmingEnter()
-    {
         entered = true;
         left = false;
     }
 
-    public void OnLemmingExit()
+    private void OnTriggerExit2D(Collider2D other)
     {
-       left = true;
-
+        left = true;
     }
 
-    public void OnGroupEnter()
-    {
-        throw new System.NotImplementedException();
-    }
 
-    public void OnGroupExit()
-    {
-        throw new System.NotImplementedException();
-    }
 }
