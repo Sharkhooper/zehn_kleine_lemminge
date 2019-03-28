@@ -14,10 +14,10 @@ public class Chainsaw : MonoBehaviour
     private int nextPoint;
     private int vecListLength;
     private Vector3[] vec3List;
-    
-    
-    
-    
+
+    public bool Moving { get; set; } = true;
+
+
     void Start()
     {
 
@@ -44,63 +44,87 @@ public class Chainsaw : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Transform child = transform.GetChild(0);
-        if (!circle)
+        if (Moving)
         {
-
-
-
-
-            child.position =
-                Vector3.MoveTowards(child.position, vec3List[nextPoint], Time.deltaTime * speed);
-
-
-            if (child.position == vec3List[0])
+            Transform child = transform.GetChild(0);
+            if (!circle)
             {
-                forward = true;
-            }
 
-            if (child.position == vec3List[vecListLength-1])
-            {
-                forward = false;
-            }
 
-            if (child.position == vec3List[nextPoint])
-            {
-                if (forward)
+
+
+                child.position =
+                    Vector3.MoveTowards(child.position, vec3List[nextPoint], Time.deltaTime * speed);
+
+
+                if (child.position == vec3List[0])
                 {
-                    nextPoint += 1;
+                    forward = true;
                 }
 
-                else
+                if (child.position == vec3List[vecListLength - 1])
                 {
-                    nextPoint -= 1;
+                    forward = false;
                 }
+
+                if (child.position == vec3List[nextPoint])
+                {
+                    if (forward)
+                    {
+                        nextPoint += 1;
+                    }
+
+                    else
+                    {
+                        nextPoint -= 1;
+                    }
+                }
+
+
             }
 
-        
+            else
+            {
+
+
+                if (child.position == vec3List[nextPoint])
+                {
+                    nextPoint = (nextPoint + 1) % vecListLength;
+
+                }
+
+                child.position =
+                    Vector3.MoveTowards(child.position, vec3List[nextPoint], Time.deltaTime * speed);
+
+
+            }
         }
-
         else
         {
-            
+            Transform child = transform.GetChild(0);
 
-            if (child.position == vec3List[nextPoint])
+            if (child.position != vec3List[0])
             {
-                nextPoint = (nextPoint + 1) % vecListLength;
+                if (child.position == vec3List[nextPoint])
+                {
+
+                    nextPoint -= 1;
+
+                }
+                
+                forward = false;
+                child.position =
+                    Vector3.MoveTowards(child.position, vec3List[nextPoint], Time.deltaTime * speed);
+
+
+
+              
+
 
             }
 
-            child.position =
-                Vector3.MoveTowards(child.position, vec3List[nextPoint], Time.deltaTime * speed);
-
-
-       }
-
+        }
 
     }
-
-
-
-
+    
 }
