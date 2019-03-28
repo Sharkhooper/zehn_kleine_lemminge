@@ -9,8 +9,8 @@ public class MoveableObject : MonoBehaviour
     [SerializeField] public float speed = 1.0f;
     private Transform child;
     private bool forward = true;
-    
-    public bool moveObject  { get; set; }=false;
+    private Deadly deadly;
+    private bool moveObject =false;
     
     void Start()
     {
@@ -22,6 +22,8 @@ public class MoveableObject : MonoBehaviour
         child = transform.GetChild(0);
         positionStart = transform.position;
         positionEnd = transform.GetChild(1).position;
+        
+        deadly=transform.GetChild(0).GetChild(1).GetComponent<Deadly>();
 
 
     }
@@ -49,20 +51,32 @@ public class MoveableObject : MonoBehaviour
             {
                 forward = true;
                 moveObject = false;
+                deadly.isActive=moveObject;
             }
 
             if (child.position == positionEnd)
             {
                 forward = false;
                 moveObject = false;
+                deadly.isActive=moveObject;
             }
 
         }
 
     }
-       
-    
-    
 
-    
+
+    public void SwitchMoveObjectStatus(bool a)
+    {
+        if (moveObject == false)
+        {
+            moveObject = !moveObject;
+
+
+            deadly.isActive = moveObject;
+        }
+
+    }
+
+
 }
