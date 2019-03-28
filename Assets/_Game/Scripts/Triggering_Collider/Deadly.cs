@@ -13,11 +13,20 @@ public class Deadly : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 
+       // Debug.Log("Collided");
         if (isActive)
         {
-            ExecuteEvents.Execute<IKillTarget>(other.gameObject, null, (x, y) => x.Die());
+          
+            ExecuteEvents.Execute<IKillTarget>(other.gameObject, null, (x, y) => x.Die(other.gameObject));
         }
 
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {  if (isActive)
+        {
+          
+            ExecuteEvents.Execute<IKillTarget>(other.gameObject, null, (x, y) => x.Die(other.gameObject));
+        }
+    }
 }

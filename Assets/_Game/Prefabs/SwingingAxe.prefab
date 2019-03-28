@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3190373929610144333}
   - component: {fileID: 3190373929610144331}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SwingingAxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,8 @@ GameObject:
   - component: {fileID: 3190373929808458501}
   - component: {fileID: 3190373929808458500}
   - component: {fileID: 3190373929808458499}
-  m_Layer: 0
+  - component: {fileID: 8593111348574775526}
+  m_Layer: 10
   m_Name: Deadly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,6 +158,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.35
+--- !u!50 &8593111348574775526
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3190373929808458497}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3190373929854477055
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3190373929854477040}
   - component: {fileID: 3190373929854477041}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Chain
   m_TagString: Untagged
   m_Icon: {fileID: 0}

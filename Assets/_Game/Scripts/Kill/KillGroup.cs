@@ -12,7 +12,7 @@ public class KillGroup : MonoBehaviour, IKillTarget
     }
 
 
-	public void Die()
+	public void Die(GameObject other)
 	{
 		Debug.Log("Group gekillt");
 	}

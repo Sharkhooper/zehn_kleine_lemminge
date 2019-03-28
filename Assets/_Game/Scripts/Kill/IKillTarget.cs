@@ -5,5 +5,5 @@ using UnityEngine.EventSystems;
 
 public interface IKillTarget : IEventSystemHandler
 {
-	void Die();
+	void Die(GameObject other);
 }
