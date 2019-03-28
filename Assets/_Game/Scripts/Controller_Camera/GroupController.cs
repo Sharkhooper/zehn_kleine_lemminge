@@ -9,9 +9,11 @@ public class GroupController : MonoBehaviour, IKillTarget
 	private GameManager gameManager;
 	public bool IsGroupSelected;
 	private bool blockedInput;
+	bool isDirectionPositiv;
 	public GameObject[] PlayableLemmings { get; set; }
 	public GameObject[] DummyLemmings { get; set; }
 	public Animator[] AllLemmingAnimator { get; set; }
+	public SpriteRenderer[] AllLemmingSpriteRenderer { get; set; }
 
 	public int ActiveLemmingIndex { get; set; }
 	public GameObject ActiveLemming { get; set; }
@@ -26,6 +28,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 		gameManager = FindObjectOfType<GameManager>();
 
 		AllLemmingAnimator = GetComponentsInChildren<Animator>();
+		AllLemmingSpriteRenderer = GetComponentsInChildren<SpriteRenderer>();
 
 		int lemmingsCount = transform.GetChild(0).transform.childCount;
 		PlayableLemmings = new GameObject[lemmingsCount];
@@ -120,11 +123,15 @@ public class GroupController : MonoBehaviour, IKillTarget
 		ActiveLemming.GetComponent<Rigidbody2D>().simulated = status;
 		ActiveLemming.GetComponentInChildren<GroundTrigger>(true).ChangeFootStatus(status);
 
-		//ActiveLemming.GetComponentInChildren<Collider2D>(true).enabled = status;
+		gameManager.existSingleLemming = status;
 	}
 
 	public void MoveHorizontal(float direction)
 	{
+		if (direction != 0)
+		{
+			isDirectionPositiv = direction > 0;
+		}
 		if (IsGroupSelected && !blockedInput)
 		{
 			groupMovement.MoveHorizontal(direction);
@@ -132,11 +139,17 @@ public class GroupController : MonoBehaviour, IKillTarget
 			{
 				animator.SetFloat("Speed", Mathf.Abs(direction));
 			}
+
+			foreach (var sprite in AllLemmingSpriteRenderer)
+			{
+				sprite.flipX = isDirectionPositiv;
+			}
 		}
 		else if (!blockedInput)
 		{
 			ActiveLemmingMovement.MoveHorizontal(direction);
 			ActiveLemmingAnimator.SetFloat("Speed", Mathf.Abs(direction));
+			ActiveLemming.GetComponent<SpriteRenderer>().flipX = isDirectionPositiv;
 		}
 	}
 

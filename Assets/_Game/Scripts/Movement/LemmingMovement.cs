@@ -23,8 +23,6 @@ public class LemmingMovement : MonoBehaviour
 	void Start()
 	{
 		rb.freezeRotation = true;
-		animator = GetComponent<Animator>();
-		InGroup = false;
 	}
 
 	void FixedUpdate()
