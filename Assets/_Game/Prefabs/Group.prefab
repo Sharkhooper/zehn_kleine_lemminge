@@ -14,8 +14,7 @@ GameObject:
   - component: {fileID: 3450176123358320513}
   - component: {fileID: 3450176123358320514}
   - component: {fileID: 3354040020890434468}
-  - component: {fileID: 3677554869597537554}
-  - component: {fileID: 6011242687033619491}
+  - component: {fileID: 6984787653120822475}
   m_Layer: 9
   m_Name: Group
   m_TagString: Untagged
@@ -138,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11caec89d8c6be54f94cd943c3407ec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3677554869597537554
+--- !u!114 &6984787653120822475
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,36 +146,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3450176123358320518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5de881537e4cf7b44ba96446b2860d2b, type: 3}
+  m_Script: {fileID: 11500000, guid: e42b70d8db1478c42941981933b00e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 1
-  speed: 1
-  maxSpeed: 5
-  landingDelay: 100
-  superJumpForce: 2
-  InGroup: 1
-  landingTimer: 0
-  animator: {fileID: 6011242687033619491}
---- !u!95 &6011242687033619491
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3450176123358320518}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fb2f5be7396bfa842af5b0967d321eee, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3450176123715995597
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3450176125379432898}
   - component: {fileID: 3450176125379432897}
+  - component: {fileID: 5449484100261570457}
   m_Layer: 0
   m_Name: Baby Lemming
   m_TagString: Untagged
@@ -335,6 +308,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5449484100261570457
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3450176125379432899}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fb2f5be7396bfa842af5b0967d321eee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5200972109978447038
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2318409773978723861}
   - component: {fileID: 2506767378308610240}
+  - component: {fileID: 4918560815431200847}
   m_Layer: 0
   m_Name: Large Lemming (4)
   m_TagString: Untagged
@@ -451,6 +444,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4918560815431200847
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5269455310857627018}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fb2f5be7396bfa842af5b0967d321eee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6592617866388673907
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,6 +506,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3245596115267724214}
   - component: {fileID: 3412511340987940005}
+  - component: {fileID: 8089982271917772428}
   m_Layer: 0
   m_Name: Large Lemming
   m_TagString: Untagged
@@ -563,6 +576,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8089982271917772428
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7649776420523318632}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fb2f5be7396bfa842af5b0967d321eee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1206970162071940246
 PrefabInstance:
   m_ObjectHideFlags: 0

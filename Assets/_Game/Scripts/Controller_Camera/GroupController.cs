@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class GroupController : MonoBehaviour
 {
+	[SerializeField] GroupMovement groupMovement;
+
 	public bool IsGroupSelected;
 	public GameObject[] PlayableLemmings { get; set; }
 	public GameObject[] DummyLemmings { get; set; }
 	public int ActiveLemmingIndex { get; set; }
-	public GameObject ActiveLemming { get; set; }
+	public LemmingMovement ActiveLemming { get; set; }
 
 	// Start is called before the first frame update
 	void Start()
@@ -30,35 +32,50 @@ public class GroupController : MonoBehaviour
 		}
 
 		ActiveLemmingIndex = 0;
-		ActiveLemming = PlayableLemmings[ActiveLemmingIndex];
-    }
+		ActiveLemming = PlayableLemmings[ActiveLemmingIndex].GetComponent<LemmingMovement>();
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
+	public void RemoveLemmingFromGroup()
+	{
 
-    }
+	}
 
-    public void RemoveLemmingFromGroup()
-    {
+	public void KillGroup()
+	{
+		foreach (var lemming in PlayableLemmings)
+		{
 
-    }
+		}
+	}
 
-    public void KillGroup()
-    {
-	    foreach (var lemming in PlayableLemmings)
-	    {
+	public void KillActiveLemming()
+	{
 
-	    }
-    }
+	}
 
-    public void KillActiveLemming()
-    {
+	public void ToggleMovementGroup()
+	{
 
-    }
+	}
 
-    public void ToggleMovementGroup()
-    {
+	public void MoveHorizontal(float direction)
+	{
+		if (IsGroupSelected)
+		{
+			
+		}
+		else
+		{
+			ActiveLemming.MoveHorizontal(direction);
+		}
+	}
 
-    }
+	public void Jump()
+	{
+		if (!IsGroupSelected)
+		{
+			ActiveLemming.Jump();
+		}
+	}
+
 }
