@@ -13,7 +13,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 	public Animator[] AllLemmingAnimator { get; set; }
 	public int ActiveLemmingIndex { get; set; }
 	public LemmingMovement ActiveLemming { get; set; }
-	public Animator activeLemmingAnimator { get; set; }
+	public Animator ActiveLemmingAnimator { get; set; }
 
 	// Start is called before the first frame update
 	void Start()
@@ -44,20 +44,14 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void RemoveLemmingFromGroup()
 	{
-
-	}
-
-	public void KillGroup()
-	{
-		foreach (var lemming in PlayableLemmings)
+		if(ActiveLemmingIndex +1 <= PlayableLemmings.Length)
 		{
-
+			ActiveLemmingIndex++;
 		}
-	}
-
-	public void KillActiveLemming()
-	{
-
+		else
+		{
+			Debug.Log("Verloren");
+		}
 	}
 
 	public void ToggleMovementGroup()

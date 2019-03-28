@@ -52,7 +52,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 4.62
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 2506767378308610240}
   - component: {fileID: 4918560815431200847}
   m_Layer: 0
-  m_Name: Large Lemming (4)
+  m_Name: Large Lemming (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

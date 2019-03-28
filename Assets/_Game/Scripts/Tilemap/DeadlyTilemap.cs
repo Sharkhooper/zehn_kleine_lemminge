@@ -1,17 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
-public class DeadlyTilemap : MonoBehaviour, ICollidable
+public class DeadlyTilemap : MonoBehaviour
 {
-	public void OnCollisionWithLemming()
+	private void OnTriggerEnter2D(Collider2D other)
 	{
-		Debug.Log("This is so great");
-	}
-
-	public void OnCollisionWithGroup()
-	{
-		throw new System.NotImplementedException();
+		if (other.CompareTag("Player"))
+		{
+			ExecuteEvents.Execute<IKillTarget>(other.gameObject, null, (x, y) => x.Die());
+			// TODO: Exchange tile here
+		}
 	}
 }
