@@ -2,25 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaterTilemap : MonoBehaviour, ITrigger
+public class WaterTilemap : MonoBehaviour
 {
-	public void OnLemmingEnter()
+	private void OnTriggerEnter2D(Collider2D other)
 	{
-		throw new System.NotImplementedException();
+		if (other.tag.Equals("Player"))
+		{
+			LemmingMovement move = other.gameObject.GetComponent<LemmingMovement>();
+			// TODO: Change player physics here
+		}
 	}
 
-	public void OnLemmingExit()
+	private void OnTriggerExit2D(Collider2D other)
 	{
-		throw new System.NotImplementedException();
-	}
-
-	public void OnGroupEnter()
-	{
-		throw new System.NotImplementedException();
-	}
-
-	public void OnGroupExit()
-	{
-		throw new System.NotImplementedException();
+		if (other.tag.Equals("Player"))
+		{
+			LemmingMovement move = other.gameObject.GetComponent<LemmingMovement>();
+			// TODO: Reset player physics here
+		}
 	}
 }

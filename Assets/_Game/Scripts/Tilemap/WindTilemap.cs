@@ -1,37 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityAtoms;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class WindTilemap : MonoBehaviour, ITrigger
+public class WindTilemap : MonoBehaviour
 {
 	[SerializeField] private Vector2 windDirection;
-	private GroupController groupController;
 
-	private void Start()
+	private void OnTriggerEnter2D(Collider2D other)
 	{
-		groupController = GameObject.FindGameObjectWithTag("Player").GetComponent<GroupController>();
+		if (other.tag.Equals("Player"))
+		{
+			LemmingMovement move = other.gameObject.GetComponent<LemmingMovement>();
+			move.WindConstant = windDirection;
+		}
 	}
 
-	public void OnLemmingEnter()
+	private void OnTriggerExit2D(Collider2D other)
 	{
-		LemmingMovement lemming = groupController.ActiveLemming;
-		lemming.WindConstant = windDirection;
-	}
-
-	public void OnLemmingExit()
-	{
-		LemmingMovement lemming = groupController.ActiveLemming;
-		lemming.WindConstant = Vector2.zero;
-	}
-
-	public void OnGroupEnter()
-	{
-		throw new System.NotImplementedException();
-	}
-
-	public void OnGroupExit()
-	{
-		throw new System.NotImplementedException();
+		if (other.tag.Equals("Player"))
+		{
+			LemmingMovement move = other.gameObject.GetComponent<LemmingMovement>();
+			move.WindConstant = Vector2.zero;
+		}
 	}
 }
