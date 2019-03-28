@@ -84,7 +84,7 @@ public class InputTouch : MonoBehaviour
 						{
 							//Debug.Log("Tan: " + tan + "   x-Wert: " + richtungsVector.x);
 							lemming.Jump();
-							lemming.MoveHorizontal(richtungsVector.x);
+							//lemming.MoveHorizontal(richtungsVector.x);
 
 							//Aufstehen
 						}
@@ -114,31 +114,22 @@ public class InputTouch : MonoBehaviour
 				if ((Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10)) - movement).x > 0) start = movement;
 
 				movement = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
-				//movement = touch.position;
-				//Debug.Log("Input MOVEMENT: " + movement);
-				//richtungsVector = movement - start;
-				//Debug.Log("Input RICHTUNGSVECTOR: " + richtungsVector);
-				//lemming.MoveHorizontal(richtungsVector.x);
-				//	Debug.Log("Touch movement: " + movement);
-				//if (movement.x < 0 && start.x > 0)
-				//{
-				//	Debug.Log("Start -1");
-				//	start = movement;
-				//	lemming.MoveHorizontal(-1);
-				//}
-				//else if (movement.x > 0 && start.x < 0)
-				//{
-				//	Debug.Log("Start +1");
-				//	start = movement;
-				//	lemming.MoveHorizontal(1);
-				//}
-				//else
-				{
-					//if (Mathf.Abs(movement.x - start.x) > 1) oldMovementX = movement.x - start.x;
-					//if (oldMovementX == 1 || oldMovementX == -1) oldMovementX = 0;
-					//Debug.Log("MovementX: " + oldMovementX);
 					lemming.MoveHorizontal((movement.x - start.x));
+
+
+				if (movement.y-originStart.y > 3)
+				{
+					float tan = movement.y - originStart.y / movement.x - originStart.x;
+					if (!(tan < 1 && tan > -1 && tan != 0))
+					{
+						//Debug.Log("Tan: " + tan + "   x-Wert: " + richtungsVector.x);
+						lemming.Jump();
+						//lemming.MoveHorizontal(movement.y - originStart.y);
+
+						//Aufstehen
+					}
 				}
+
 			}
 		}
 	}

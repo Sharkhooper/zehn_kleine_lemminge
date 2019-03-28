@@ -31,6 +31,7 @@ public class MenuButtonScript : MonoBehaviour
 	{
 		//newGameText.text = "新しい遊";
 		newGameText.color = Color.white;
+		newGameText.color = Color.clear;
 		SceneManager.LoadScene("Level 1", LoadSceneMode.Single);
 		level = 1;
 		leben = 3;

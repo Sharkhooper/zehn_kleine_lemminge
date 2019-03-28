@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class LemmingMovement : MonoBehaviour
 {
-	[SerializeField] public float jumpForce = 1;
-	[SerializeField] public float speed = 1;
-	[SerializeField] public float maxSpeed = 5;
-	[SerializeField] public float landingDelay = 100;
+	[SerializeField] public float jumpForce = 1.1f;
+	[SerializeField] public float speed = ;
+	[SerializeField] public float maxSpeed = 2;
+	[SerializeField] public float landingDelay = 50;
 	[SerializeField] public float superJumpForce = 2;
 	[SerializeField] public bool InGroup = true;
 
@@ -21,7 +21,7 @@ public class LemmingMovement : MonoBehaviour
 	private Rigidbody2D rb;
 	[SerializeField] private float landingTimer;
 
-	[SerializeField] public Animator animator;
+	//[SerializeField] public Animator animator;
 
 	// Start is called before the first frame update
 	void Start()
@@ -47,11 +47,11 @@ public class LemmingMovement : MonoBehaviour
 	public void Jump()
 	{
 		Vector2 jump;
-		/*if (manager.SuperJumpActivated)
+		if (manager.SuperJumpActivated)
 		{
 			 jump = new Vector2(0, 1 * jumpForce * superJumpForce * 5f);
 		}
-		else*/
+		else
 		{
 			 jump = new Vector2(0, 1 * jumpForce * 5f);
 		}
@@ -65,28 +65,6 @@ public class LemmingMovement : MonoBehaviour
 		}
 	}
 
-	public void JumpWithHorizontal(float direction)
-	{
-		Vector2 jump;
-		if (manager.SuperJumpActivated)
-		{
-			Debug.Log("Super Jump");
-			jump = new Vector2(direction, 1 * jumpForce * superJumpForce * 5f);
-		}
-		else
-		{
-
-			Debug.Log("Jump");
-			jump = new Vector2(direction, 1 * jumpForce * 5f);
-		}
-
-		if (!InGroup && landingTimer <= 0f && IsGrounded)
-		{
-			rb.AddForce(jump, ForceMode2D.Impulse);
-			IsGrounded = false;
-			landingTimer = landingDelay / 1000;
-		}
-	}
 
 	// Intensity on a scale from 1 to 10
 	private void BrakeMovement()
@@ -107,8 +85,7 @@ public class LemmingMovement : MonoBehaviour
 		if (direction > 0) direction = 1;
 		else if (direction < 0) direction = -1;
 
-		Debug.Log(direction);
-		animator.SetFloat("Speed", Mathf.Abs(direction));
+		//animator.SetFloat("Speed", Mathf.Abs(direction));
 
 		// If no movement input exists, auto brake
 		if (direction < 0.1f && direction > -0.1f)
@@ -116,15 +93,15 @@ public class LemmingMovement : MonoBehaviour
 			return;
 		}
 
-		// Rotates character to face direction it's moving
-		if (direction < 0f)
-		{
-			transform.rotation = Quaternion.identity;
-		}
-		else if (direction > 0f)
-		{
-			transform.rotation = Quaternion.Euler(0,180,0);
-		}
+		//// Rotates character to face direction it's moving
+		//if (direction < 0f)
+		//{
+		//	transform.rotation = Quaternion.identity;
+		//}
+		//else if (direction > 0f)
+		//{
+		//	transform.rotation = Quaternion.Euler(0,180,0);
+		//}
 
 		Vector2 velocity = rb.velocity;
 
@@ -139,12 +116,10 @@ public class LemmingMovement : MonoBehaviour
 			// Acceleration on ground is faster than in air
 			if (IsGrounded)
 			{
-				//rb.AddForce(new Vector2(direction, 0f) * speed * 100 * Time.deltaTime);
 				rb.velocity = new Vector2(direction, 0f) * speed * 100 * Time.deltaTime;
 			}
 			else
 			{
-				//rb.AddForce(new Vector2(direction, 0f) * speed * 40 * Time.deltaTime);
 				rb.velocity = new Vector2(direction * speed * 40 * Time.deltaTime, rb.velocity.y);
 			}
 		}
