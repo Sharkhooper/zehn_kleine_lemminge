@@ -9,11 +9,11 @@ public class InputTouch : MonoBehaviour
 	float oldMovementX = 0;
 	Vector3 start, end, movement, richtungsVector, touchStart, originStart;
 	Touch touch;
-	private LemmingMovement lemming;
+	[SerializeField] public GroupController groupController;
 
 	private void Start()
 	{
-		lemming = GetComponent<LemmingMovement>();
+
 	}
 
 	// Update is called once per frame
@@ -61,12 +61,12 @@ public class InputTouch : MonoBehaviour
 
 						//=> Vector sollte übergeen werden, testen ob da LemmingGruppe ist
 						//RichtigeMethode
-						lemming.MoveHorizontal(0);
+						groupController.MoveHorizontal(0);
 					}
 					else
 					{
 						doubleTap = 0;
-						lemming.MoveHorizontal(0);
+						groupController.MoveHorizontal(0);
 					}
 				}
 
@@ -83,7 +83,7 @@ public class InputTouch : MonoBehaviour
 						if (!(tan < 1 && tan > -1 && tan != 0))
 						{
 							//Debug.Log("Tan: " + tan + "   x-Wert: " + richtungsVector.x);
-							lemming.Jump();
+							groupController.Jump();
 							//lemming.MoveHorizontal(richtungsVector.x);
 
 							//Aufstehen
@@ -102,10 +102,10 @@ public class InputTouch : MonoBehaviour
 					else if (Mathf.Abs(richtungsVector.x) <= 2 && Mathf.Abs(richtungsVector.y) <= 2)
 					{
 						Debug.Log("Input Punkt Richtung: " + -((Camera.main.gameObject.transform.position - end).x));
-						lemming.MoveHorizontal(-((Camera.main.gameObject.transform.position - end).x));
+						groupController.MoveHorizontal(-((Camera.main.gameObject.transform.position - end).x));
 					}
 				}
-				lemming.MoveHorizontal(0);
+				groupController.MoveHorizontal(0);
 
 			}
 
@@ -114,7 +114,7 @@ public class InputTouch : MonoBehaviour
 				if ((Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10)) - movement).x > 0) start = movement;
 
 				movement = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
-					lemming.MoveHorizontal((movement.x - start.x));
+				groupController.MoveHorizontal((movement.x - start.x));
 
 
 				if (movement.y-originStart.y > 3)
@@ -123,7 +123,7 @@ public class InputTouch : MonoBehaviour
 					if (!(tan < 1 && tan > -1 && tan != 0))
 					{
 						//Debug.Log("Tan: " + tan + "   x-Wert: " + richtungsVector.x);
-						lemming.Jump();
+						groupController.Jump();
 						//lemming.MoveHorizontal(movement.y - originStart.y);
 
 						//Aufstehen

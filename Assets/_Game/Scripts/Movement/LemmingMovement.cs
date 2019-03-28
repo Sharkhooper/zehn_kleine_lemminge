@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class LemmingMovement : MonoBehaviour
 {
+	[SerializeField] public Rigidbody2D rb;
 	[SerializeField] public float jumpForce = 1.1f;
 	[SerializeField] public float speed = 2;
 	[SerializeField] public float maxSpeed = 2;
@@ -17,8 +18,6 @@ public class LemmingMovement : MonoBehaviour
 	public Vector2 WindConstant { get; set; }
 	public Vector2 AdditionalVelocity { get; set; }
 
-	private GameManager manager;
-	private Rigidbody2D rb;
 	[SerializeField] private float landingTimer;
 
 	[SerializeField] public Animator animator;
@@ -26,9 +25,6 @@ public class LemmingMovement : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		manager = FindObjectOfType<GameManager>();
-
-		rb = GetComponent<Rigidbody2D>();
 		rb.freezeRotation = true;
 		
 		InGroup = false;
@@ -44,10 +40,10 @@ public class LemmingMovement : MonoBehaviour
 		}
 	}
 
-	public void Jump()
+	public void Jump(bool superJumpActivated)
 	{
 		Vector2 jump;
-		if (manager.SuperJumpActivated)
+		if (superJumpActivated)
 		{
 			 jump = new Vector2(0, 1 * jumpForce * superJumpForce * 5f);
 		}

@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class KillLemming : MonoBehaviour, IKillTarget
 {
-	private bool life;
+	public GroupController groupController;
+	private Animator animator;
 
 	// Start is called before the first frame update
 	void Start()
     {
-		life = true;
+		animator = GetComponent<Animator>();
         
     }
 
 	public void Die()
 	{
-		life = false;
+		animator.SetBool("Life", false);
+		groupController.RemoveLemmingFromGroup();
+
 		Debug.Log("Lemming gekillt");
 	}
 }

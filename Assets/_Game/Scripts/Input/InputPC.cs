@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class InputPC : MonoBehaviour
 {
-	private LemmingMovement lemmingMovement;
+	[SerializeField] public GroupController groupController;
 	private Rigidbody2D rb;
 	private bool nonZeroHorizontal;
 
 	void Awake()
 	{
-		lemmingMovement = GetComponent<LemmingMovement>();
+
 	}
 
     // Start is called before the first frame update
@@ -28,18 +28,18 @@ public class InputPC : MonoBehaviour
 		if (horizontal != 0)
 		{
 			nonZeroHorizontal = true;
-			lemmingMovement.MoveHorizontal(horizontal);
+			groupController.MoveHorizontal(horizontal);
 		}
 		else if (nonZeroHorizontal)
 		{
-			lemmingMovement.MoveHorizontal(horizontal);
+			groupController.MoveHorizontal(horizontal);
 			nonZeroHorizontal = false;
 		}
 
 		float vertical = Input.GetAxis("Vertical");
 		if(vertical > 0)
 		{
-			lemmingMovement.Jump();
+			groupController.Jump();
 		}
 
     }
