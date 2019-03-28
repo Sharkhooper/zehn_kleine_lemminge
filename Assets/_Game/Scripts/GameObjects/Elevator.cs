@@ -49,7 +49,7 @@ public class Elevator  : MonoBehaviour,ITrigger
             isMoving = true;
             rigiBody.DOMove(positionEnd, duration).onComplete += () => { isMoving = false; };
             */
-           if ( eTime>3)
+           if ( eTime>duration)
            {
                rigiBody.position = positionEnd;
            }
@@ -123,6 +123,8 @@ public class Elevator  : MonoBehaviour,ITrigger
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
+        
     }
 
 
