@@ -1,62 +1,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+	public static GameManager instance = null;
+
+	[SerializeField] private TextMeshProUGUI groupText;
 
 	public int level = 1;
 	public int leben = 3;
 	public int lemminge = 10;
 	public bool existSingleLemming = false;
 
-	public TextMeshProUGUI newGameText;
-	public TextMeshProUGUI continueGameText;
-	public TextMeshProUGUI optionText;
-	public TextMeshProUGUI creditText;
-	public TextMeshProUGUI backText;
-	public TextMeshProUGUI groupText;
-
-	public Button actionButton;
-	private InteractebaleSwitch interactebaleSwitch;
-	
-
-
-	private void Start()
-	{
-		Object.DontDestroyOnLoad(this);
-		//wenn ein GameManager existiert keinen neuen Laden FEHLT NOCH!!!!!
-
-		if (continueGameText != null)
-		{
-			if (level == 1) continueGameText.color = new Color32(142, 146, 183, 100);
-		}
-
-		actionButton.enabled = false;
-	}
-
-	private void Update()
-	{
-		if(SceneManager.GetActiveScene().Equals(SceneManager.GetSceneByName("TitleMenu")))
-		{
-			Debug.Log("Buttons ausblenden");
-		}
-	}
-
-
-
 	public Dictionary<string, bool> UnlockedAbilities { get; private set; }
 	public bool SuperJumpActivated { get; set; }
 
-	private void Awake()
+	public Button actionButton;
+	private InteractebaleSwitch interactebaleSwitch;
+
+	//Awake is always called before any Start functions
+	void Awake()
 	{
+		if (instance == null)
+			instance = this;
+		else if (instance != this)
+			Destroy(gameObject);
+
+		//Sets this to not be destroyed when reloading scene
+		DontDestroyOnLoad(gameObject);
+
 		UnlockedAbilities = new Dictionary<string, bool>
 			{{"Fire", false}, {"SuperJump", false}, {"Power", false}};
 	}
 
-	public void ActionButtonEnable(bool b,InteractebaleSwitch switchScript)
+	private void Start()
+	{
+		actionButton.enabled = false;
+	}
+
+	public void EnableIngameUI(bool enable)
+	{
+		transform.GetChild(0).gameObject.SetActive(enable);
+	}
+
+	public void ActionButtonEnable(bool b, InteractebaleSwitch switchScript)
 	{
 		interactebaleSwitch = switchScript;
 		actionButton.enabled = b;
@@ -72,51 +63,17 @@ public class GameManager : MonoBehaviour
 		UnlockedAbilities[ability] = false;
 	}
 
-	public void NewGameButton_Click()
-	{
-		newGameText.color = new Color32(255, 255, 255, 255);
-
-		newGameText.text = "New Game";
-		SceneManager.LoadScene("Level 1", LoadSceneMode.Single);
-		level = 1;
-		leben = 3;
-		lemminge = 10;
-	}
-
-	public void ContinueGame_Click()
-	{
-
-		if (level != 1)
-		{
-			SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
-			continueGameText.text = "Continue";
-			continueGameText.color = new Color32(255, 255, 255, 255);
-		}//korrektes leben und lemming Anzahl laden
-		}
-
-		public void Option_Click()
-	{
-		optionText.text = "Options";
-		optionText.color = new Color32(255, 255, 255, 255);
-		SceneManager.LoadScene("OptionScene", LoadSceneMode.Single);
-	}
-
-	public void Credit_Click()
-	{
-		creditText.text = "Menschen!";
-		creditText.color = new Color32(255, 255, 255, 255);
-		SceneManager.LoadScene("CreditScene", LoadSceneMode.Single);
-	}
-
 	public void Back_Click()
 	{
-		backText.color = new Color32(255, 255, 255, 255);
+		//backText.color = new Color32(255, 255, 255, 255);
 		SceneManager.LoadScene("TitleMenu", LoadSceneMode.Single);
+		EnableIngameUI(false);
 	}
 
 	public void MenuButton_Click()
 	{
 		SceneManager.LoadScene("TitleMenu", LoadSceneMode.Single);
+		EnableIngameUI(false);
 	}
 
 
@@ -143,6 +100,12 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public void ResetProgress()
+	{
+		level = 1;
+		leben = 3;
+		lemminge = 10;
+	}
 
 	public void GameOver()
 	{
