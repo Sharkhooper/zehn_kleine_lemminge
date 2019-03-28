@@ -12,6 +12,8 @@ public class SuperJumpButton : MonoBehaviour
 
 	public Button jumpButton;
 
+
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -44,6 +46,7 @@ public class SuperJumpButton : MonoBehaviour
 			cb.normalColor = Color.yellow;
 			cb.highlightedColor = Color.yellow;
 			jumpButton.colors = cb;
+			
 		}
 		else
 		{
