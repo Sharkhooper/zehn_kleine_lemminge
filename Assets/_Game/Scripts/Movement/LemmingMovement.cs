@@ -26,7 +26,7 @@ public class LemmingMovement : MonoBehaviour
 	void Start()
 	{
 		rb.freezeRotation = true;
-		
+		animator = GetComponent<Animator>();
 		InGroup = false;
 	}
 
@@ -127,30 +127,4 @@ public class LemmingMovement : MonoBehaviour
 		}
 	}
 
-	private void OnCollisionEnter2D(Collision2D other)
-	{
-		ICollidable collidable = other.gameObject.GetComponent<ICollidable>();
-		if (collidable != null)
-		{
-			collidable.OnCollisionWithLemming();
-		}
-	}
-
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		ITrigger trigger = other.gameObject.GetComponent<ITrigger>();
-		if (trigger != null)
-		{
-			trigger.OnLemmingEnter();
-		}
-	}
-
-	private void OnTriggerExit2D(Collider2D other)
-	{
-		ITrigger trigger = other.gameObject.GetComponent<ITrigger>();
-		if (trigger != null)
-		{
-			trigger.OnLemmingExit();
-		}
-	}
 }
