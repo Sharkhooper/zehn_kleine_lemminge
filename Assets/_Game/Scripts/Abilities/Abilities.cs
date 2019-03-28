@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class Abilities : MonoBehaviour
 {
 	[SerializeField] float fireSpeed = 10.0f;
-	[SerializeField] float punchDistance = 0.5f;
+	[SerializeField] float bombSpeed = 0.5f;
 	[SerializeField] private float cooldown = 3f;
 
 	private Transform playerTransform;
@@ -44,35 +44,19 @@ public class Abilities : MonoBehaviour
 		fireObject.GetComponent<Rigidbody2D>().velocity = new Vector2(fireSpeed, 0f);
 	}
 
-	public void Punch()
+	public void Bomb()
 	{
 		if (cooldownTimer > 0f)
-		{
-			return;
-		}
+        {
+        	return;
+        }
 
-		bool punchLeft = (playerTransform.rotation != new Quaternion(0,0,0,0));
+        GameObject bombPrefab = Resources.Load<GameObject>("Bomb");
+        GameObject bombObject = Instantiate(bombPrefab);
 
-		RaycastHit2D hit;
-		if (punchLeft)
-		{
-			hit = Physics2D.Raycast(playerTransform.position, Vector2.left, punchDistance);
-		}
-		else
-		{
-			hit = Physics2D.Raycast(playerTransform.position, Vector2.right, punchDistance);
-		}
+        bombObject.transform.position = playerTransform.position;
+        //bombObject.transform.rotation = playerTransform.rotation;
 
-		if (hit.collider != null)
-		{
-			GameObject other = hit.collider.gameObject;
-
-			/*
-			if (other.CompareTag("Punchable"))
-			{
-				ExecuteEvents.Execute<IKillTarget>(other.gameObject, null, (x, y) => x.Die());
-			}
-			*/
-		}
+        bombObject.GetComponent<Rigidbody2D>().velocity = new Vector2(fireSpeed, 0f);
 	}
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Elevator  : MonoBehaviour,ITrigger
+public class Elevator  : MonoBehaviour
 {
     // Start is called before the first frame update
 
@@ -49,7 +49,7 @@ public class Elevator  : MonoBehaviour,ITrigger
             isMoving = true;
             rigiBody.DOMove(positionEnd, duration).onComplete += () => { isMoving = false; };
             */
-           if ( eTime>3)
+           if ( eTime>duration)
            {
                rigiBody.position = positionEnd;
            }
@@ -123,28 +123,15 @@ public class Elevator  : MonoBehaviour,ITrigger
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-    }
-
-
-    public void OnLemmingEnter()
-    {
+        
         entered = true;
         left = false;
     }
 
-    public void OnLemmingExit()
+    private void OnTriggerExit2D(Collider2D other)
     {
-       left = true;
-
+        left = true;
     }
 
-    public void OnGroupEnter()
-    {
-        throw new System.NotImplementedException();
-    }
 
-    public void OnGroupExit()
-    {
-        throw new System.NotImplementedException();
-    }
 }

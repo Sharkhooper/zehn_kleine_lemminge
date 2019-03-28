@@ -80,12 +80,12 @@ public class Press  : MonoBehaviour
 
     }
 
-    public void switchPressStatus(bool status)
+    public void SwitchPressStatus(bool status)
     {
         moving = status;
 
         Debug.Log("status ist "+status);
-        transform.GetChild(0).GetChild(1).GetComponent<DeadlyTrigger>().statusActive=status;
+        transform.GetChild(0).GetChild(1).GetComponent<Deadly>().isActive=status;
     }
 
 
