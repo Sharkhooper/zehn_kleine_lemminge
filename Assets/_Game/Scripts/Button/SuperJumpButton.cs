@@ -52,7 +52,6 @@ public class SuperJumpButton : MonoBehaviour
 			cb.highlightedColor = Color.white;
 			jumpButton.colors = cb;
 		}
-
 		manager.SuperJumpActivated = active;
 	}
 }
