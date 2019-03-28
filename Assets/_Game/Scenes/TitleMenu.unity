@@ -512,7 +512,6 @@ GameObject:
   - component: {fileID: 540911341}
   - component: {fileID: 540911340}
   - component: {fileID: 540911339}
-  - component: {fileID: 540911342}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -580,8 +579,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 540911342}
-        m_MethodName: credit_Click
+      - m_Target: {fileID: 638119994}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -630,25 +629,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 540911337}
   m_CullTransparentMesh: 0
---- !u!114 &540911342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 540911337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ee056eeb489eb4ca9ced6fe97be312, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 1
-  leben: 3
-  lemminge: 10
-  newGameText: {fileID: 186796170}
-  continueGameText: {fileID: 0}
-  optionText: {fileID: 0}
-  creditText: {fileID: 1766091279}
 --- !u!1 &638119994
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,6 +641,7 @@ GameObject:
   - component: {fileID: 638119997}
   - component: {fileID: 638119996}
   - component: {fileID: 638119995}
+  - component: {fileID: 638119999}
   m_Layer: 5
   m_Name: MenuUI
   m_TagString: Untagged
@@ -751,6 +732,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &638119999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638119994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ee056eeb489eb4ca9ced6fe97be312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  leben: 3
+  lemminge: 10
+  newGameText: {fileID: 186796170}
+  continueGameText: {fileID: 208711324}
+  optionText: {fileID: 359426193}
+  creditText: {fileID: 1766091279}
 --- !u!1 &833172910
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,7 +763,6 @@ GameObject:
   - component: {fileID: 833172914}
   - component: {fileID: 833172913}
   - component: {fileID: 833172912}
-  - component: {fileID: 833172915}
   m_Layer: 5
   m_Name: Optionen
   m_TagString: Untagged
@@ -831,8 +830,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 833172915}
-        m_MethodName: option_Click
+      - m_Target: {fileID: 638119994}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -881,25 +880,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833172910}
   m_CullTransparentMesh: 0
---- !u!114 &833172915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 833172910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ee056eeb489eb4ca9ced6fe97be312, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 1
-  leben: 3
-  lemminge: 10
-  newGameText: {fileID: 186796170}
-  continueGameText: {fileID: 0}
-  optionText: {fileID: 359426193}
-  creditText: {fileID: 0}
 --- !u!1 &1116441877
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,7 +892,6 @@ GameObject:
   - component: {fileID: 1116441881}
   - component: {fileID: 1116441880}
   - component: {fileID: 1116441879}
-  - component: {fileID: 1116441882}
   m_Layer: 5
   m_Name: ContinueGame
   m_TagString: Untagged
@@ -980,8 +959,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1116441882}
-        m_MethodName: continueGame_Click
+      - m_Target: {fileID: 638119994}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1030,25 +1009,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116441877}
   m_CullTransparentMesh: 0
---- !u!114 &1116441882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1116441877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ee056eeb489eb4ca9ced6fe97be312, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 1
-  leben: 3
-  lemminge: 10
-  newGameText: {fileID: 186796170}
-  continueGameText: {fileID: 208711324}
-  optionText: {fileID: 0}
-  creditText: {fileID: 0}
 --- !u!1 &1651176415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,7 +1150,6 @@ GameObject:
   - component: {fileID: 2034985327}
   - component: {fileID: 2034985326}
   - component: {fileID: 2034985325}
-  - component: {fileID: 2034985328}
   m_Layer: 5
   m_Name: StartGame
   m_TagString: Untagged
@@ -1258,7 +1217,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2034985328}
+      - m_Target: {fileID: 638119999}
         m_MethodName: newGameButton_Click
         m_Mode: 1
         m_Arguments:
@@ -1308,25 +1267,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2034985323}
   m_CullTransparentMesh: 0
---- !u!114 &2034985328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2034985323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ee056eeb489eb4ca9ced6fe97be312, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 1
-  leben: 3
-  lemminge: 10
-  newGameText: {fileID: 186796170}
-  continueGameText: {fileID: 0}
-  optionText: {fileID: 0}
-  creditText: {fileID: 0}
 --- !u!1 &2095353397
 GameObject:
   m_ObjectHideFlags: 0

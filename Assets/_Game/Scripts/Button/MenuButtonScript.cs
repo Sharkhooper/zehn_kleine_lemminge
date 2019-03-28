@@ -47,17 +47,18 @@ public class MenuButtonScript : MonoBehaviour
 	public void option_Click()
 	{
 		optionText.color = Color.white;
-		SceneManager.LoadScene("OptionScene", LoadSceneMode.Additive);
+		SceneManager.LoadScene("OptionScene", LoadSceneMode.Single);
 	}
 
 	public void credit_Click()
 	{
 		creditText.color = Color.white;
-		SceneManager.LoadScene("CreditScene", LoadSceneMode.Additive);
+		SceneManager.LoadScene("CreditScene", LoadSceneMode.Single);
 	}
 
 	public void back_Click()
 	{
-		SceneManager.UnloadScene(SceneManager.GetActiveScene());
-	}
+
+		SceneManager.LoadScene("MeinScene", LoadSceneMode.Single);
+			}
 }

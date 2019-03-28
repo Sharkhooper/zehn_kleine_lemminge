@@ -37,6 +37,7 @@ public class SuperJumpButton : MonoBehaviour
 
 	public void OnAction()
 	{
+		Debug.Log("Button On Action");
 		active = !active;
 		if (active)
 		{
@@ -52,7 +53,7 @@ public class SuperJumpButton : MonoBehaviour
 			cb.highlightedColor = Color.white;
 			jumpButton.colors = cb;
 		}
-
 		manager.SuperJumpActivated = active;
+		Debug.Log("Jump Activ: " + manager.SuperJumpActivated);
 	}
 }

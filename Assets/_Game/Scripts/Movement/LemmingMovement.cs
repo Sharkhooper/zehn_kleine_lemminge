@@ -70,10 +70,13 @@ public class LemmingMovement : MonoBehaviour
 		Vector2 jump;
 		if (manager.SuperJumpActivated)
 		{
+			Debug.Log("Super Jump");
 			jump = new Vector2(direction, 1 * jumpForce * superJumpForce * 5f);
 		}
 		else
 		{
+
+			Debug.Log("Jump");
 			jump = new Vector2(direction, 1 * jumpForce * 5f);
 		}
 
