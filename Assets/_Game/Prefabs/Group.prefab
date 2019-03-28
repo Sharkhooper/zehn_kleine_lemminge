@@ -52,7 +52,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 4.62
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 2506767378308610240}
   - component: {fileID: 4918560815431200847}
   m_Layer: 0
-  m_Name: Large Lemming (4)
+  m_Name: Large Lemming (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -726,6 +726,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2628070240855994102, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: groupController
+      value: 
+      objectReference: {fileID: 6516250755021112255}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}
 --- !u!4 &4253378167811214838 stripped
@@ -826,6 +831,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2628070240855994102, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: groupController
+      value: 
+      objectReference: {fileID: 6516250755021112255}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}
 --- !u!4 &585308932580555406 stripped
@@ -946,6 +956,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2628070240855994102, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: groupController
+      value: 
+      objectReference: {fileID: 6516250755021112255}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}
 --- !u!4 &7614418580890627958 stripped
@@ -1061,6 +1076,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2628070240855994102, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: groupController
+      value: 
+      objectReference: {fileID: 6516250755021112255}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}
 --- !u!4 &8553706441999294546 stripped
@@ -1161,6 +1181,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2628070240855994102, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: groupController
+      value: 
+      objectReference: {fileID: 6516250755021112255}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}
 --- !u!4 &5668933161381337257 stripped
@@ -1261,6 +1286,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2628070240855994102, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: groupController
+      value: 
+      objectReference: {fileID: 6516250755021112255}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}
 --- !u!4 &5581169112036064716 stripped
@@ -1386,6 +1416,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2628070240855994102, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: groupController
+      value: 
+      objectReference: {fileID: 6516250755021112255}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60af0043699aaf44a1e028585e60427, type: 3}
 --- !u!4 &5125884416515809704 stripped
