@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,12 +10,16 @@ public class GameManager : MonoBehaviour
 	public int level = 1;
 	public int leben = 3;
 	public int lemminge = 10;
+	public bool existSingleLemming = false;
 
 	public TextMeshProUGUI newGameText;
 	public TextMeshProUGUI continueGameText;
 	public TextMeshProUGUI optionText;
 	public TextMeshProUGUI creditText;
 	public TextMeshProUGUI backText;
+	public TextMeshProUGUI groupText;
+
+	public Button actionButton;
 
 
 	private void Start()
@@ -36,6 +41,11 @@ public class GameManager : MonoBehaviour
 			{{"Fire", false}, {"SuperJump", false}, {"Power", false}};
 	}
 
+	public void ActionButtonEnable(bool b)
+	{
+		actionButton.enabled = b;
+	}
+
 	public void UnlockAbility(string ability)
 	{
 		UnlockedAbilities[ability] = true;
@@ -46,7 +56,7 @@ public class GameManager : MonoBehaviour
 		UnlockedAbilities[ability] = false;
 	}
 
-	public void newGameButton_Click()
+	public void NewGameButton_Click()
 	{
 		newGameText.color = new Color32(255, 255, 255, 255);
 
@@ -57,7 +67,7 @@ public class GameManager : MonoBehaviour
 		lemminge = 10;
 	}
 
-	public void continueGame_Click()
+	public void ContinueGame_Click()
 	{
 
 		if (level != 1)
@@ -68,36 +78,56 @@ public class GameManager : MonoBehaviour
 		}//korrektes leben und lemming Anzahl laden
 		}
 
-		public void option_Click()
+		public void Option_Click()
 	{
 		optionText.text = "Options";
 		optionText.color = new Color32(255, 255, 255, 255);
 		SceneManager.LoadScene("OptionScene", LoadSceneMode.Single);
 	}
 
-	public void credit_Click()
+	public void Credit_Click()
 	{
 		creditText.text = "Menschen!";
 		creditText.color = new Color32(255, 255, 255, 255);
 		SceneManager.LoadScene("CreditScene", LoadSceneMode.Single);
 	}
 
-	public void back_Click()
+	public void Back_Click()
 	{
 		backText.color = new Color32(255, 255, 255, 255);
 		SceneManager.LoadScene("TitleMenu", LoadSceneMode.Single);
 	}
 
-	public void menuButton_Click()
+	public void MenuButton_Click()
 	{
 		SceneManager.LoadScene("TitleMenu", LoadSceneMode.Single);
 	}
 
 
+	public void ActionButton_Click()
+	{
+		Debug.Log("Schalter wird umgelegt");
+	}
+
+	public void GroupButton_Click()
+	{
+		if (existSingleLemming)
+		{
+			if (groupText.text.Equals("Group"))
+			{
+				Debug.Log("Single");
+				groupText.text = "Single";
+			}
+			else
+			{
+				Debug.Log("Group");
+				groupText.text = "Group";
+			}
+		}
+	}
 
 
-
-	public void gameOver()
+	public void GameOver()
 	{
 		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
 		leben = 3;
