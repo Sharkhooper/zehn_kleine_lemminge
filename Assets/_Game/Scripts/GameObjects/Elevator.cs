@@ -19,7 +19,7 @@ public class Elevator  : MonoBehaviour
     [SerializeField] public float duration = 3.0f;
     private Rigidbody2D rigiBody;
     private float eTime = 0;
-   // private bool isMoving = false;
+    public bool stopMoving=false;
     
     
     void Start()
@@ -42,7 +42,8 @@ public class Elevator  : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //if(isMoving) return;
+        if (stopMoving) return;
+        
         
         if (forward && entered)
         {/*
