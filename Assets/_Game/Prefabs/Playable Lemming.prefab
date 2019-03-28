@@ -192,11 +192,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de881537e4cf7b44ba96446b2860d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 1
-  speed: 10
-  maxSpeed: 10
+  jumpForce: 1.1
+  speed: 2
+  maxSpeed: 2
   landingDelay: 50
   superJumpForce: 2
+  InGroup: 1
   landingTimer: 0
   animator: {fileID: 8739096752964580133}
 --- !u!50 &3154503392202662251

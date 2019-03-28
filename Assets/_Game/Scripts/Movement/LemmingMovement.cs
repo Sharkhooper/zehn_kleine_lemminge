@@ -6,7 +6,7 @@ using UnityEngine;
 public class LemmingMovement : MonoBehaviour
 {
 	[SerializeField] public float jumpForce = 1.1f;
-	[SerializeField] public float speed = ;
+	[SerializeField] public float speed = 2;
 	[SerializeField] public float maxSpeed = 2;
 	[SerializeField] public float landingDelay = 50;
 	[SerializeField] public float superJumpForce = 2;
@@ -21,7 +21,7 @@ public class LemmingMovement : MonoBehaviour
 	private Rigidbody2D rb;
 	[SerializeField] private float landingTimer;
 
-	//[SerializeField] public Animator animator;
+	[SerializeField] public Animator animator;
 
 	// Start is called before the first frame update
 	void Start()
@@ -85,7 +85,7 @@ public class LemmingMovement : MonoBehaviour
 		if (direction > 0) direction = 1;
 		else if (direction < 0) direction = -1;
 
-		//animator.SetFloat("Speed", Mathf.Abs(direction));
+		animator.SetFloat("Speed", Mathf.Abs(direction));
 
 		// If no movement input exists, auto brake
 		if (direction < 0.1f && direction > -0.1f)
@@ -93,15 +93,15 @@ public class LemmingMovement : MonoBehaviour
 			return;
 		}
 
-		//// Rotates character to face direction it's moving
-		//if (direction < 0f)
-		//{
-		//	transform.rotation = Quaternion.identity;
-		//}
-		//else if (direction > 0f)
-		//{
-		//	transform.rotation = Quaternion.Euler(0,180,0);
-		//}
+		// Rotates character to face direction it's moving
+		if (direction < 0f)
+		{
+			transform.rotation = Quaternion.identity;
+		}
+		else if (direction > 0f)
+		{
+			transform.rotation = Quaternion.Euler(0, 180, 0);
+		}
 
 		Vector2 velocity = rb.velocity;
 
