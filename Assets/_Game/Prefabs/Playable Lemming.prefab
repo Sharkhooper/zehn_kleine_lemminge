@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d18e75b59e19c4b912bc86cb48df65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trigger: {fileID: 1537675051}
 --- !u!61 &1537675051
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -173,9 +174,8 @@ MonoBehaviour:
   maxSpeed: 2
   landingDelay: 50
   superJumpForce: 2
-  InGroup: 1
+  IsGrounded: 0
   landingTimer: 0
-  animator: {fileID: 0}
 --- !u!50 &3154503392202662251
 Rigidbody2D:
   serializedVersion: 4

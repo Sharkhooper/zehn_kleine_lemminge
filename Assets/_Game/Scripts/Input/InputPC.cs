@@ -8,6 +8,7 @@ public class InputPC : MonoBehaviour
 	[SerializeField] public GroupController groupController;
 	private Rigidbody2D rb;
 	private bool nonZeroHorizontal;
+	private float ActionCoolDown { get; set; }
 
 	void Awake()
 	{
@@ -18,17 +19,24 @@ public class InputPC : MonoBehaviour
     void Start()
     {
 	    rb = GetComponent<Rigidbody2D>();
+		ActionCoolDown = 0;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+		Debug.Log(ActionCoolDown);
+		if (ActionCoolDown > 0)
+		{
+			ActionCoolDown -= 0.1f;
+		}
 		float horizontal = Input.GetAxis("Horizontal");
 
 		bool groupAction = Input.GetButton("Group Action");
-		if (groupAction)
+		if (groupAction && ActionCoolDown <= 0)
 		{
-			groupController.ActivateGroup();
+			groupController.ActivateGroup(true);
+			ActionCoolDown = 1.0f;
 		}
 
 		if (horizontal != 0)
