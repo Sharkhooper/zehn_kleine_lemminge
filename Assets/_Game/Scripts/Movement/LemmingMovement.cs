@@ -109,4 +109,5 @@ public class LemmingMovement : MonoBehaviour
 			rb.velocity = new Vector2(direction * maxSpeed, rb.velocity.y);
 		}
 	}
+
 }
