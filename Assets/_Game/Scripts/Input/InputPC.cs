@@ -25,6 +25,12 @@ public class InputPC : MonoBehaviour
     {
 		float horizontal = Input.GetAxis("Horizontal");
 
+		bool groupAction = Input.GetButton("Group Action");
+		if (groupAction)
+		{
+			groupController.ActivateGroup();
+		}
+
 		if (horizontal != 0)
 		{
 			nonZeroHorizontal = true;

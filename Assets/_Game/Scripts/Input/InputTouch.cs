@@ -61,7 +61,7 @@ public class InputTouch : MonoBehaviour
 
 						//=> Vector sollte übergeen werden, testen ob da LemmingGruppe ist
 						//RichtigeMethode
-						groupController.MoveHorizontal(0);
+						groupController.DoubleTab(touch);
 					}
 					else
 					{
