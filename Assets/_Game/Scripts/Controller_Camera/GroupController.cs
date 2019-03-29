@@ -99,8 +99,9 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void RemoveLemmingFromGroup()
 	{
+		
 		Debug.Log("Dot");
-		gameManager.currentLemmings--;
+		gameManager.currentLemmingText.text = "Leben: " + --gameManager.currentLemmings;
 		if (ActiveLemmingIndex + 1 < PlayableLemmings.Length)
 		{
 			Destroy(ActiveLemming);
@@ -140,6 +141,8 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void LemmingEnterGroup()
 	{
+		gameManager.GroupButton.enabled = false;
+
 		ActiveLemming.transform.localPosition = ActiveLemmingGroupPosition;
 		ActiveLemming.GetComponent<SpriteRenderer>().color = ActiveLemmingColor;
 
@@ -149,6 +152,10 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	private void LemmingExitGroup(float z)
 	{
+
+		gameManager.GroupButton.enabled = true;
+
+
 		ActiveLemming.transform.localPosition = new Vector3(2, 0, 0);
 		ActiveLemming.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
 
@@ -185,6 +192,24 @@ public class GroupController : MonoBehaviour, IKillTarget
 		}
 	}
 
+	public void MoveHorizontal(Vector3 position)
+	{
+		if (IsGroupSelected && !blockedInput)
+		{
+			float direction = -((transform.position - position).x);
+
+			groupMovement.MoveHorizontal(direction);
+		}
+		else if (!blockedInput)
+		{
+			float direction = -((ActiveLemmingMovement.transform.position - position).x);
+
+			ActiveLemmingMovement.MoveHorizontal(direction);
+			ActiveLemmingAnimator.SetFloat("Speed", Mathf.Abs(direction));
+			ActiveLemming.GetComponent<SpriteRenderer>().flipX = isDirectionPositiv;
+		}
+	}
+
 	public void Jump()
 	{
 		if (!IsGroupSelected && !blockedInput)
@@ -212,6 +237,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void Die(GameObject other)
 	{
+
 		gameManager.GameOver();
 	}
 }

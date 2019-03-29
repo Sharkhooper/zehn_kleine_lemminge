@@ -12,9 +12,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI groupText;
 
 	public int level = 1;
-	public int leben = 3;
 	public int maxLemminge = 10;
-	public int currentLemmings = 10;
+	public int currentLemmings = 7;
 	public bool existSingleLemming = false;
 
 	public Dictionary<string, bool> UnlockedAbilities { get; private set; }
@@ -22,7 +21,9 @@ public class GameManager : MonoBehaviour
 	public int MaxLevelLemming { get; set; }
 
 	public Button actionButton;
-	private IInteractible interactebaleSwitch;
+	public Button GroupButton;
+	public TextMeshProUGUI currentLemmingText;
+	private InteractebaleSwitch interactebaleSwitch;
 
 	//Awake is always called before any Start functions
 	void Awake()
@@ -137,14 +138,13 @@ public class GameManager : MonoBehaviour
 	public void ResetProgress()
 	{
 		level = 1;
-		leben = 3;
+		maxLemminge = 10;
 		currentLemmings = 10;
 	}
 
 	public void GameOver()
 	{
 		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
-		leben = 3;
-		currentLemmings = 10;
+		currentLemmings = maxLemminge;
 	}
 }
