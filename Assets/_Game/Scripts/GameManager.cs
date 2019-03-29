@@ -3,17 +3,17 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using _Game.Scripts.GameObjects;
 
 public class GameManager : MonoBehaviour
 {
 	public static GameManager instance = null;
 
-	[SerializeField] private TextMeshProUGUI groupText;
+	[SerializeField] public TextMeshProUGUI groupText;
 
 	public int level = 1;
-	public int leben = 3;
 	public int maxLemminge = 10;
-	public int currentLemmings = 10;
+	public int currentLemmings = 7;
 	public bool existSingleLemming = false;
 
 	public Dictionary<string, bool> UnlockedAbilities { get; private set; }
@@ -21,11 +21,20 @@ public class GameManager : MonoBehaviour
 	public int MaxLevelLemming { get; set; }
 
 	public Button actionButton;
-	private InteractebaleSwitch interactebaleSwitch;
+	public Button groupButton;
+	public TextMeshProUGUI currentLemmingText;
+	private IInteractible interactebaleSwitch;
 
 	//Awake is always called before any Start functions
 	void Awake()
 	{
+		if (PlayerPrefs.HasKey("level"))
+			level = PlayerPrefs.GetInt("level");
+		if (PlayerPrefs.HasKey("currentLemmings"))
+			currentLemmings = PlayerPrefs.GetInt("currentLemmings");
+		if (PlayerPrefs.HasKey("maxLemminge"))
+			maxLemminge = PlayerPrefs.GetInt("maxLemminge");
+
 		if (instance == null)
 			instance = this;
 		else if (instance != this)
@@ -37,18 +46,19 @@ public class GameManager : MonoBehaviour
 		UnlockedAbilities = new Dictionary<string, bool>
 			{{"Fire", false}, {"SuperJump", false}, {"Power", false}};
 
-		MaxLevelLemming = 10;
+		MaxLevelLemming = 7;
 	}
 
 	private void Start()
-	{
+	{ 
+		groupButton.enabled = false;
 		actionButton.enabled = false;
 	}
 
 	//because when you start a NewGame the UI would be active before you are in a Level Scene!
 	public void Update()
 	{
-		if (SceneManager.GetActiveScene().name.Equals("Level " + level))
+		if (SceneManager.GetActiveScene().name.Contains("Level"))
 			EnableIngameUI(true);
 		else
 			EnableIngameUI(false);
@@ -71,6 +81,12 @@ public class GameManager : MonoBehaviour
 			default:
 				break;
 		}
+
+		PlayerPrefs.SetInt("level", level);
+		PlayerPrefs.SetInt("currentLemmings", currentLemmings);
+		PlayerPrefs.SetInt("maxLemminge", maxLemminge);
+		PlayerPrefs.Save();
+
 		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
 	}
 
@@ -80,7 +96,7 @@ public class GameManager : MonoBehaviour
 		transform.GetChild(0).gameObject.SetActive(enable);
 	}
 
-	public void ActionButtonEnable(bool b, InteractebaleSwitch switchScript)
+	public void ActionButtonEnable(bool b, IInteractible switchScript)
 	{
 		interactebaleSwitch = switchScript;
 		actionButton.enabled = b;
@@ -120,14 +136,23 @@ public class GameManager : MonoBehaviour
 	{
 		if (existSingleLemming)
 		{
+			GroupController groupController = FindObjectOfType<GroupController>();
 			if (groupText.text.Equals("Group"))
 			{
 				Debug.Log("Single");
+
+				groupController.IsGroupSelected = false;
+				groupController.CamController.FocusChange = true;
+
 				groupText.text = "Single";
 			}
 			else
 			{
 				Debug.Log("Group");
+
+				groupController.IsGroupSelected = true;
+				groupController.CamController.FocusChange = true;
+
 				groupText.text = "Group";
 			}
 		}
@@ -135,15 +160,17 @@ public class GameManager : MonoBehaviour
 
 	public void ResetProgress()
 	{
-		level = 1;
-		leben = 3;
-		currentLemmings = 10;
+		
+		PlayerPrefs.SetInt("level", level=1);
+		PlayerPrefs.SetInt("currentLemmings", currentLemmings=10);
+		PlayerPrefs.SetInt("maxLemminge", maxLemminge=10);
+		PlayerPrefs.Save();
+
 	}
 
 	public void GameOver()
 	{
 		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
-		leben = 3;
-		currentLemmings = 10;
+		currentLemmings = maxLemminge;
 	}
 }
