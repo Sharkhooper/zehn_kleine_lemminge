@@ -26,6 +26,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 	void Start()
 	{
 		gameManager = FindObjectOfType<GameManager>();
+		gameManager.currentLemmings = 10;
 
 		AllLemmingAnimator = GetComponentsInChildren<Animator>();
 		AllLemmingSpriteRenderer = GetComponentsInChildren<SpriteRenderer>();
@@ -47,6 +48,16 @@ public class GroupController : MonoBehaviour, IKillTarget
 		}
 
 		ActiveLemmingIndex = 0;
+		SetActiveLemming(ActiveLemmingIndex);
+
+		while(gameManager.currentLemmings > gameManager.maxLevelLemming)
+		{
+			RemoveLemmingFromGroup();
+		}
+	}
+
+	public void SetActiveLemming(float index)
+	{
 		ActiveLemming = PlayableLemmings[ActiveLemmingIndex];
 		ActiveLemmingMovement = ActiveLemming.GetComponent<LemmingMovement>();
 		ActiveLemmingGroupPosition = ActiveLemming.transform.localPosition;
@@ -56,9 +67,13 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void RemoveLemmingFromGroup()
 	{
+		gameManager.currentLemmings--;
 		if (ActiveLemmingIndex + 1 <= PlayableLemmings.Length)
 		{
-			ActiveLemming = PlayableLemmings[++ActiveLemmingIndex];
+			Destroy(ActiveLemming);
+
+			ActiveLemming = PlayableLemmings[ActiveLemmingIndex];
+			ActiveLemmingStatus(false);
 		}
 		else
 		{
@@ -72,24 +87,16 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 		float zCoordinate = ActiveLemming.transform.position.z;
 		bool activeHitGroup = false;
-		foreach(var collider in GetComponents<Collider2D>())
+		foreach (var collider in GetComponents<BoxCollider2D>())
 		{
-			if (collider.isTrigger)
-			{
-				activeHitGroup = ActiveLemming.GetComponent<Collider2D>().IsTouching(collider);
-			}
-		}
-
-		if (pcButton)
-		{
-			activeHitGroup = true;
+			activeHitGroup = collider.bounds.Contains(ActiveLemming.transform.position);
 		}
 
 		if (zCoordinate == 0 && activeHitGroup)
 		{
 			LemmingEnterGroup();
 		}
-		else
+		else if(zCoordinate!=0)
 		{
 			LemmingExitGroup(zCoordinate);
 		}
@@ -137,12 +144,18 @@ public class GroupController : MonoBehaviour, IKillTarget
 			groupMovement.MoveHorizontal(direction);
 			foreach (var animator in AllLemmingAnimator)
 			{
-				animator.SetFloat("Speed", Mathf.Abs(direction));
+				if (animator != null)
+				{
+					animator.SetFloat("Speed", Mathf.Abs(direction));
+				}
 			}
 
 			foreach (var sprite in AllLemmingSpriteRenderer)
 			{
-				sprite.flipX = isDirectionPositiv;
+				if (sprite != null)
+				{
+					sprite.flipX = isDirectionPositiv;
+				}
 			}
 		}
 		else if (!blockedInput)
@@ -164,9 +177,8 @@ public class GroupController : MonoBehaviour, IKillTarget
 	public void DoubleTab(Touch touch)
 	{
 		Ray ray = Camera.main.ScreenPointToRay(touch.position);
-
-		RaycastHit vHit;
-		if (Physics.Raycast(ray.origin, ray.direction, out vHit))
+		RaycastHit2D vHit = Physics2D.Raycast(ray.origin, ray.direction);
+		if (vHit.collider != null)
 		{
 			if (vHit.transform.tag == "Group")
 			{

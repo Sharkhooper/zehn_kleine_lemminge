@@ -13,12 +13,14 @@ public class GameManager : MonoBehaviour
 
 	public int level = 1;
 	public int leben = 3;
-	public int lemminge = 10;
 	public int maxLemminge = 10;
+	public int currentLemmings = 10;
+	public int lemminge = 10;
 	public bool existSingleLemming = false;
 
 	public Dictionary<string, bool> UnlockedAbilities { get; private set; }
 	public bool SuperJumpActivated { get; set; }
+	public int maxLevelLemming { get; set; }
 
 	public Button actionButton;
 	private InteractebaleSwitch interactebaleSwitch;
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
 	private void Start()
 	{
 		actionButton.enabled = false;
+		maxLevelLemming = 10;
 	}
 
 	//because when you start a NewGame the UI would be active before you are in a Level Scene!
@@ -135,13 +138,13 @@ public class GameManager : MonoBehaviour
 	{
 		level = 1;
 		leben = 3;
-		lemminge = 10;
+		currentLemmings = 10;
 	}
 
 	public void GameOver()
 	{
 		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
 		leben = 3;
-		lemminge = 10;
+		currentLemmings = 10;
 	}
 }
