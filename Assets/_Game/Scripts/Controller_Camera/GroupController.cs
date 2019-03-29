@@ -96,6 +96,12 @@ public class GroupController : MonoBehaviour, IKillTarget
 		else
 		{
 			ActiveLemmingAnimator.SetFloat("Speed", Mathf.Abs(ActiveLemmingRb.velocity.x));
+			ActiveLemmingAnimator.SetFloat("JumpingDirection", ActiveLemmingRb.velocity.y);
+
+			if(ActiveLemmingRb.velocity.y <= 0.1f)
+			{
+				ActiveLemmingAnimator.SetBool("Jumping", false);
+			}
 		}
 
 	}
@@ -220,6 +226,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 		if (!IsGroupSelected && !blockedInput)
 		{
 			ActiveLemmingMovement.Jump(gameManager.SuperJumpActivated);
+			ActiveLemmingAnimator.SetBool("Jumping", true);
 		}
 	}
 
