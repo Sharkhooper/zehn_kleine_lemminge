@@ -8,6 +8,8 @@ public class Bomb : MonoBehaviour
 	private CircleCollider2D explosionCollider;
 	private SpriteRenderer explosionSprite;
 
+	private SpriteRenderer bombSprite;
+
 	private void Awake()
 	{
 		explosion = transform.GetChild(0);
@@ -17,21 +19,8 @@ public class Bomb : MonoBehaviour
 
 		explosionSprite = explosion.GetComponent<SpriteRenderer>();
 		explosionSprite.enabled = false;
-	}
 
-	private void FixedUpdate()
-	{
-		if (explosionSprite.enabled)
-		{
-			if (explosion.localScale.x < 2.0f)
-			{
-				explosion.localScale *= 1.001f;
-			}
-			else
-			{
-				Destroy(gameObject);
-			}
-		}
+		bombSprite = GetComponent<SpriteRenderer>();
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -40,6 +29,8 @@ public class Bomb : MonoBehaviour
 		{
 			explosionCollider.enabled = true;
 			explosionSprite.enabled = true;
+
+			bombSprite.enabled = false;
 		}
 	}
 }
