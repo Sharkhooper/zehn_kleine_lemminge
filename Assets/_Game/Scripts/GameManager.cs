@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 	public int level = 1;
 	public int leben = 3;
 	public int lemminge = 10;
+	public int maxLemminge = 10;
 	public bool existSingleLemming = false;
 
 	public Dictionary<string, bool> UnlockedAbilities { get; private set; }
@@ -41,6 +42,36 @@ public class GameManager : MonoBehaviour
 	{
 		actionButton.enabled = false;
 	}
+
+	//because when you start a NewGame the UI would be active before you are in a Level Scene!
+	public void Update()
+	{
+		if (SceneManager.GetActiveScene().name.Equals("Level " + level))
+			EnableIngameUI(true);
+		else
+			EnableIngameUI(false);
+	}
+
+	public void LoadNextLevel()
+	{
+		if (level < 4)
+			level++;
+		switch (level)
+		{
+			case 1: maxLemminge = 10;
+				break;
+			case 2: maxLemminge = 7;
+				break;
+			case 3: maxLemminge = 6;
+				break;
+			case 4: maxLemminge = 6;
+				break;
+			default:
+				break;
+		}
+		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
+	}
+
 
 	public void EnableIngameUI(bool enable)
 	{
