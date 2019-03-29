@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using _Game.Scripts.GameObjects;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
 	public int MaxLevelLemming { get; set; }
 
 	public Button actionButton;
-	private InteractebaleSwitch interactebaleSwitch;
+	private IInteractible interactebaleSwitch;
 
 	//Awake is always called before any Start functions
 	void Awake()
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
 	//because when you start a NewGame the UI would be active before you are in a Level Scene!
 	public void Update()
 	{
-		if (SceneManager.GetActiveScene().name.Equals("Level " + level))
+		if (SceneManager.GetActiveScene().name.Contains("Level"))
 			EnableIngameUI(true);
 		else
 			EnableIngameUI(false);
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
 		transform.GetChild(0).gameObject.SetActive(enable);
 	}
 
-	public void ActionButtonEnable(bool b, InteractebaleSwitch switchScript)
+	public void ActionButtonEnable(bool b, IInteractible switchScript)
 	{
 		interactebaleSwitch = switchScript;
 		actionButton.enabled = b;
