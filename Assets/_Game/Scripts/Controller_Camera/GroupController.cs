@@ -50,7 +50,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 		ActiveLemmingIndex = 0;
 		SetActiveLemming(ActiveLemmingIndex);
 
-		while(gameManager.currentLemmings > gameManager.maxLevelLemming)
+		while(gameManager.currentLemmings > gameManager.MaxLevelLemming)
 		{
 			RemoveLemmingFromGroup();
 		}
@@ -79,7 +79,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 		}
 		else
 		{
-			Debug.Log("Verloren");
+			gameManager.GameOver();
 		}
 	}
 
@@ -192,6 +192,6 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void Die(GameObject other)
 	{
-		Debug.Log("Group gekillt");
+		gameManager.GameOver();
 	}
 }
