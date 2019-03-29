@@ -33,6 +33,8 @@ Deploy Nextcloud:
     start_in:
 
 Release:
+    when: manual
+    allow_failure: false
     dependencies:
         - Deploy Nextcloud
 
