@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 		UnlockedAbilities = new Dictionary<string, bool>
 			{{"Fire", false}, {"SuperJump", false}, {"Power", false}};
 
-		MaxLevelLemming = 10;
+		MaxLevelLemming = 7;
 	}
 
 	private void Start()
