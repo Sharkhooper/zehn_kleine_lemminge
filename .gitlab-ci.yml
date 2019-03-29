@@ -16,6 +16,28 @@ variables:
         variables:
             - $RUN_NON_RELEASE_BUILDS
 
+.release_build:
+    artifacts:
+        expire_in: 1 week
+
+WebGL [Release]:
+    when: on_success
+
+pages:
+    when: on_success
+    start_in:
+
+Deploy Nextcloud:
+    when: manual
+    allow_failure: false
+    start_in:
+
+Release:
+    when: manual
+    allow_failure: false
+    dependencies:
+        - Deploy Nextcloud
+
 include:
 # Base
     - https://gitlab.dragonixx.de/Dragonixx/gitlab-ci-toolbox/raw/master/scripts/unity/build-base.yml
