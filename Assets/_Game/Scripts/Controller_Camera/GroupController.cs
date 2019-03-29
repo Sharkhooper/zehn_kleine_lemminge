@@ -138,12 +138,18 @@ public class GroupController : MonoBehaviour, IKillTarget
 			groupMovement.MoveHorizontal(direction);
 			foreach (var animator in AllLemmingAnimator)
 			{
-				animator.SetFloat("Speed", Mathf.Abs(direction));
+				if (animator != null)
+				{
+					animator.SetFloat("Speed", Mathf.Abs(direction));
+				}
 			}
 
 			foreach (var sprite in AllLemmingSpriteRenderer)
 			{
-				sprite.flipX = isDirectionPositiv;
+				if (sprite != null)
+				{
+					sprite.flipX = isDirectionPositiv;
+				}
 			}
 		}
 		else if (!blockedInput)
