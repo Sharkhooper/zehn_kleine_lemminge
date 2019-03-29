@@ -5,12 +5,12 @@ using UnityEngine.EventSystems;
 
 public class Abilities : MonoBehaviour
 {
-	[SerializeField] float fireSpeed = 3.0f;
-	[SerializeField] float bombSpeed = 0.5f;
-	[SerializeField] private float cooldown = 3f;
+	[SerializeField] float fireSpeed = 1.5f;
+	[SerializeField] float bombSpeed = 1.5f;
+	[SerializeField] private float cooldown = 1f;
 
 	private SpriteRenderer playerSpriteRenderer;
-	[SerializeField] private float cooldownTimer;
+	private float cooldownTimer;
 
 	private void Awake()
 	{
@@ -63,10 +63,18 @@ public class Abilities : MonoBehaviour
         GameObject bombPrefab = Resources.Load<GameObject>("Bomb");
         GameObject bombObject = Instantiate(bombPrefab);
 
-        bombObject.transform.position = transform.position;
-        //bombObject.transform.rotation = playerTransform.rotation;
+        SpriteRenderer bombRenderer = bombObject.GetComponent<SpriteRenderer>();
 
-        bombObject.GetComponent<Rigidbody2D>().velocity = new Vector2(fireSpeed, 0f);
+        bombObject.transform.position = transform.position;
+        bombRenderer.flipX = playerSpriteRenderer.flipX;
+
+        int flipDir = 1;
+        if (!bombRenderer.flipX)
+        {
+	        flipDir = -1;
+        }
+
+        bombObject.GetComponent<Rigidbody2D>().velocity = new Vector2(bombSpeed * flipDir, bombSpeed * 2f);
 
         cooldownTimer = cooldown;
 	}
