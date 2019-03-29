@@ -101,7 +101,7 @@ public class InputTouch : MonoBehaviour
 					//Vlt nicht auf nem Button möglich
 					else if (Mathf.Abs(richtungsVector.x) <= 2 && Mathf.Abs(richtungsVector.y) <= 2)
 					{
-						Debug.Log("Input Punkt Richtung: " + -((Camera.main.gameObject.transform.position - end).x));
+						//Debug.Log("Input Punkt Richtung: " + -((Camera.main.gameObject.transform.position - end).x));
 						groupController.MoveHorizontal(-((Camera.main.gameObject.transform.position - end).x));
 					}
 				}
