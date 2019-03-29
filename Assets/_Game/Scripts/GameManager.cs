@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 	public Button actionButton;
 	public Button GroupButton;
 	public TextMeshProUGUI currentLemmingText;
-	private InteractebaleSwitch interactebaleSwitch;
+	private IInteractible interactebaleSwitch;
 
 	//Awake is always called before any Start functions
 	void Awake()
