@@ -7,7 +7,6 @@ public class InputTouch : MonoBehaviour
 	int doubleTap = 0;
 	float startZeit = 0;
 	float tempTime = 0;
-	float oldMovementX = 0;
 	Vector3 start, end, movement, richtungsVector, touchStart, tempStart, originStart;
 	Touch touch;
 	[SerializeField] public GroupController groupController;
@@ -23,9 +22,10 @@ public class InputTouch : MonoBehaviour
 		if (Input.touchCount > 0)
 		{
 			touch = Input.GetTouch(0);
-			Debug.Log("TAP");
 			if (Input.GetTouch(0).phase == TouchPhase.Began)
 			{
+				Debug.Log("NEW TAP");
+
 				start = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
 				originStart = start;
 				//start = touch.position;
@@ -39,14 +39,13 @@ public class InputTouch : MonoBehaviour
 				}
 				else if (!(Mathf.Abs(touchStart.x - start.x) <= 1f && Mathf.Abs(touchStart.y - start.y) <= 1f))
 				{
-					Debug.Log("2.Touch Position X: " + start.x);
-					Debug.Log("DoubleTap zu weit weg");
 					doubleTap = 0;
 					touchStart = start;
 					startZeit = Time.time;
 				}
 				else
 				{
+					Debug.Log("Else-Fall");
 					tempTime = Time.time;
 					tempStart = start;
 				}
@@ -107,7 +106,7 @@ public class InputTouch : MonoBehaviour
 					else if (Mathf.Abs(richtungsVector.x) <= 2 && Mathf.Abs(richtungsVector.y) <= 2)
 					{
 						//Debug.Log("Input Punkt Richtung: " + -((Camera.main.gameObject.transform.position - end).x));
-						groupController.MoveHorizontal(-((Camera.main.gameObject.transform.position - end).x));
+						groupController.MoveHorizontal(end);
 					}
 				}
 				groupController.MoveHorizontal(0);
