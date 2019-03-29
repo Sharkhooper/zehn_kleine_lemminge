@@ -28,11 +28,11 @@ public class PresurePlate : MonoBehaviour
         if (other.gameObject.CompareTag("Group"))
         {
             groupIn = true;
-            Debug.Log("Group Enter Trigger");
+           // Debug.Log("Group Enter Trigger");
           
             statusActive = !statusActive;
             onStateChange.Invoke(statusActive);
-            Debug.Log(statusActive);
+          //  Debug.Log(statusActive);
             
         }
         else
