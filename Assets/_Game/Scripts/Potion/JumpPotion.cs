@@ -5,7 +5,7 @@ using UnityEngine;
 public class JumpPotion : MonoBehaviour
 {
     private GameManager gameManager;
-    private string name;
+    private string abilityName;
     private void Awake()
     {
     }
@@ -15,7 +15,7 @@ public class JumpPotion : MonoBehaviour
     {
 
         gameManager = FindObjectOfType<GameManager>(); 
-        name = "SuperJump";
+        abilityName = "SuperJump";
         
             
 
@@ -25,7 +25,7 @@ public class JumpPotion : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        gameManager.UnlockAbility(name);
+        gameManager.UnlockAbility(abilityName);
         Destroy(gameObject);
 
     }

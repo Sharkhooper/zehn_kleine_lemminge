@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerPotion : MonoBehaviour
 {
     private GameManager gameManager;
-    private string name;
+    private string abilityName;
     private void Awake()
     {
         
@@ -16,7 +16,7 @@ public class PowerPotion : MonoBehaviour
     {
 
         gameManager = FindObjectOfType<GameManager>(); 
-        name = "Power";
+        abilityName = "Power";
         
             
 
@@ -25,7 +25,7 @@ public class PowerPotion : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        gameManager.UnlockAbility(name);
+        gameManager.UnlockAbility(abilityName);
         Destroy(gameObject);
 
     }
