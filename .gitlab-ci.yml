@@ -29,6 +29,7 @@ pages:
 
 Deploy Nextcloud:
     when: manual
+    allow_failure: false
     start_in:
 
 Release:
