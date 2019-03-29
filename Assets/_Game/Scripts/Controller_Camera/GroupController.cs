@@ -26,6 +26,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 	void Start()
 	{
 		gameManager = FindObjectOfType<GameManager>();
+		gameManager.currentLemmings = 10;
 
 		AllLemmingAnimator = GetComponentsInChildren<Animator>();
 		AllLemmingSpriteRenderer = GetComponentsInChildren<SpriteRenderer>();
@@ -49,6 +50,10 @@ public class GroupController : MonoBehaviour, IKillTarget
 		ActiveLemmingIndex = 0;
 		SetActiveLemming(ActiveLemmingIndex);
 
+		while(gameManager.currentLemmings > gameManager.maxLevelLemming)
+		{
+			RemoveLemmingFromGroup();
+		}
 	}
 
 	public void SetActiveLemming(float index)
@@ -62,6 +67,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void RemoveLemmingFromGroup()
 	{
+		gameManager.currentLemmings--;
 		if (ActiveLemmingIndex + 1 <= PlayableLemmings.Length)
 		{
 			Destroy(ActiveLemming);
