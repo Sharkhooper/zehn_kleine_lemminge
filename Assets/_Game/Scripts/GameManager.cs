@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -15,7 +14,6 @@ public class GameManager : MonoBehaviour
 	public int leben = 3;
 	public int maxLemminge = 10;
 	public int currentLemmings = 10;
-	public int lemminge = 10;
 	public bool existSingleLemming = false;
 
 	public Dictionary<string, bool> UnlockedAbilities { get; private set; }
