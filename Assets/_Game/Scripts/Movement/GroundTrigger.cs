@@ -14,12 +14,18 @@ public class GroundTrigger : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		move.IsGrounded = true;
+		if (other.CompareTag("Ground"))
+		{
+			move.IsGrounded = true;
+		}
 	}
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
-		move.IsGrounded = true;
+		if (other.CompareTag("Ground"))
+		{
+			move.IsGrounded = true;
+		}
 	}
 
 	public void ChangeFootStatus(bool status)

@@ -9,6 +9,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 	private GameManager gameManager;
 	public bool IsGroupSelected;
 	private bool blockedInput;
+	private Rigidbody2D rbGroup;
 	bool isDirectionPositiv;
 	public GameObject[] PlayableLemmings { get; set; }
 	public GameObject[] DummyLemmings { get; set; }
@@ -21,6 +22,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 	public Animator ActiveLemmingAnimator { get; set; }
 	private Vector3 ActiveLemmingGroupPosition { get; set; }
 	private Color ActiveLemmingColor { get; set; }
+	private Rigidbody2D ActiveLemmingRb { get; set; }
 
 	// Start is called before the first frame update
 	void Start()
@@ -54,6 +56,35 @@ public class GroupController : MonoBehaviour, IKillTarget
 		{
 			RemoveLemmingFromGroup();
 		}
+
+		rbGroup = GetComponent<Rigidbody2D>();
+	}
+
+	private void FixedUpdate()
+	{
+		foreach (var animator in AllLemmingAnimator)
+		{
+			if (animator != null)
+			{
+				//animator.SetFloat("Speed", Mathf.Abs(direction));
+				animator.SetFloat("Speed", Mathf.Abs(rbGroup.velocity.x));
+			}
+		}
+
+		if (IsGroupSelected)
+		{
+			foreach (var sprite in AllLemmingSpriteRenderer)
+			{
+				if (sprite != null)
+				{
+					sprite.flipX = isDirectionPositiv;
+				}
+			}
+		}
+		else
+		{
+			ActiveLemmingAnimator.SetFloat("Speed", Mathf.Abs(ActiveLemmingRb.velocity.x));
+		}
 	}
 
 	public void SetActiveLemming(float index)
@@ -63,6 +94,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 		ActiveLemmingGroupPosition = ActiveLemming.transform.localPosition;
 		ActiveLemmingColor = ActiveLemming.GetComponent<SpriteRenderer>().color;
 		ActiveLemmingAnimator = ActiveLemming.GetComponent<Animator>();
+		ActiveLemmingRb = ActiveLemming.GetComponent<Rigidbody2D>();
 	}
 
 	public void RemoveLemmingFromGroup()
@@ -144,21 +176,6 @@ public class GroupController : MonoBehaviour, IKillTarget
 		if (IsGroupSelected && !blockedInput)
 		{
 			groupMovement.MoveHorizontal(direction);
-			foreach (var animator in AllLemmingAnimator)
-			{
-				if (animator != null)
-				{
-					animator.SetFloat("Speed", Mathf.Abs(direction));
-				}
-			}
-
-			foreach (var sprite in AllLemmingSpriteRenderer)
-			{
-				if (sprite != null)
-				{
-					sprite.flipX = isDirectionPositiv;
-				}
-			}
 		}
 		else if (!blockedInput)
 		{

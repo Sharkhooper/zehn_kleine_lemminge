@@ -7,15 +7,14 @@ public class LemmingMovement : MonoBehaviour
 {
 	[SerializeField] public Rigidbody2D rb;
 	[SerializeField] public float jumpForce = 1.1f;
-	[SerializeField] public float speed = 2;
-	[SerializeField] public float maxSpeed = 2;
+	[SerializeField] public float speed = 5;
 	[SerializeField] public float landingDelay = 50;
 	[SerializeField] public float superJumpForce = 2;
 
 	[SerializeField] public bool IsGrounded;
 	public bool IsCrouching { get; set; }
 	public Vector2 WindConstant { get; set; }
-	public Vector2 AdditionalVelocity { get; set; }
+	private Animator anim;
 
 	[SerializeField] private float landingTimer;
 
@@ -23,15 +22,21 @@ public class LemmingMovement : MonoBehaviour
 	void Start()
 	{
 		rb.freezeRotation = true;
+		anim = GetComponent<Animator>();
 	}
 
 	void FixedUpdate()
 	{
-		rb.AddForce(WindConstant + AdditionalVelocity);
+		//rb.AddForce(WindConstant + AdditionalVelocity);
 
-		if (IsGrounded && landingTimer >= 0f)
+		if (IsGrounded)
 		{
-			landingTimer -= Time.deltaTime;
+			if (landingTimer >= 0f)
+			{
+				landingTimer -= Time.deltaTime;
+			}
+
+			//if (rb.velocity < )
 		}
 	}
 
@@ -40,24 +45,21 @@ public class LemmingMovement : MonoBehaviour
 		Vector2 jump;
 		if (superJumpActivated)
 		{
-			 jump = new Vector2(0, 1 * jumpForce * superJumpForce * 5f);
+			jump = new Vector2(0, jumpForce * superJumpForce * 5f);
 		}
 		else
 		{
-			 jump = new Vector2(0, 1 * jumpForce * 5f);
+			jump = new Vector2(0, jumpForce * 5f);
 		}
 
 		if (landingTimer <= 0f && IsGrounded)
 		{
-			//rb.AddForce(jump, ForceMode2D.Impulse);
 			rb.velocity = jump;
 			IsGrounded = false;
 			landingTimer = landingDelay / 1000;
 		}
 	}
 
-
-	// Intensity on a scale from 1 to 10
 	private void BrakeMovement()
 	{
 		if (rb.velocity.x < -0.1f && rb.velocity.x > 0.1f)
@@ -73,11 +75,16 @@ public class LemmingMovement : MonoBehaviour
 
 	public void MoveHorizontal(float direction)
 	{
-		if (direction > 0) direction = 1;
-		else if (direction < 0) direction = -1;
-
-		// If no movement input exists, auto brake
-		if (direction < 0.1f && direction > -0.1f)
+		// Clamp input to -1 / 1
+		if (direction > 0.1f)
+		{
+			direction = 1;
+		}
+		else if(direction < -0.1f)
+		{
+			direction = -1;
+		}
+		else
 		{
 			return;
 		}
@@ -89,25 +96,14 @@ public class LemmingMovement : MonoBehaviour
 		{
 			BrakeMovement();
 		}
-		// Accelerate in movement direction
-		else if (rb.velocity.x < maxSpeed && rb.velocity.x > -maxSpeed)
-		{
-			// Acceleration on ground is faster than in air
-			if (IsGrounded)
-			{
-				rb.velocity = new Vector2(direction, 0f) * speed * 100 * Time.deltaTime;
-			}
-			else
-			{
-				rb.velocity = new Vector2(direction * speed * 40 * Time.deltaTime, rb.velocity.y);
-			}
-		}
 
-		// Reduce velocity to maxSpeed if too fast
-		if (velocity.x > maxSpeed || velocity.x < -maxSpeed)
+		if (IsGrounded)
 		{
-			rb.velocity = new Vector2(direction * maxSpeed, rb.velocity.y);
+			rb.velocity = new Vector2(direction * speed, 0f);
+		}
+		else
+		{
+			rb.velocity = new Vector2(direction * speed * 0.7f, rb.velocity.y);
 		}
 	}
-
 }
