@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf2129e099ba6649b9b83699072046b, type: 3}
   m_Name: WindTile
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 3b82b26f0b16f8e48ae67381e4fbcfb2, type: 3}
-  direction: {x: 1, y: 0}
+  m_Name: WindTile
+  m_EditorClassIdentifier: 
