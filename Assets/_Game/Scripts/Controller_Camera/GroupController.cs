@@ -16,6 +16,11 @@ public class GroupController : MonoBehaviour, IKillTarget
 	public Animator[] AllLemmingAnimator { get; set; }
 	public SpriteRenderer[] AllLemmingSpriteRenderer { get; set; }
 
+	public Animator CoffinAnimator;
+	public SpriteRenderer CoffinSprite;
+
+	public CamController CamController { get; set; }
+
 	public int ActiveLemmingIndex { get; set; }
 	public GameObject ActiveLemming { get; set; }
 	public LemmingMovement ActiveLemmingMovement { get; set; }
@@ -58,6 +63,9 @@ public class GroupController : MonoBehaviour, IKillTarget
 		}
 
 		rbGroup = GetComponent<Rigidbody2D>();
+
+		CamController = GetComponent<CamController>();
+		CamController.initTargets(this);
 	}
 
 	private void FixedUpdate()
@@ -71,6 +79,8 @@ public class GroupController : MonoBehaviour, IKillTarget
 			}
 		}
 
+		CoffinAnimator.SetFloat("Speed", Mathf.Abs(rbGroup.velocity.x));
+
 		if (IsGroupSelected)
 		{
 			foreach (var sprite in AllLemmingSpriteRenderer)
@@ -80,11 +90,14 @@ public class GroupController : MonoBehaviour, IKillTarget
 					sprite.flipX = isDirectionPositiv;
 				}
 			}
+
+			CoffinSprite.flipX = isDirectionPositiv;
 		}
 		else
 		{
 			ActiveLemmingAnimator.SetFloat("Speed", Mathf.Abs(ActiveLemmingRb.velocity.x));
 		}
+
 	}
 
 	public void SetActiveLemming(float index)
@@ -99,7 +112,6 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void RemoveLemmingFromGroup()
 	{
-		Debug.Log("Dot");
 		gameManager.currentLemmings--;
 		if (ActiveLemmingIndex + 1 < PlayableLemmings.Length)
 		{
@@ -108,6 +120,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 			SetActiveLemming(++ActiveLemmingIndex);
 			Debug.Log((ActiveLemming));
 			ActiveLemmingStatus(false);
+
 		}
 		else
 		{
@@ -144,7 +157,6 @@ public class GroupController : MonoBehaviour, IKillTarget
 		ActiveLemming.GetComponent<SpriteRenderer>().color = ActiveLemmingColor;
 
 		ActiveLemmingStatus(false);
-		ActiveLemmingAnimator.SetBool("InGroup", true);
 	}
 
 	private void LemmingExitGroup(float z)
@@ -153,7 +165,6 @@ public class GroupController : MonoBehaviour, IKillTarget
 		ActiveLemming.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
 
 		ActiveLemmingStatus(true);
-		ActiveLemmingAnimator.SetBool("InGroup", false);
 
 	}
 
@@ -164,7 +175,20 @@ public class GroupController : MonoBehaviour, IKillTarget
 		ActiveLemming.GetComponentInChildren<GroundTrigger>(true).ChangeFootStatus(status);
 
 		IsGroupSelected = !status;
+		ActiveLemmingAnimator.SetBool("InGroup", !status);
+		CoffinAnimator.SetBool("InGroup", !status);
 		gameManager.existSingleLemming = status;
+
+		CamController.FocusChange = true;
+
+		if (status)
+		{
+			gameManager.groupText.text = "Single";
+		}
+		else
+		{
+			gameManager.groupText.text = "";
+		}
 	}
 
 	public void MoveHorizontal(float direction)
@@ -176,6 +200,12 @@ public class GroupController : MonoBehaviour, IKillTarget
 		if (IsGroupSelected && !blockedInput)
 		{
 			groupMovement.MoveHorizontal(direction);
+			if (gameManager.existSingleLemming)
+			{
+				ActiveLemmingMovement.MoveHorizontal(direction);
+				ActiveLemmingAnimator.SetFloat("Speed", Mathf.Abs(direction));
+				ActiveLemming.GetComponent<SpriteRenderer>().flipX = isDirectionPositiv;
+			}
 		}
 		else if (!blockedInput)
 		{

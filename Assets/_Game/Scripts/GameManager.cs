@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
 	public static GameManager instance = null;
 
-	[SerializeField] private TextMeshProUGUI groupText;
+	[SerializeField] public TextMeshProUGUI groupText;
 
 	public int level = 1;
 	public int leben = 3;
@@ -120,14 +120,23 @@ public class GameManager : MonoBehaviour
 	{
 		if (existSingleLemming)
 		{
+			GroupController groupController = FindObjectOfType<GroupController>();
 			if (groupText.text.Equals("Group"))
 			{
 				Debug.Log("Single");
+
+				groupController.IsGroupSelected = false;
+				groupController.CamController.FocusChange = true;
+
 				groupText.text = "Single";
 			}
 			else
 			{
 				Debug.Log("Group");
+
+				groupController.IsGroupSelected = true;
+				groupController.CamController.FocusChange = true;
+
 				groupText.text = "Group";
 			}
 		}
