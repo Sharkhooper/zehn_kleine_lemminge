@@ -36,12 +36,13 @@ public class GameManager : MonoBehaviour
 
 		UnlockedAbilities = new Dictionary<string, bool>
 			{{"Fire", false}, {"SuperJump", false}, {"Power", false}};
+
+		MaxLevelLemming = 10;
 	}
 
 	private void Start()
 	{
 		actionButton.enabled = false;
-		MaxLevelLemming = 10;
 	}
 
 	//because when you start a NewGame the UI would be active before you are in a Level Scene!
