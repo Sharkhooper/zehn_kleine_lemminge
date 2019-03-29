@@ -3,12 +3,13 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using _Game.Scripts.GameObjects;
 
 public class GameManager : MonoBehaviour
 {
 	public static GameManager instance = null;
 
-	[SerializeField] private TextMeshProUGUI groupText;
+	[SerializeField] public TextMeshProUGUI groupText;
 
 	public int level = 1;
 	public int maxLemminge = 10;
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
 	public Button actionButton;
 	public Button groupButton;
 	public TextMeshProUGUI currentLemmingText;
-	private InteractebaleSwitch interactebaleSwitch;
+	private IInteractible interactebaleSwitch;
 
 	//Awake is always called before any Start functions
 	void Awake()
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
 	//because when you start a NewGame the UI would be active before you are in a Level Scene!
 	public void Update()
 	{
-		if (SceneManager.GetActiveScene().name.Equals("Level " + level))
+		if (SceneManager.GetActiveScene().name.Contains("Level"))
 			EnableIngameUI(true);
 		else
 			EnableIngameUI(false);
@@ -95,7 +96,7 @@ public class GameManager : MonoBehaviour
 		transform.GetChild(0).gameObject.SetActive(enable);
 	}
 
-	public void ActionButtonEnable(bool b, InteractebaleSwitch switchScript)
+	public void ActionButtonEnable(bool b, IInteractible switchScript)
 	{
 		interactebaleSwitch = switchScript;
 		actionButton.enabled = b;
@@ -135,14 +136,23 @@ public class GameManager : MonoBehaviour
 	{
 		if (existSingleLemming)
 		{
+			GroupController groupController = FindObjectOfType<GroupController>();
 			if (groupText.text.Equals("Group"))
 			{
 				Debug.Log("Single");
+
+				groupController.IsGroupSelected = false;
+				groupController.CamController.FocusChange = true;
+
 				groupText.text = "Single";
 			}
 			else
 			{
 				Debug.Log("Group");
+
+				groupController.IsGroupSelected = true;
+				groupController.CamController.FocusChange = true;
+
 				groupText.text = "Group";
 			}
 		}
