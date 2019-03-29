@@ -5,17 +5,17 @@ using UnityEngine.EventSystems;
 
 public class Abilities : MonoBehaviour
 {
-	[SerializeField] float fireSpeed = 10.0f;
+	[SerializeField] float fireSpeed = 3.0f;
 	[SerializeField] float bombSpeed = 0.5f;
 	[SerializeField] private float cooldown = 3f;
 
-	private Transform playerTransform;
+	private SpriteRenderer playerSpriteRenderer;
 	[SerializeField] private float cooldownTimer;
 
 	private void Awake()
 	{
 		// Debug Code
-		playerTransform = transform;
+		playerSpriteRenderer = GetComponent<SpriteRenderer>();
 
 		cooldownTimer = cooldown;
 	}
@@ -37,11 +37,20 @@ public class Abilities : MonoBehaviour
 
 		GameObject firePrefab = Resources.Load<GameObject>("Fireball");
 		GameObject fireObject = Instantiate(firePrefab);
+		SpriteRenderer fireRenderer = fireObject.GetComponent<SpriteRenderer>();
 
-		fireObject.transform.position = playerTransform.position;
-		//fireObject.transform.rotation = playerTransform.rotation;
+		fireObject.transform.position = transform.position;
+		fireRenderer.flipX = playerSpriteRenderer.flipX;
 
-		fireObject.GetComponent<Rigidbody2D>().velocity = new Vector2(fireSpeed, 0f);
+		int flipDir = 1;
+		if (!fireRenderer.flipX)
+		{
+			flipDir = -1;
+		}
+
+		fireObject.GetComponent<Rigidbody2D>().velocity = new Vector2(fireSpeed * flipDir, 0f);
+
+		cooldownTimer = cooldown;
 	}
 
 	public void Bomb()
@@ -54,9 +63,11 @@ public class Abilities : MonoBehaviour
         GameObject bombPrefab = Resources.Load<GameObject>("Bomb");
         GameObject bombObject = Instantiate(bombPrefab);
 
-        bombObject.transform.position = playerTransform.position;
+        bombObject.transform.position = transform.position;
         //bombObject.transform.rotation = playerTransform.rotation;
 
         bombObject.GetComponent<Rigidbody2D>().velocity = new Vector2(fireSpeed, 0f);
+
+        cooldownTimer = cooldown;
 	}
 }
