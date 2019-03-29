@@ -13,12 +13,12 @@ public class DebugInput : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-			if (Input.GetKey(KeyCode.A))
+			if (Input.GetKey(KeyCode.Y))
 			{
 				abilities.Fire();
 			}
 
-			if (Input.GetKey(KeyCode.S))
+			if (Input.GetKey(KeyCode.X))
 			{
 				abilities.Bomb();
 			}

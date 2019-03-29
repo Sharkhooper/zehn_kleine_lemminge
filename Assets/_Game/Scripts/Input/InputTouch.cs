@@ -6,8 +6,8 @@ public class InputTouch : MonoBehaviour
 {
 	int doubleTap = 0;
 	float startZeit = 0;
-	float oldMovementX = 0;
-	Vector3 start, end, movement, richtungsVector, touchStart, originStart;
+	float tempTime = 0;
+	Vector3 start, end, movement, richtungsVector, touchStart, tempStart, originStart;
 	Touch touch;
 	[SerializeField] public GroupController groupController;
 
@@ -22,9 +22,10 @@ public class InputTouch : MonoBehaviour
 		if (Input.touchCount > 0)
 		{
 			touch = Input.GetTouch(0);
-
 			if (Input.GetTouch(0).phase == TouchPhase.Began)
 			{
+				Debug.Log("NEW TAP");
+
 				start = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
 				originStart = start;
 				//start = touch.position;
@@ -32,13 +33,21 @@ public class InputTouch : MonoBehaviour
 				//Debug.Log("Input START: " + start);
 				if (doubleTap == 0)
 				{
+					Debug.Log("1.Touch Position X: " + start.x);
 					startZeit = Time.time;
 					touchStart = start;
 				}
 				else if (!(Mathf.Abs(touchStart.x - start.x) <= 1f && Mathf.Abs(touchStart.y - start.y) <= 1f))
 				{
-					//		Debug.Log("DoppelTap Fail");
 					doubleTap = 0;
+					touchStart = start;
+					startZeit = Time.time;
+				}
+				else
+				{
+					Debug.Log("Else-Fall");
+					tempTime = Time.time;
+					tempStart = start;
 				}
 			}
 
@@ -54,10 +63,10 @@ public class InputTouch : MonoBehaviour
 					{
 						doubleTap++;
 					}
-					else if (doubleTap == 1 && Time.time - startZeit < 0.5f)
+					else if (doubleTap == 1 && Time.time - startZeit < 1f)
 					{
 						doubleTap = 0;
-						//				Debug.Log("DoppelTap erfolgt");
+						Debug.Log("DoubleTap erfolgt");
 
 						//=> Vector sollte übergeen werden, testen ob da LemmingGruppe ist
 						//RichtigeMethode
@@ -65,8 +74,12 @@ public class InputTouch : MonoBehaviour
 					}
 					else
 					{
+						Debug.Log(string.Format("Zeit: {0,6:0.0} sec.", Time.time-startZeit));
+						Debug.Log("DoubleTap zu langsam");
 						doubleTap = 0;
 						groupController.MoveHorizontal(0);
+						startZeit = tempTime;
+						touchStart = tempStart;
 					}
 				}
 
@@ -89,20 +102,11 @@ public class InputTouch : MonoBehaviour
 							//Aufstehen
 						}
 					}
-					else if (richtungsVector.y < -3)
-					{
-						float tan = richtungsVector.y / richtungsVector.x;
-						if (!(tan < 1 && tan > -1 && tan != 0))
-						{
-							Debug.Log("Bück dich du Luder!");
-							//bücken
-						}
-					}
-					//Vlt nicht auf nem Button möglich
+					//Vlt nicht auf nem Button möglich sein
 					else if (Mathf.Abs(richtungsVector.x) <= 2 && Mathf.Abs(richtungsVector.y) <= 2)
 					{
 						//Debug.Log("Input Punkt Richtung: " + -((Camera.main.gameObject.transform.position - end).x));
-						groupController.MoveHorizontal(-((Camera.main.gameObject.transform.position - end).x));
+						groupController.MoveHorizontal(end);
 					}
 				}
 				groupController.MoveHorizontal(0);
@@ -117,7 +121,7 @@ public class InputTouch : MonoBehaviour
 				groupController.MoveHorizontal((movement.x - start.x));
 
 
-				if (movement.y-originStart.y > 3)
+				if (movement.y - originStart.y > 3)
 				{
 					float tan = movement.y - originStart.y / movement.x - originStart.x;
 					if (!(tan < 1 && tan > -1 && tan != 0))

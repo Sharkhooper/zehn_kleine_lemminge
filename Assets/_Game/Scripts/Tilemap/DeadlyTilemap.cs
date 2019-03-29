@@ -10,7 +10,7 @@ public class DeadlyTilemap : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-			ExecuteEvents.Execute<IKillTarget>(other.gameObject, null, (x, y) => x.Die(other.gameObject));
+			ExecuteEvents.Execute<IKillTarget>(other.gameObject, null, (x, y) => x.Die(gameObject));
 			// TODO: Exchange tile here
 		}
 	}

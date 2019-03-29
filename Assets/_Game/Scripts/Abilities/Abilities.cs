@@ -5,17 +5,17 @@ using UnityEngine.EventSystems;
 
 public class Abilities : MonoBehaviour
 {
-	[SerializeField] float fireSpeed = 10.0f;
-	[SerializeField] float bombSpeed = 0.5f;
-	[SerializeField] private float cooldown = 3f;
+	[SerializeField] float fireSpeed = 1.5f;
+	[SerializeField] float bombSpeed = 1.5f;
+	[SerializeField] private float cooldown = 1f;
 
-	private Transform playerTransform;
-	[SerializeField] private float cooldownTimer;
+	private SpriteRenderer playerSpriteRenderer;
+	private float cooldownTimer;
 
 	private void Awake()
 	{
 		// Debug Code
-		playerTransform = transform;
+		playerSpriteRenderer = GetComponent<SpriteRenderer>();
 
 		cooldownTimer = cooldown;
 	}
@@ -37,11 +37,20 @@ public class Abilities : MonoBehaviour
 
 		GameObject firePrefab = Resources.Load<GameObject>("Fireball");
 		GameObject fireObject = Instantiate(firePrefab);
+		SpriteRenderer fireRenderer = fireObject.GetComponent<SpriteRenderer>();
 
-		fireObject.transform.position = playerTransform.position;
-		//fireObject.transform.rotation = playerTransform.rotation;
+		fireObject.transform.position = transform.position;
+		fireRenderer.flipX = playerSpriteRenderer.flipX;
 
-		fireObject.GetComponent<Rigidbody2D>().velocity = new Vector2(fireSpeed, 0f);
+		int flipDir = 1;
+		if (!fireRenderer.flipX)
+		{
+			flipDir = -1;
+		}
+
+		fireObject.GetComponent<Rigidbody2D>().velocity = new Vector2(fireSpeed * flipDir, 0f);
+
+		cooldownTimer = cooldown;
 	}
 
 	public void Bomb()
@@ -54,9 +63,19 @@ public class Abilities : MonoBehaviour
         GameObject bombPrefab = Resources.Load<GameObject>("Bomb");
         GameObject bombObject = Instantiate(bombPrefab);
 
-        bombObject.transform.position = playerTransform.position;
-        //bombObject.transform.rotation = playerTransform.rotation;
+        SpriteRenderer bombRenderer = bombObject.GetComponent<SpriteRenderer>();
 
-        bombObject.GetComponent<Rigidbody2D>().velocity = new Vector2(fireSpeed, 0f);
+        bombObject.transform.position = transform.position;
+        bombRenderer.flipX = playerSpriteRenderer.flipX;
+
+        int flipDir = 1;
+        if (!bombRenderer.flipX)
+        {
+	        flipDir = -1;
+        }
+
+        bombObject.GetComponent<Rigidbody2D>().velocity = new Vector2(bombSpeed * flipDir, bombSpeed * 2f);
+
+        cooldownTimer = cooldown;
 	}
 }
