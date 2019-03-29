@@ -203,7 +203,10 @@ public class GroupController : MonoBehaviour, IKillTarget
 			{
 				vHit.transform.GetComponent<GroupController>().ActivateGroup(false);
 			}
-
+			else
+			{
+				Debug.Log("DoubleTap falsche Position");
+			}
 		}
 	}
 
