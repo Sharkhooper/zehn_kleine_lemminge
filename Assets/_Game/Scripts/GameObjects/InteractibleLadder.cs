@@ -23,8 +23,6 @@ public class InteractibleLadder : MonoBehaviour, IInteractible
 	private Rigidbody2D lemmingRb;
 	private GroupController groupController;
 	private Vector3 upperEnd;
-	private Vector3 lowerEnd;
-	private bool moveUpwards;
 
 	private void Start()
 	{
@@ -36,7 +34,6 @@ public class InteractibleLadder : MonoBehaviour, IInteractible
 		SpriteRenderer render = GetComponent<SpriteRenderer>();
 		float sizeY = render.size.y / 2;
 		upperEnd = new Vector3(pos.x, pos.y + sizeY + 0.5f, pos.z);
-		lowerEnd = new Vector3(pos.x, pos.y - sizeY + 0.5f, pos.z);
 
 		top = transform.GetChild(0);
 		topCollider = top.GetComponent<BoxCollider2D>();
@@ -48,26 +45,13 @@ public class InteractibleLadder : MonoBehaviour, IInteractible
 		if (lemmingRb != null)
 		{
 			Vector3 playerPos = lemmingRb.transform.position;
-			if (moveUpwards)
-			{
-				lemmingRb.velocity = Vector2.up * climbingSpeed;
+			lemmingRb.velocity = Vector2.up * climbingSpeed;
 
-				if (upperEnd.y - playerPos.y < 0.1f)
-				{
-					lemmingRb.velocity = Vector2.zero;
-					lemmingRb = null;
-					topCollider.isTrigger = false;
-				}
-			}
-			else
+			if (upperEnd.y - playerPos.y < 0.1f)
 			{
-				lemmingRb.velocity = Vector2.down * climbingSpeed;
-
-				if (lowerEnd.y - playerPos.y < 0.1f)
-				{
-					lemmingRb.velocity = Vector2.zero;
-					lemmingRb = null;
-				}
+				lemmingRb.velocity = Vector2.zero;
+				lemmingRb = null;
+				topCollider.isTrigger = false;
 			}
 		}
 	}
@@ -123,14 +107,6 @@ public class InteractibleLadder : MonoBehaviour, IInteractible
 		{
 			lemmingRb = groupController.ActiveLemming.GetComponent<Rigidbody2D>();
 			Vector3 playerPos = lemmingRb.transform.position;
-			if (Vector3.Distance(playerPos, upperEnd) > Vector3.Distance(playerPos, lowerEnd))
-			{
-				moveUpwards = true;
-			}
-			else
-			{
-				moveUpwards = false;
-			}
 		}
 	}
 }

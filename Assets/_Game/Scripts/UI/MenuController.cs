@@ -86,7 +86,7 @@ public class MenuController : MonoBehaviour
 
     public void Return_MainMenu()
     {
-		returnText.text = "Return";
+	//	returnText.text = "Return";
 		
 		newGameText.text = "Neues Spiel";
 		continueGameText.text = "Fortsetzen";

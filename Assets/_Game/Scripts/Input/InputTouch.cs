@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InputTouch : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class InputTouch : MonoBehaviour
 	Vector3 start, end, movement, richtungsVector, touchStart, tempStart, originStart;
 	Touch touch;
 	[SerializeField] public GroupController groupController;
+
+	
 
 	private void Start()
 	{
@@ -107,17 +110,19 @@ public class InputTouch : MonoBehaviour
 					float tan = movement.y - originStart.y / movement.x - originStart.x;
 					if (!(tan < 1 && tan > -1 && tan != 0))
 					{
-						//Debug.Log("Tan: " + tan + "   x-Wert: " + richtungsVector.x);
 						groupController.Jump();
 						//lemming.MoveHorizontal(movement.y - originStart.y);
-
-						//Aufstehen
 					}
 				}
-
 			}
 		}
-	}
+
+		if(Input.touchCount==4)
+		{
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+		}
+
+	}//Update
 
 
 }//class

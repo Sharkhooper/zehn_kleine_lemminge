@@ -160,7 +160,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void LemmingEnterGroup()
 	{
-		gameManager.GroupButton.enabled = false;
+		gameManager.groupButton.enabled = false;
 
 		ActiveLemming.transform.localPosition = ActiveLemmingGroupPosition;
 		ActiveLemming.GetComponent<SpriteRenderer>().color = ActiveLemmingColor;
@@ -171,7 +171,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 	private void LemmingExitGroup(float z)
 	{
 
-		gameManager.GroupButton.enabled = true;
+		gameManager.groupButton.enabled = true;
 
 
 		ActiveLemming.transform.localPosition = new Vector3(2, 0, 0);
@@ -233,13 +233,19 @@ public class GroupController : MonoBehaviour, IKillTarget
 		if (IsGroupSelected && !blockedInput)
 		{
 			float direction = -((transform.position - position).x);
-
+			if (direction != 0)
+			{
+				isDirectionPositiv = direction > 0;
+			}
 			groupMovement.MoveHorizontal(direction);
 		}
 		else if (!blockedInput)
 		{
 			float direction = -((ActiveLemmingMovement.transform.position - position).x);
-
+			if (direction != 0)
+			{
+				isDirectionPositiv = direction > 0;
+			}
 			ActiveLemmingMovement.MoveHorizontal(direction);
 			ActiveLemmingAnimator.SetFloat("Speed", Mathf.Abs(direction));
 			ActiveLemming.GetComponent<SpriteRenderer>().flipX = isDirectionPositiv;
@@ -264,10 +270,6 @@ public class GroupController : MonoBehaviour, IKillTarget
 			if (vHit.transform.tag == "Group")
 			{
 				vHit.transform.GetComponent<GroupController>().ActivateGroup(false);
-			}
-			else
-			{
-				Debug.Log("DoubleTap falsche Position");
 			}
 		}
 	}
