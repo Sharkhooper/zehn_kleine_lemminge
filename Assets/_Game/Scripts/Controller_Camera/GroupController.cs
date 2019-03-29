@@ -67,12 +67,14 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void RemoveLemmingFromGroup()
 	{
+		Debug.Log("Dot");
 		gameManager.currentLemmings--;
-		if (ActiveLemmingIndex + 1 <= PlayableLemmings.Length)
+		if (ActiveLemmingIndex + 1 < PlayableLemmings.Length)
 		{
 			Destroy(ActiveLemming);
 
-			ActiveLemming = PlayableLemmings[ActiveLemmingIndex];
+			SetActiveLemming(++ActiveLemmingIndex);
+			Debug.Log((ActiveLemming));
 			ActiveLemmingStatus(false);
 		}
 		else
@@ -111,7 +113,6 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 		ActiveLemmingStatus(false);
 		ActiveLemmingAnimator.SetBool("InGroup", true);
-		IsGroupSelected = true;
 	}
 
 	private void LemmingExitGroup(float z)
@@ -121,7 +122,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 		ActiveLemmingStatus(true);
 		ActiveLemmingAnimator.SetBool("InGroup", false);
-		IsGroupSelected = false;
+
 	}
 
 	private void ActiveLemmingStatus(bool status)
@@ -130,6 +131,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 		ActiveLemming.GetComponent<Rigidbody2D>().simulated = status;
 		ActiveLemming.GetComponentInChildren<GroundTrigger>(true).ChangeFootStatus(status);
 
+		IsGroupSelected = !status;
 		gameManager.existSingleLemming = status;
 	}
 
