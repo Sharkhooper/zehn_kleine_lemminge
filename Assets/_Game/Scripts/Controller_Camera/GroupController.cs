@@ -22,11 +22,12 @@ public class GroupController : MonoBehaviour, IKillTarget
 	public Animator ActiveLemmingAnimator { get; set; }
 	private Vector3 ActiveLemmingGroupPosition { get; set; }
 	private Color ActiveLemmingColor { get; set; }
-	private Rigidbody2D ActiveLemmingRb { get; set; }
+	//private Rigidbody2D ActiveLemmingRb { get; set; }
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		/*
 		gameManager = FindObjectOfType<GameManager>();
 		gameManager.currentLemmings = 10;
 
@@ -58,10 +59,12 @@ public class GroupController : MonoBehaviour, IKillTarget
 		}
 
 		rbGroup = GetComponent<Rigidbody2D>();
+		*/
 	}
 
 	private void FixedUpdate()
 	{
+		/*
 		foreach (var animator in AllLemmingAnimator)
 		{
 			if (animator != null)
@@ -84,21 +87,25 @@ public class GroupController : MonoBehaviour, IKillTarget
 		else
 		{
 			ActiveLemmingAnimator.SetFloat("Speed", Mathf.Abs(ActiveLemmingRb.velocity.x));
-		}
+		}*/
+
 	}
 
 	public void SetActiveLemming(float index)
 	{
+		/*
 		ActiveLemming = PlayableLemmings[ActiveLemmingIndex];
 		ActiveLemmingMovement = ActiveLemming.GetComponent<LemmingMovement>();
 		ActiveLemmingGroupPosition = ActiveLemming.transform.localPosition;
 		ActiveLemmingColor = ActiveLemming.GetComponent<SpriteRenderer>().color;
 		ActiveLemmingAnimator = ActiveLemming.GetComponent<Animator>();
-		ActiveLemmingRb = ActiveLemming.GetComponent<Rigidbody2D>();
+		//ActiveLemmingRb = ActiveLemming.GetComponent<Rigidbody2D>();
+		*/
 	}
 
 	public void RemoveLemmingFromGroup()
 	{
+		/*
 		Debug.Log("Dot");
 		gameManager.currentLemmings--;
 		if (ActiveLemmingIndex + 1 < PlayableLemmings.Length)
@@ -113,10 +120,12 @@ public class GroupController : MonoBehaviour, IKillTarget
 		{
 			gameManager.GameOver();
 		}
+		*/
 	}
 
 	public void ActivateGroup(bool pcButton)
 	{
+		/*
 		blockedInput = true;
 
 		float zCoordinate = ActiveLemming.transform.position.z;
@@ -136,15 +145,18 @@ public class GroupController : MonoBehaviour, IKillTarget
 		}
 
 		blockedInput = false;
+		*/
 	}
 
 	public void LemmingEnterGroup()
 	{
+		/*
 		ActiveLemming.transform.localPosition = ActiveLemmingGroupPosition;
 		ActiveLemming.GetComponent<SpriteRenderer>().color = ActiveLemmingColor;
 
 		ActiveLemmingStatus(false);
 		ActiveLemmingAnimator.SetBool("InGroup", true);
+		*/
 	}
 
 	private void LemmingExitGroup(float z)
@@ -169,6 +181,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void MoveHorizontal(float direction)
 	{
+		/*
 		if (direction != 0)
 		{
 			isDirectionPositiv = direction > 0;
@@ -183,6 +196,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 			ActiveLemmingAnimator.SetFloat("Speed", Mathf.Abs(direction));
 			ActiveLemming.GetComponent<SpriteRenderer>().flipX = isDirectionPositiv;
 		}
+		*/
 	}
 
 	public void Jump()
