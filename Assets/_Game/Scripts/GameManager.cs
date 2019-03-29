@@ -20,13 +20,20 @@ public class GameManager : MonoBehaviour
 	public int MaxLevelLemming { get; set; }
 
 	public Button actionButton;
-	public Button GroupButton;
+	public Button groupButton;
 	public TextMeshProUGUI currentLemmingText;
 	private InteractebaleSwitch interactebaleSwitch;
 
 	//Awake is always called before any Start functions
 	void Awake()
 	{
+		if (PlayerPrefs.HasKey("level"))
+			level = PlayerPrefs.GetInt("level");
+		if (PlayerPrefs.HasKey("currentLemmings"))
+			currentLemmings = PlayerPrefs.GetInt("currentLemmings");
+		if (PlayerPrefs.HasKey("maxLemminge"))
+			maxLemminge = PlayerPrefs.GetInt("maxLemminge");
+
 		if (instance == null)
 			instance = this;
 		else if (instance != this)
@@ -42,7 +49,8 @@ public class GameManager : MonoBehaviour
 	}
 
 	private void Start()
-	{
+	{ 
+		groupButton.enabled = false;
 		actionButton.enabled = false;
 	}
 
@@ -72,6 +80,12 @@ public class GameManager : MonoBehaviour
 			default:
 				break;
 		}
+
+		PlayerPrefs.SetInt("level", level);
+		PlayerPrefs.SetInt("currentLemmings", currentLemmings);
+		PlayerPrefs.SetInt("maxLemminge", maxLemminge);
+		PlayerPrefs.Save();
+
 		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
 	}
 
@@ -136,9 +150,12 @@ public class GameManager : MonoBehaviour
 
 	public void ResetProgress()
 	{
-		level = 1;
-		maxLemminge = 10;
-		currentLemmings = 10;
+		
+		PlayerPrefs.SetInt("level", level=1);
+		PlayerPrefs.SetInt("currentLemmings", currentLemmings=10);
+		PlayerPrefs.SetInt("maxLemminge", maxLemminge=10);
+		PlayerPrefs.Save();
+
 	}
 
 	public void GameOver()
