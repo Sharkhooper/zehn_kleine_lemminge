@@ -8,25 +8,27 @@ public class ByAbilityDestroyableObject : MonoBehaviour,IKillTarget
    
     public void Die(GameObject other)
     {
-        Transform thisGameObject = gameObject.transform;
+        Transform otherGameObject= other.transform;
+        Debug.Log("Collided");
 
 
-
-        if (gameObject.CompareTag("Burnable") && thisGameObject.CompareTag("Fire"))
+        Debug.Log(other);
+        Debug.Log(otherGameObject);
+        if (gameObject.CompareTag("Burnable") && otherGameObject.CompareTag("Fire"))
         {
 
 
 
 
-            Destroy(thisGameObject.gameObject);
+            Destroy(otherGameObject.gameObject);
 
         }
-        else if (gameObject.CompareTag("Explosivable")&&thisGameObject.CompareTag("Bomb"))
+        else if (gameObject.CompareTag("Explosivable")&&otherGameObject.CompareTag("Bomb"))
         {
             
-           
+          //  Debug.Log("Collided if open");
 
-            Destroy(thisGameObject.gameObject);
+            Destroy(otherGameObject.gameObject);
         }
 
     }
