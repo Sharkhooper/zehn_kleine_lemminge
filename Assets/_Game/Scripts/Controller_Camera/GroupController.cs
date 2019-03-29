@@ -65,7 +65,9 @@ public class GroupController : MonoBehaviour, IKillTarget
 		if (ActiveLemmingIndex + 1 <= PlayableLemmings.Length)
 		{
 			Destroy(ActiveLemming);
-			SetActiveLemming(++ActiveLemmingIndex);
+
+			ActiveLemming = PlayableLemmings[ActiveLemmingIndex];
+			ActiveLemmingStatus(false);
 		}
 		else
 		{
