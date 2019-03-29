@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using _Game.Scripts.GameObjects;
 
-public class InteractebaleSwitch : MonoBehaviour
+public class InteractebaleSwitch : MonoBehaviour, IInteractible
 {
     [System.Serializable]
     private class BoolEvent : UnityEvent<bool>
@@ -24,12 +25,12 @@ public class InteractebaleSwitch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-      
+
         if (groupIn)
         {
             return;
         }
-        
+
         if (other.gameObject.CompareTag("Group"))
         {
             groupIn = true;
@@ -48,9 +49,9 @@ public class InteractebaleSwitch : MonoBehaviour
 
 
         }
-        
-        
-        
+
+
+
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -71,15 +72,15 @@ public class InteractebaleSwitch : MonoBehaviour
 
 
         }
-        
-        
+
+
     }
 
 
     public void ActionButtonPressed()
     {
         Debug.Log("Button pressed");
-        
+
         if (playerIn)
         {
 

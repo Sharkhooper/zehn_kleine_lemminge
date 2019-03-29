@@ -1708,7 +1708,7 @@ MonoBehaviour:
   currentLemmings: 10
   existSingleLemming: 0
   actionButton: {fileID: 8462022603242337191}
-  GroupButton: {fileID: 4690084536887695565}
+  groupButton: {fileID: 4690084536887695565}
   currentLemmingText: {fileID: 434592542853494592}
 --- !u!114 &5491725386549767824
 MonoBehaviour:
