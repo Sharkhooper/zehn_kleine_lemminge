@@ -17,6 +17,8 @@ public class DeadlyTilemap : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D other)
 	{
+		Debug.Log(other.transform.tag);
+
 		if (other.transform.CompareTag("Player"))
 		{
 			Vector2 pos2D = other.GetContact(0).point;
@@ -29,6 +31,15 @@ public class DeadlyTilemap : MonoBehaviour
 			Vector3Int posOnGround = groundMap.WorldToCell(pos);
 			unDeadlyTile.transform = tempMatrix;
 			groundMap.SetTile(posOnGround, unDeadlyTile);
+		}
+		// Last minute fix
+		else if (other.transform.parent.parent.parent.name.Equals("DeadBlock"))
+		{
+			Vector2 pos2D = other.GetContact(0).point;
+			Vector3 pos = new Vector3(pos2D.x, pos2D.y, 0f);
+
+			Vector3Int posOnDeadly = deadlyMap.WorldToCell(pos);
+			deadlyMap.SetTile(posOnDeadly, null);
 		}
 
 		if (other.transform.CompareTag("Player") || other.transform.CompareTag("Group"))

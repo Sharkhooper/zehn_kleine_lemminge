@@ -137,7 +137,11 @@ public class InputTouch : MonoBehaviour
 
 		if(Input.touchCount==4)
 		{
+			if(!SceneManager.GetActiveScene().name.Equals("GameOver"))
 			SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+			else
+				SceneManager.LoadScene("TitleMenu", LoadSceneMode.Single);
+
 		}
 
 	}//Update
