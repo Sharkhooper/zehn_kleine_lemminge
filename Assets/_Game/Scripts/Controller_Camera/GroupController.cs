@@ -167,7 +167,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void LemmingEnterGroup()
 	{
-		gameManager.groupButton.enabled = false;
+		gameManager.getInstance().groupButton.enabled = false;
 
 		ActiveLemming.transform.localPosition = ActiveLemmingGroupPosition;
 		ActiveLemming.GetComponent<SpriteRenderer>().color = ActiveLemmingColor;
@@ -177,11 +177,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	private void LemmingExitGroup(float z)
 	{
-		Debug.Log(gameManager.name);
-		Debug.Log(gameManager.groupButton.name);
-		gameManager.groupButton.enabled = true;
-
-
+		gameManager.getInstance().groupButton.enabled = true;
 		ActiveLemming.transform.localPosition = new Vector3(2, 0, 0);
 		ActiveLemming.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
 
