@@ -61,9 +61,11 @@ public class GameManager : MonoBehaviour
 				UnlockedAbilities["SuperJump"] = IntToBoolForDic(PlayerPrefs.GetInt("JumpP"));
 			if (PlayerPrefs.HasKey("BombP"))
 				UnlockedAbilities["Power"] = IntToBoolForDic(PlayerPrefs.GetInt("BombP"));
-			
+
 			if (level == 1)
-			FireButtonDisable();
+			{
+				FireButtonDisable();
+			}
 			else if (level==2)
 			{
 				BombButtonDisable();
@@ -85,9 +87,13 @@ public class GameManager : MonoBehaviour
 				instance.UnlockedAbilities["Power"] = IntToBoolForDic(PlayerPrefs.GetInt("BombP"));
 
 
-			if (level == 1)
-				instance.FireButtonDisable();
-			else if (level==2)
+			if (instance.level == 1)
+			{
+			//Debug.Log(level);
+			instance.FireButtonDisable();
+			
+			}
+		else if (instance.level==2)
 			{
 				instance.BombButtonDisable();
 			}
