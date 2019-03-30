@@ -9,17 +9,17 @@ public class KillLemming : MonoBehaviour, IKillTarget
 
 	// Start is called before the first frame update
 	void Start()
-    {
+	{
 		animator = GetComponent<Animator>();
 
-    }
+	}
 
 	public void Die(GameObject other)
 	{
 		animator.SetBool("Life", false);
 	}
 
-	private void AnimEnds()
+	public void AnimEnds()
 	{
 		animator.SetBool("Dead", true);
 		Debug.Log("Anim ends");
