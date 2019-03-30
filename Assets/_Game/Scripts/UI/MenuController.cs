@@ -19,11 +19,7 @@ public class MenuController : MonoBehaviour
 	public TextMeshProUGUI optionText;
 	public TextMeshProUGUI creditText;
 	public TextMeshProUGUI returnText;
-
-	public Vector3 groupPosition;
-	public Vector3 singlePosition;
-
-	private GameManager gm;
+	
 	private GameObject menuUI;
 
 	/*void Awake()
@@ -39,16 +35,9 @@ public class MenuController : MonoBehaviour
 	*/
 	private void Start()
     {
-	    if (GameManager.instance == null)
-	    {
-		    gm = Instantiate(gameManager);
-	    }
-	    else
-	    {
-		    gm = GameManager.instance;
-	    }
+		gameManager = gameManager.getInstance();
 
-	    if (gm.level == 1)
+	    if (gameManager.level == 1 && gameManager.groupPosition==Vector3.zero)
 	    {
 		    Button continueButton = transform.GetChild(1).GetComponent<Button>();
 		    continueButton.enabled = false;
@@ -69,8 +58,8 @@ public class MenuController : MonoBehaviour
 		newGameText.color = new Color32(255, 255, 255, 255);
 		newGameText.text = "New Game";
 
-		gm.ResetProgress();
-		gm.currentLemmingText.text = "Leben: " + gm.currentLemmings;
+		gameManager.ResetProgress();
+		gameManager.currentLemmingText.text = "Leben: " + gameManager.currentLemmings;
 
 		SceneManager.LoadScene("Level 1", LoadSceneMode.Single);
 		//gm.EnableIngameUI(true);
@@ -79,13 +68,13 @@ public class MenuController : MonoBehaviour
     public void ContinueGame_Click()
     {
 		//menuUI.SetActive(false);
-		SceneManager.LoadScene("Level " + gm.level, LoadSceneMode.Single);
-		gm.currentLemmingText.text = "Leben: " + gm.currentLemmings;
+		SceneManager.LoadScene("Level " + gameManager.level, LoadSceneMode.Single);
+		gameManager.currentLemmingText.text = "Leben: " + gameManager.currentLemmings;
 		gameManager.playMusic.enabled = true;
 		gameManager.playMusic.Play();
 
-			if (continueGameText.text.Equals("Zurück zum Spiel"))
-				gm.getInstance().BackToGame_Click(groupPosition, singlePosition);
+		if (gameManager.groupPosition != Vector3.zero)
+			gameManager.getInstance().BackToGame_Click();
 				
 		//	    gm.EnableIngameUI(true);
 	}

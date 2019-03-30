@@ -36,7 +36,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 	[SerializeField] public GameObject[] Waypoints;
 
 	// Start is called before the first frame update
-	void Start()
+	void Awake()
 	{
 		gameManager = FindObjectOfType<GameManager>();
 		gameManager.getInstance().currentLemmings = 7;
@@ -72,7 +72,13 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 		CamController = GetComponent<CamController>();
 		CamController.initTargets(this);
+
 	}
+
+	void Start()
+	{
+		//gameManager = FindObjectOfType<GameManager>();
+		}
 
 	private void FixedUpdate()
 	{
@@ -149,9 +155,8 @@ public class GroupController : MonoBehaviour, IKillTarget
 			Destroy(ActiveLemming);
 
 			SetActiveLemming(++ActiveLemmingIndex);
-			Debug.Log((ActiveLemming));
+			//Debug.Log((ActiveLemming));
 			ActiveLemmingStatus(false);
-
 		}
 		else
 		{
@@ -197,7 +202,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	}
 
-	private void LemmingExitGroup(float z)
+	public void LemmingExitGroup(float z)
 	{
 		gameManager.getInstance().groupButton.enabled = true;
 

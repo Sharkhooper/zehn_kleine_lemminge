@@ -689,15 +689,11 @@ MonoBehaviour:
     type: 3}
   optionUI: {fileID: 1344796523}
   creditUI: {fileID: 365082639}
-  playMusic: {fileID: 1846940902}
-  menuMusic: {fileID: 2004132642}
   newGameText: {fileID: 1142620923}
   continueGameText: {fileID: 1993474470}
   optionText: {fileID: 1248125270}
   creditText: {fileID: 367998310}
   returnText: {fileID: 2014128178}
-  groupPosition: {x: 0, y: 0, z: 0}
-  singlePosition: {x: 0, y: 0, z: 0}
 --- !u!114 &434523903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1537,6 +1533,38 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7393841134299425669, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: m_text
+      value: '
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393841134299425669, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393841134299425669, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393841134299425669, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393841134299425669, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393841134299425669, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3202539104620840815, guid: bf18cb00ef043184eb50a0f82e61aba6,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -1560,7 +1588,7 @@ PrefabInstance:
     - target: {fileID: 6980350954943020736, guid: bf18cb00ef043184eb50a0f82e61aba6,
         type: 3}
       propertyPath: m_text
-      value: 'Bomb
+      value: '
 
 '
       objectReference: {fileID: 0}
@@ -1577,12 +1605,27 @@ PrefabInstance:
     - target: {fileID: 6980350954943020736, guid: bf18cb00ef043184eb50a0f82e61aba6,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6980350954943020736, guid: bf18cb00ef043184eb50a0f82e61aba6,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980350954943020736, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980350954943020736, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980350954943020736, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2755150782613814635, guid: bf18cb00ef043184eb50a0f82e61aba6,
         type: 3}
@@ -2755,12 +2798,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794617853}
   m_CullTransparentMesh: 0
---- !u!82 &1846940902 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 390954148519259779, guid: bf18cb00ef043184eb50a0f82e61aba6,
-    type: 3}
-  m_PrefabInstance: {fileID: 930041584}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1917550407
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,12 +29,12 @@ public class CamController : MonoBehaviour
 
 		targetGroup.m_Targets[0].target = groupController.gameObject.transform;
 		targetGroup.m_Targets[0].weight = 1;
-		targetGroup.m_Targets[0].radius = 5;
+		targetGroup.m_Targets[0].radius = 3;
 
 		for (int i = 1; i < targetGroup.m_Targets.Length; i++)
 		{
 			targetGroup.m_Targets[i].target = groupController.PlayableLemmings[i - 1].transform;
-			targetGroup.m_Targets[i].radius = 5;
+			targetGroup.m_Targets[i].radius = 3;
 			targetGroup.m_Targets[i].weight = 0;
 		}
 	}
