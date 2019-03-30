@@ -247,20 +247,23 @@ public class GameManager : MonoBehaviour
 
 
 		GroupController groupController = FindObjectOfType<GroupController>();
-		SceneManager.LoadScene("TitleMenu", LoadSceneMode.Single);
 		if (existSingleLemming)
+		{
 			instance.singlePosition = groupController.ActiveLemming.transform.position;
-		if (instance.groupPosition != Vector3.zero)
+			Debug.Log("SinglePosition beim Speichern: " + instance.singlePosition.x + " - " + instance.singlePosition.y);
+		}
+		if (groupController != null)
 		{
 			instance.groupPosition = groupController.transform.position;
-
+			Debug.Log("GroupPosition beim Speichern: " + instance.groupPosition.x + " - " + instance.groupPosition.y);
 			currentLemmings = groupController.ActiveLemmingIndex;
 		}
 		EnableIngameUI(false);
+		SceneManager.LoadScene("TitleMenu", LoadSceneMode.Single);
 
-		
+
 	}
-	
+
 	public void BackToGame_Click()
 	{
 		SceneManager.sceneLoaded += OnSceneLoaded;
@@ -271,6 +274,8 @@ public class GameManager : MonoBehaviour
 		GroupController groupController = FindObjectOfType<GroupController>();
 		if (SceneManager.GetActiveScene().name.Equals("Level " + level))
 		{
+			groupController.transform.position = groupPosition;
+
 			if (singlePosition != Vector3.zero)
 			{
 				currentLemmings = instance.currentLemmings;
@@ -279,12 +284,14 @@ public class GameManager : MonoBehaviour
 				{
 					groupController.RemoveLemmingFromGroup();
 				}
-				Debug.Log("SinglePositionLoad");
 				groupController.SetActiveLemming(currentLemmings);
 				groupController.LemmingExitGroup(0);
 				groupController.ActiveLemming.transform.position = singlePosition;
+
+				Debug.Log("SinglePosition beim Laden: " + instance.singlePosition.x + " - " + instance.singlePosition.y);
 			}
-			groupController.transform.position = groupPosition;
+
+			Debug.Log("GroupPosition beim Laden: " + instance.groupPosition.x + " - " + instance.groupPosition.y);
 
 			instance.singlePosition = Vector3.zero;
 			instance.groupPosition = Vector3.zero;
@@ -294,7 +301,7 @@ public class GameManager : MonoBehaviour
 			gameOverContinue.onClick.AddListener(ContinueGame_Click);
 			gameOverMainMenue.onClick.AddListener(MenuButton_Click);
 		}
-
+		SceneManager.sceneLoaded -= OnSceneLoaded;
 }
 
 	public GameManager getInstance()
@@ -336,10 +343,9 @@ public class GameManager : MonoBehaviour
 
 	public void ResetProgress()
 	{
-		
-		PlayerPrefs.SetInt("level", level = 1);
-		PlayerPrefs.SetInt("currentLemmings", currentLemmings=7);
-		PlayerPrefs.SetInt("maxLemminge", MaxLevelLemming = 7);
+		PlayerPrefs.SetInt("level", instance.level = 1);
+		PlayerPrefs.SetInt("currentLemmings", instance.currentLemmings =7);
+		PlayerPrefs.SetInt("maxLemminge", instance.MaxLevelLemming = 7);
 		PlayerPrefs.SetInt("FireP",0);
 		PlayerPrefs.SetInt("BombP",0);
 		PlayerPrefs.SetInt("JumpP",0);
@@ -360,11 +366,8 @@ public class GameManager : MonoBehaviour
 		currentLemmings = MaxLevelLemming;
 	}
 
-
-
 	public void ContinueGame_Click()
 	{
-		Debug.Log("Loading");
 		//menuUI.SetActive(false);
 		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
 		currentLemmingText.text = "Leben: " + MaxLevelLemming;
@@ -373,6 +376,8 @@ public class GameManager : MonoBehaviour
 
 		//	    gm.EnableIngameUI(true);
 	}
+
+
 	public void useFire()
 	{
 		if (existSingleLemming)

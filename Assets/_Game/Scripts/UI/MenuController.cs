@@ -37,7 +37,7 @@ public class MenuController : MonoBehaviour
     {
 		gameManager = gameManager.getInstance();
 
-	    if (gameManager.level == 1 && gameManager.groupPosition==Vector3.zero)
+	    if (gameManager.level == 1 && gameManager.getInstance().groupPosition==Vector3.zero)
 	    {
 		    Button continueButton = transform.GetChild(1).GetComponent<Button>();
 		    continueButton.enabled = false;

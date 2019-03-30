@@ -38,6 +38,11 @@ public class GroupController : MonoBehaviour, IKillTarget
 	// Start is called before the first frame update
 	void Start()
 	{
+
+	}
+
+	private void Start()
+	{
 		gameManager = FindObjectOfType<GameManager>();
 		gameManager.getInstance().currentLemmings = 7;
 
