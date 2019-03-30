@@ -1,25 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
-using Tile = UnityEngine.WSA.Tile;
 
 public class DeadlyTilemap : MonoBehaviour
 {
 	private Tilemap deadlyMap;
 	private Tilemap groundMap;
-	private UnityEngine.Tilemaps.Tile unDeadlyTile;
+	private Tile unDeadlyTile;
 
 	private void Start()
 	{
-		unDeadlyTile = Resources.Load<UnityEngine.Tilemaps.Tile>("UnDeadly");
+		unDeadlyTile = Resources.Load<Tile>("UnDeadly");
 		deadlyMap = GetComponent<Tilemap>();
 		groundMap = transform.parent.GetChild(0).GetComponent<Tilemap>();
 	}
 
 	private void OnCollisionEnter2D(Collision2D other)
 	{
+		Debug.Log(other.transform.tag);
+
 		if (other.transform.CompareTag("Player"))
 		{
 			Vector2 pos2D = other.GetContact(0).point;
@@ -33,8 +32,25 @@ public class DeadlyTilemap : MonoBehaviour
 			unDeadlyTile.transform = tempMatrix;
 			groundMap.SetTile(posOnGround, unDeadlyTile);
 		}
+		// Last minute fix
+		else if (other.transform.parent.parent.parent.name.Equals("DeadBlock"))
+		{
+			Vector2 pos2D = other.GetContact(0).point;
+			Vector3 pos = new Vector3(pos2D.x, pos2D.y, 0f);
+
+			Vector3Int posOnDeadly = deadlyMap.WorldToCell(pos);
+			deadlyMap.SetTile(posOnDeadly, null);
+		}
 
 		if (other.transform.CompareTag("Player") || other.transform.CompareTag("Group"))
+		{
+			ExecuteEvents.Execute<IKillTarget>(other.gameObject, null, (x, y) => x.Die(gameObject));
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.transform.CompareTag("Group"))
 		{
 			ExecuteEvents.Execute<IKillTarget>(other.gameObject, null, (x, y) => x.Die(gameObject));
 		}

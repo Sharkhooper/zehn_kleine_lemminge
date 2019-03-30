@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,10 +20,13 @@ public class Elevator  : MonoBehaviour
     private Rigidbody2D rigiBody;
     private float eTime = 0;
     public bool stopMoving=false;
+    private float delayBeforeStart = 1f;
+    
 
 
     void Start()
     {
+        
         parent = transform.parent;
 
         parent.GetChild(1).gameObject.GetComponent<SpriteRenderer>().enabled = false;
@@ -42,6 +45,19 @@ public class Elevator  : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+     
+//        Debug.Log(delayBeforeStart);
+        if (entered)
+        {
+            delayBeforeStart -= Time.fixedDeltaTime;
+            
+
+        }
+        if ( delayBeforeStart>0f)
+        {
+            return;
+        }
+      
         if (stopMoving) return;
 
 
@@ -93,6 +109,7 @@ public class Elevator  : MonoBehaviour
 
             if (left)
             {
+                delayBeforeStart = 1f;
                 entered = false;
             }
         }
@@ -124,7 +141,7 @@ public class Elevator  : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-	    if (!other.CompareTag("Group"))
+	    if (other.CompareTag("Player"))
 	    {
 		    entered = true;
 		    left = false;
@@ -133,7 +150,11 @@ public class Elevator  : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        left = true;
+        if (other.CompareTag("Player"))
+        {
+            
+            left = true;
+        }
     }
 
 

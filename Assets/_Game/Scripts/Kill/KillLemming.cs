@@ -11,7 +11,7 @@ public class KillLemming : MonoBehaviour, IKillTarget
 	void Start()
 	{
 		animator = GetComponent<Animator>();
-
+		groupController = FindObjectOfType<GroupController>();
 	}
 
 	public void Die(GameObject other)
