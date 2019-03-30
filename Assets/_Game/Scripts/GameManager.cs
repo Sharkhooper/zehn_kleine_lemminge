@@ -290,11 +290,9 @@ public class GameManager : MonoBehaviour
 				groupController.LemmingExitGroup(0);
 				groupController.ActiveLemming.transform.position = singlePosition;
 
-				Debug.Log("SinglePosition beim Laden: " + instance.singlePosition.x + " - " + instance.singlePosition.y);
 			}
 
-			Debug.Log("GroupPosition beim Laden: " + instance.groupPosition.x + " - " + instance.groupPosition.y);
-
+		
 			instance.singlePosition = Vector3.zero;
 			instance.groupPosition = Vector3.zero;
 		}
@@ -324,14 +322,14 @@ public class GameManager : MonoBehaviour
 		if (existSingleLemming)
 		{
 			GroupController groupController = FindObjectOfType<GroupController>();
-			if (groupText.text.Equals("Group"))
+			if (groupText.text.Equals("Single"))
 			{
 				Debug.Log("Single");
 
 				groupController.IsGroupSelected = false;
 				groupController.CamController.FocusChange = true;
 
-				groupText.text = "Single";
+				groupText.text = "Group";
 			}
 			else
 			{
@@ -340,7 +338,7 @@ public class GameManager : MonoBehaviour
 				groupController.IsGroupSelected = true;
 				groupController.CamController.FocusChange = true;
 
-				groupText.text = "Group";
+				groupText.text = "Single";
 			}
 		}
 	}

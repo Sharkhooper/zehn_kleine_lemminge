@@ -247,7 +247,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 		ActiveLemmingStatus(true);
 	}
 
-	private void ActiveLemmingStatus(bool status)
+	public void ActiveLemmingStatus(bool status)
 	{
 		ActiveLemming.GetComponent<Collider2D>().enabled = status;
 		ActiveLemming.GetComponent<Rigidbody2D>().simulated = status;
@@ -266,7 +266,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 		if (status)
 		{
-			gameManager.getInstance().groupText.text = "Single";
+			gameManager.getInstance().groupText.text = "Group";
 		}
 		else
 		{
