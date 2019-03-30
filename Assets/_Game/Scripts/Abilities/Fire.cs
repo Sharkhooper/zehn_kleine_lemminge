@@ -12,10 +12,17 @@ public class Fire : Deadly
 
 	private void OnCollisionEnter2D(Collision2D other)
 	{
-		//Debug.Log("Collided");
-		if (isActive)
+
+		if (other.transform.CompareTag("Burnable"))
 		{
-			ExecuteEvents.Execute<IKillTarget>(other.gameObject, null, (x, y) => x.Die(gameObject));
+
+
+
+			//Debug.Log("Collided");
+			if (isActive)
+			{
+				ExecuteEvents.Execute<IKillTarget>(other.gameObject, null, (x, y) => x.Die(gameObject));
+			}
 		}
 
 		Destroy(gameObject);
