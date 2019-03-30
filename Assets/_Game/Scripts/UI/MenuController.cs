@@ -73,7 +73,6 @@ public class MenuController : MonoBehaviour
 		gm.currentLemmingText.text = "Leben: " + gm.currentLemmings;
 
 		SceneManager.LoadScene("Level 1", LoadSceneMode.Single);
-
 		//gm.EnableIngameUI(true);
     }
 
@@ -82,10 +81,12 @@ public class MenuController : MonoBehaviour
 		//menuUI.SetActive(false);
 		SceneManager.LoadScene("Level " + gm.level, LoadSceneMode.Single);
 		gm.currentLemmingText.text = "Leben: " + gm.currentLemmings;
+		gameManager.playMusic.enabled = true;
+		gameManager.playMusic.Play();
 
-	/*	if (continueGameText.text.Equals("Zurück zum Spiel"))
-			gm.BackToGame_Click(groupPosition, singlePosition);
-			*/
+			if (continueGameText.text.Equals("Zurück zum Spiel"))
+				gm.getInstance().BackToGame_Click(groupPosition, singlePosition);
+				
 		//	    gm.EnableIngameUI(true);
 	}
 
