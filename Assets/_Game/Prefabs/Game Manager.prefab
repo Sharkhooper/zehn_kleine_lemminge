@@ -244,7 +244,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5147499583771585077}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6970042148868717515}
+        m_MethodName: useFire
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1155864440633242157
@@ -651,7 +662,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11351932738403734}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6970042148868717515}
+        m_MethodName: useBomb
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &3901943864943940918
@@ -1869,6 +1891,9 @@ MonoBehaviour:
   actionButton: {fileID: 8462022603242337191}
   groupButton: {fileID: 4690084536887695565}
   currentLemmingText: {fileID: 434592542853494592}
+  fireButton: {fileID: 8815723887717183530}
+  bombButton: {fileID: 2877233180917328516}
+  jumpButton: {fileID: 4719037892076706817}
 --- !u!114 &5491725386549767824
 MonoBehaviour:
   m_ObjectHideFlags: 0
