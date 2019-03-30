@@ -12,6 +12,7 @@ TagManager:
   - Explosivable
   - Bomb
   - MenuController
+  - Explosion
   layers:
   - Default
   - TransparentFX

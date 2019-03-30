@@ -88,6 +88,8 @@ GameObject:
   - component: {fileID: 2628070240855994102}
   - component: {fileID: 63313264306098145}
   - component: {fileID: 7672991103066796357}
+  - component: {fileID: 2595081301780465816}
+  - component: {fileID: 4194325868821535714}
   m_Layer: 9
   m_Name: Playable Lemming
   m_TagString: Player
@@ -280,3 +282,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groupController: {fileID: 0}
+--- !u!114 &2595081301780465816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3154503392202662250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e9be567ea8d3640a175d5fa9dc29a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireSpeed: 1.5
+  bombSpeed: 1.5
+  cooldown: 1
+--- !u!114 &4194325868821535714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3154503392202662250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c6539de7b83fcf4a8fc2ff8d9d80d3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
