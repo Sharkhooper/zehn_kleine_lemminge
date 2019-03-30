@@ -763,11 +763,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6531219523297955621}
     m_Modifications:
-    - target: {fileID: 3154503392202662250, guid: d60af0043699aaf44a1e028585e60427,
-        type: 3}
-      propertyPath: m_Name
-      value: Playable Lemming (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662240, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -822,6 +817,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154503392202662250, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: m_Name
+      value: Playable Lemming (4)
       objectReference: {fileID: 0}
     - target: {fileID: 9133135212281118022, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
@@ -888,11 +888,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6531219523297955621}
     m_Modifications:
-    - target: {fileID: 3154503392202662250, guid: d60af0043699aaf44a1e028585e60427,
-        type: 3}
-      propertyPath: m_Name
-      value: Playable Lemming (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662240, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -948,6 +943,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3154503392202662250, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: m_Name
+      value: Playable Lemming (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 9133135212281118022, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: m_IsTrigger
@@ -998,11 +998,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6531219523297955621}
     m_Modifications:
-    - target: {fileID: 3154503392202662250, guid: d60af0043699aaf44a1e028585e60427,
-        type: 3}
-      propertyPath: m_Name
-      value: Playable Lemming (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662240, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1057,6 +1052,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154503392202662250, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: m_Name
+      value: Playable Lemming (3)
       objectReference: {fileID: 0}
     - target: {fileID: 9133135212281118022, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
@@ -1128,11 +1128,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6531219523297955621}
     m_Modifications:
-    - target: {fileID: 3154503392202662250, guid: d60af0043699aaf44a1e028585e60427,
-        type: 3}
-      propertyPath: m_Name
-      value: Playable Lemming (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662240, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1187,6 +1182,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154503392202662250, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: m_Name
+      value: Playable Lemming (1)
       objectReference: {fileID: 0}
     - target: {fileID: 9133135212281118022, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
@@ -1253,11 +1253,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6531219523297955621}
     m_Modifications:
-    - target: {fileID: 3154503392202662250, guid: d60af0043699aaf44a1e028585e60427,
-        type: 3}
-      propertyPath: m_Name
-      value: Playable Lemming (5)
-      objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662240, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1313,6 +1308,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3154503392202662250, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: m_Name
+      value: Playable Lemming (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 9133135212281118022, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: m_IsTrigger
@@ -1363,11 +1363,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6531219523297955621}
     m_Modifications:
-    - target: {fileID: 3154503392202662250, guid: d60af0043699aaf44a1e028585e60427,
-        type: 3}
-      propertyPath: m_Name
-      value: Playable Lemming (7)
-      objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662240, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1423,6 +1418,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3154503392202662250, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: m_Name
+      value: Playable Lemming (7)
+      objectReference: {fileID: 0}
     - target: {fileID: 9133135212281118022, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: m_IsTrigger
@@ -1473,11 +1473,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6531219523297955621}
     m_Modifications:
-    - target: {fileID: 3154503392202662250, guid: d60af0043699aaf44a1e028585e60427,
-        type: 3}
-      propertyPath: m_Name
-      value: Playable Lemming (6)
-      objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662240, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1532,6 +1527,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3154503392202662250, guid: d60af0043699aaf44a1e028585e60427,
+        type: 3}
+      propertyPath: m_Name
+      value: Playable Lemming (6)
       objectReference: {fileID: 0}
     - target: {fileID: 9133135212281118022, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}

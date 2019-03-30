@@ -31,6 +31,10 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	private Abilities ActiveLemmingAbilities { get; set; }
 
+	private bool LemmingEnter { get; set; }
+	private bool LemmingExit { get; set; }
+	[SerializeField] public GameObject[] Waypoints;
+
 	// Start is called before the first frame update
 	void Start()
 	{
