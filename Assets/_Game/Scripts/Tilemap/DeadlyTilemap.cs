@@ -17,7 +17,7 @@ public class DeadlyTilemap : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D other)
 	{
-		Debug.Log(other.transform.parent.parent.name);
+		Debug.Log(other.transform.tag);
 
 		if (other.transform.CompareTag("Player"))
 		{
