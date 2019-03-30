@@ -58,6 +58,11 @@ public class LemmingMovement : MonoBehaviour
 
 	public void MoveHorizontal(float direction)
 	{
+		if (direction == 0)
+		{
+			BrakeMovement();
+			return;
+		}
 		// Clamp input to -1 / 1
 		if (direction > 0.1f)
 		{
