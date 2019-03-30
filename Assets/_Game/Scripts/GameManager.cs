@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 
 	public Button actionButton;
 	public Button groupButton;
+	public Button gameOverContinue;
+	public Button gameOverMainMenue;
+
 	public TextMeshProUGUI currentLemmingText;
 	private IInteractible interactebaleSwitch;
 	private GroupController groupControllerUseable;
@@ -30,6 +33,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private Button fireButton;
 	[SerializeField] private Button bombButton;
 	[SerializeField] private Button jumpButton;
+
+	public Vector3 groupPosition;
+	public Vector3 singlePosition;
 
 	//Awake is always called before any Start functions
 	void Awake()
@@ -68,6 +74,11 @@ public class GameManager : MonoBehaviour
 				instance.UnlockedAbilities["SuperJump"] = IntToBoolForDic(PlayerPrefs.GetInt("JumpP"));
 			if (PlayerPrefs.HasKey("BombP"))
 				instance.UnlockedAbilities["Power"] = IntToBoolForDic(PlayerPrefs.GetInt("BombP"));
+
+
+			instance.gameOverContinue = gameOverContinue;
+			instance.gameOverMainMenue = gameOverMainMenue;
+
 			Destroy(gameObject);
 		}
 		//Sets this to not be destroyed when reloading scene
@@ -205,46 +216,65 @@ public class GameManager : MonoBehaviour
 		playMusic.Stop();
 
 
-		/*GroupController groupController = FindObjectOfType<GroupController>();
-		MenuController menu = FindObjectOfType<MenuController>();
-		menu.ChangeContinueText("Zurück zum Spiel");
-
-		if (existSingleLemming)
-			menu.singlePosition = groupController.ActiveLemming.transform.position;
-		menu.groupPosition = groupController.transform.position;
-		*/
-		SceneManager.LoadScene("TitleMenu", LoadSceneMode.Single);
-
-		/*Button continueButton = menu.transform.GetChild(1).GetComponent<Button>();
-		continueButton.enabled = true;
-		*/
-		EnableIngameUI(false);
-	}
-	
-	public void BackToGame_Click(Vector3 gp, Vector3 sp)
-	{
-		Debug.Log("Back to Game");
-
 		GroupController groupController = FindObjectOfType<GroupController>();
-		if (sp != Vector3.zero)
-			groupController.ActiveLemming.transform.position = sp;
-		groupController.transform.position = gp;
+		SceneManager.LoadScene("TitleMenu", LoadSceneMode.Single);
+		if (existSingleLemming)
+			instance.singlePosition = groupController.ActiveLemming.transform.position;
+		if (instance.groupPosition != Vector3.zero)
+		{
+			instance.groupPosition = groupController.transform.position;
 
-		MenuController menu = FindObjectOfType<MenuController>();
-		menu.ChangeContinueText("Zurück zum Spiel");
-		menu.singlePosition = Vector3.zero;
-		menu.groupPosition = Vector3.zero;
+			currentLemmings = groupController.ActiveLemmingIndex;
+		}
+		EnableIngameUI(false);
+
+		
 	}
 	
+	public void BackToGame_Click()
+	{
+		SceneManager.sceneLoaded += OnSceneLoaded;
+	}
 
-		public GameManager getInstance()
+	void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+	{
+		GroupController groupController = FindObjectOfType<GroupController>();
+		if (SceneManager.GetActiveScene().name.Equals("Level " + level))
+		{
+			if (singlePosition != Vector3.zero)
+			{
+				currentLemmings = instance.currentLemmings;
+				Debug.Log(currentLemmings + " - " + groupController.ActiveLemmingIndex);
+				while (groupController.ActiveLemmingIndex > currentLemmings)
+				{
+					groupController.RemoveLemmingFromGroup();
+				}
+				Debug.Log("SinglePositionLoad");
+				groupController.SetActiveLemming(currentLemmings);
+				groupController.LemmingExitGroup(0);
+				groupController.ActiveLemming.transform.position = singlePosition;
+			}
+			groupController.transform.position = groupPosition;
+
+			instance.singlePosition = Vector3.zero;
+			instance.groupPosition = Vector3.zero;
+		}
+		if (SceneManager.GetActiveScene().name.Equals("GameOver"))
+		{
+			gameOverContinue.onClick.AddListener(ContinueGame_Click);
+			gameOverMainMenue.onClick.AddListener(MenuButton_Click);
+		}
+
+}
+
+	public GameManager getInstance()
 	{
 		return instance;
 	}
 
 	public void ActionButton_Click()
 	{
-		Debug.Log("Button clicked");
+		//Debug.Log("Button clicked");
 		interactebaleSwitch.ActionButtonPressed();
 	}
 
@@ -290,10 +320,25 @@ public class GameManager : MonoBehaviour
 
 	public void GameOver()
 	{
-		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
+		EnableIngameUI(false);
+		SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+		SceneManager.sceneLoaded += OnSceneLoaded;
 		currentLemmings = MaxLevelLemming;
 	}
 
+
+
+	public void ContinueGame_Click()
+	{
+		Debug.Log("Loading");
+		//menuUI.SetActive(false);
+		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
+		currentLemmingText.text = "Leben: " + MaxLevelLemming;
+		//playMusic.enabled = true;
+		//playMusic.Play();
+
+		//	    gm.EnableIngameUI(true);
+	}
 	public void useFire()
 	{
 		if (existSingleLemming)
