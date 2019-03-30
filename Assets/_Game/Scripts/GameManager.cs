@@ -16,10 +16,12 @@ public class GameManager : MonoBehaviour
 	public int level = 1;
 	public int currentLemmings = 7;
 	public bool existSingleLemming = false;
+	public int maxLemming = 10;
 
 	public Dictionary<string, bool> UnlockedAbilities { get; private set; }
 	public bool SuperJumpActivated { get; set; }
 	public int MaxLevelLemming { get; set; }
+
 
 	public Button actionButton;
 	public Button groupButton;
@@ -43,7 +45,7 @@ public class GameManager : MonoBehaviour
 		UnlockedAbilities = new Dictionary<string, bool>
 			{{"Fire", false}, {"SuperJump", false}, {"Power", false}};
 
-
+		MaxLevelLemming = maxLemming;
 		if (instance == null)
 		{
 			instance = this;
@@ -120,7 +122,7 @@ public class GameManager : MonoBehaviour
 
 	public void LoadNextLevel()
 	{
-		if (level < 4)
+		if (level < 3)
 			level++;
 		switch (level)
 		{
@@ -131,7 +133,7 @@ public class GameManager : MonoBehaviour
 				MaxLevelLemming = 4;
 				break;
 			case 3:
-				MaxLevelLemming = 3;
+				MaxLevelLemming = 4;
 				break;
 			case 4:
 				MaxLevelLemming = 3;
@@ -288,11 +290,9 @@ public class GameManager : MonoBehaviour
 				groupController.LemmingExitGroup(0);
 				groupController.ActiveLemming.transform.position = singlePosition;
 
-				Debug.Log("SinglePosition beim Laden: " + instance.singlePosition.x + " - " + instance.singlePosition.y);
 			}
 
-			Debug.Log("GroupPosition beim Laden: " + instance.groupPosition.x + " - " + instance.groupPosition.y);
-
+		
 			instance.singlePosition = Vector3.zero;
 			instance.groupPosition = Vector3.zero;
 		}
@@ -306,6 +306,8 @@ public class GameManager : MonoBehaviour
 
 	public GameManager getInstance()
 	{
+		if (instance == null)
+			instance = this;
 		return instance;
 	}
 
@@ -320,14 +322,14 @@ public class GameManager : MonoBehaviour
 		if (existSingleLemming)
 		{
 			GroupController groupController = FindObjectOfType<GroupController>();
-			if (groupText.text.Equals("Group"))
+			if (groupText.text.Equals("Single"))
 			{
 				Debug.Log("Single");
 
 				groupController.IsGroupSelected = false;
 				groupController.CamController.FocusChange = true;
 
-				groupText.text = "Single";
+				groupText.text = "Group";
 			}
 			else
 			{
@@ -336,7 +338,7 @@ public class GameManager : MonoBehaviour
 				groupController.IsGroupSelected = true;
 				groupController.CamController.FocusChange = true;
 
-				groupText.text = "Group";
+				groupText.text = "Single";
 			}
 		}
 	}
