@@ -29,6 +29,8 @@ public class GroupController : MonoBehaviour, IKillTarget
 	private Color ActiveLemmingColor { get; set; }
 	private Rigidbody2D ActiveLemmingRb { get; set; }
 
+	private Abilities ActiveLemmingAbilities { get; set; }
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -118,6 +120,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 		ActiveLemmingColor = ActiveLemming.GetComponent<SpriteRenderer>().color;
 		ActiveLemmingAnimator = ActiveLemming.GetComponent<Animator>();
 		ActiveLemmingRb = ActiveLemming.GetComponent<Rigidbody2D>();
+		ActiveLemmingAbilities = ActiveLemming.GetComponent<Abilities>();
 	}
 
 	public void RemoveLemmingFromGroup()
@@ -286,5 +289,16 @@ public class GroupController : MonoBehaviour, IKillTarget
 	{
 
 		gameManager.GameOver();
+	}
+
+
+	public void useFire()
+	{
+		ActiveLemmingAbilities.Fire();
+	}
+	
+	public void useBomb(){
+	
+		ActiveLemmingAbilities.Bomb();
 	}
 }

@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class FirePotion : MonoBehaviour
 {
-    private GameManager gameManager;
+   // private GameManager gameManager;
     private string abilityName;
-    private void Awake()
-    {
-    }
+   
+    private GameManager gameManagerScript;
 
+   
+       
+    
 
     void Start()
     {
 
-        gameManager = FindObjectOfType<GameManager>(); 
+     //   gameManager = FindObjectOfType<GameManager>(); 
         abilityName = "Fire";
         
-            
+        gameManagerScript = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
 
     }
 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        gameManager.UnlockAbility(abilityName);
+        gameManagerScript.UnlockAbility(abilityName);
+        gameManagerScript.FireButtonEnabled();
         Destroy(gameObject);
 
     }
