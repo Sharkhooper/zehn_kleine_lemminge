@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
 
 	public void LoadNextLevel()
 	{
-		if (level < 4)
+		if (level < 3)
 			level++;
 		switch (level)
 		{
