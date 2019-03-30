@@ -20,8 +20,8 @@ public class Elevator  : MonoBehaviour
     private Rigidbody2D rigiBody;
     private float eTime = 0;
     public bool stopMoving=false;
-    
-    
+
+
     void Start()
     {
         parent = transform.parent;
@@ -37,14 +37,14 @@ public class Elevator  : MonoBehaviour
 
     }
 
-   
+
 
     // Update is called once per frame
     void FixedUpdate()
     {
         if (stopMoving) return;
-        
-        
+
+
         if (forward && entered)
         {/*
             isMoving = true;
@@ -83,7 +83,7 @@ public class Elevator  : MonoBehaviour
 
         }
 
-        
+
         if ( transform.position == positionStart)
         {
             forward = true;
@@ -100,7 +100,7 @@ public class Elevator  : MonoBehaviour
         if ( transform.position==positionEnd && timer > 0)
         {
             top = false;
-            
+
             forward = false;
             //eTime = 0;
 
@@ -108,15 +108,15 @@ public class Elevator  : MonoBehaviour
         }
         else
         {
-            
+
             top = true;
         }
 
-      
-     
 
-       
-        
+
+
+
+
 
 
     }
@@ -124,9 +124,11 @@ public class Elevator  : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
-        entered = true;
-        left = false;
+	    if (!other.CompareTag("Group"))
+	    {
+		    entered = true;
+		    left = false;
+	    }
     }
 
     private void OnTriggerExit2D(Collider2D other)
