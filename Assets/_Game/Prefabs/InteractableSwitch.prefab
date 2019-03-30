@@ -99,6 +99,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: InteractebaleSwitch+BoolEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  spriteOn: {fileID: 21300000, guid: 38323ff6f7590984d8dcdfdb06ab7515, type: 3}
+  spriteOff: {fileID: 21300000, guid: 7b8213bd42005fd4f834d987c8b69ab1, type: 3}
 --- !u!61 &7453473848812878957
 BoxCollider2D:
   m_ObjectHideFlags: 0

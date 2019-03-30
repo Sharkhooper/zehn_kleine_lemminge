@@ -15,6 +15,15 @@ public class PresurePlate : MonoBehaviour
     [SerializeField] private BoolEvent onStateChange;
     private bool statusActive=true;
     private bool groupIn = false;
+    [SerializeField] private Sprite spriteOn;
+    [SerializeField] private Sprite spriteOff;
+    private SpriteRenderer spriteRenderer;
+
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -34,6 +43,16 @@ public class PresurePlate : MonoBehaviour
             onStateChange.Invoke(statusActive);
           //  Debug.Log(statusActive);
             
+          if (!statusActive)
+          {
+              // SpriteOn
+              spriteRenderer.sprite = spriteOn;
+          }
+          else
+          {
+              // SpriteOff
+              spriteRenderer.sprite = spriteOff;
+          }
         }
         else
         {
@@ -44,6 +63,17 @@ public class PresurePlate : MonoBehaviour
             statusActive = !statusActive;
             onStateChange.Invoke(statusActive);
             Debug.Log(statusActive);
+            
+            if (!statusActive)
+            {
+                // SpriteOn
+                spriteRenderer.sprite = spriteOn;
+            }
+            else
+            {
+                // SpriteOff
+                spriteRenderer.sprite = spriteOff;
+            }
         }
     }
 
