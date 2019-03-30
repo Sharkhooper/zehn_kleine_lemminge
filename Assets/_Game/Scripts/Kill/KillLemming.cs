@@ -17,8 +17,12 @@ public class KillLemming : MonoBehaviour, IKillTarget
 	public void Die(GameObject other)
 	{
 		animator.SetBool("Life", false);
-		groupController.RemoveLemmingFromGroup();
+	}
 
-		Debug.Log("Lemming gekillt");
+	private void AnimEnds()
+	{
+		animator.SetBool("Dead", true);
+		Debug.Log("Anim ends");
+		groupController.RemoveLemmingFromGroup();
 	}
 }
