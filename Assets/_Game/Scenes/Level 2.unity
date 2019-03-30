@@ -7114,16 +7114,6 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6970042148868717515, guid: bf18cb00ef043184eb50a0f82e61aba6,
-        type: 3}
-      propertyPath: groupButton
-      value: 
-      objectReference: {fileID: 177443447}
-    - target: {fileID: 6970042148868717515, guid: bf18cb00ef043184eb50a0f82e61aba6,
-        type: 3}
-      propertyPath: level
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 434592542853494592, guid: bf18cb00ef043184eb50a0f82e61aba6,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -7133,6 +7123,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970042148868717515, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: groupButton
+      value: 
+      objectReference: {fileID: 177443447}
+    - target: {fileID: 6970042148868717515, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: level
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf18cb00ef043184eb50a0f82e61aba6, type: 3}
@@ -7229,11 +7229,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3450176123358320518, guid: 27452f8a6ee77ca41b798823eab9710e,
-        type: 3}
-      propertyPath: m_Name
-      value: Group
-      objectReference: {fileID: 0}
     - target: {fileID: 3450176123358320517, guid: 27452f8a6ee77ca41b798823eab9710e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7288,6 +7283,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450176123358320518, guid: 27452f8a6ee77ca41b798823eab9710e,
+        type: 3}
+      propertyPath: m_Name
+      value: Group
       objectReference: {fileID: 0}
     - target: {fileID: 9130241724818836497, guid: 27452f8a6ee77ca41b798823eab9710e,
         type: 3}

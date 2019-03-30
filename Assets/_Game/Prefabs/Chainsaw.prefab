@@ -179,3 +179,4 @@ MonoBehaviour:
   speed: 4
   circle: 0
   vectorList: []
+  rotationSpeed: 50

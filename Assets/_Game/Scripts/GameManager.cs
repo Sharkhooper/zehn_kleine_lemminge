@@ -4,15 +4,16 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using _Game.Scripts.GameObjects;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
 	public static GameManager instance = null;
 
 	[SerializeField] public TextMeshProUGUI groupText;
+	[SerializeField] private AudioSource playMusic;
 
 	public int level = 1;
-	public int maxLemminge = 10;
 	public int currentLemmings = 7;
 	public bool existSingleLemming = false;
 
@@ -24,17 +25,32 @@ public class GameManager : MonoBehaviour
 	public Button groupButton;
 	public TextMeshProUGUI currentLemmingText;
 	private IInteractible interactebaleSwitch;
+	private GroupController groupControllerUseable;
+
+	[SerializeField] private Button fireButton;
+	[SerializeField] private Button bombButton;
+	[SerializeField] private Button jumpButton;
 
 	//Awake is always called before any Start functions
 	void Awake()
 	{
+		UnlockedAbilities = new Dictionary<string, bool>
+			{{"Fire", false}, {"SuperJump", false}, {"Power", false}};
+		
+		
 		if (PlayerPrefs.HasKey("level"))
 			level = PlayerPrefs.GetInt("level");
 		if (PlayerPrefs.HasKey("currentLemmings"))
 			currentLemmings = PlayerPrefs.GetInt("currentLemmings");
 		if (PlayerPrefs.HasKey("maxLemminge"))
-			maxLemminge = PlayerPrefs.GetInt("maxLemminge");
-
+			MaxLevelLemming = PlayerPrefs.GetInt("maxLemminge");
+		if (PlayerPrefs.HasKey("FireP"))
+			UnlockedAbilities["Fire"] = IntToBoolForDic(PlayerPrefs.GetInt("FireP"));
+		if(PlayerPrefs.HasKey("JumpP"))
+			UnlockedAbilities["SuperJump"] = IntToBoolForDic(PlayerPrefs.GetInt("JumpP"));
+		if(PlayerPrefs.HasKey("BombP"))
+			UnlockedAbilities["Power"] = IntToBoolForDic(PlayerPrefs.GetInt("BombP"));
+		
 		if (instance == null)
 			instance = this;
 		else if (instance != this)
@@ -43,16 +59,19 @@ public class GameManager : MonoBehaviour
 		//Sets this to not be destroyed when reloading scene
 		DontDestroyOnLoad(gameObject);
 
-		UnlockedAbilities = new Dictionary<string, bool>
-			{{"Fire", false}, {"SuperJump", false}, {"Power", false}};
+		
 
 		MaxLevelLemming = 7;
 	}
 
 	private void Start()
-	{ 
+	{
+	
 		groupButton.enabled = false;
 		actionButton.enabled = false;
+		fireButton.enabled= UnlockedAbilities["Fire"];
+		bombButton.enabled = UnlockedAbilities["Power"];
+		jumpButton.enabled = UnlockedAbilities["SuperJump"];
 	}
 
 	//because when you start a NewGame the UI would be active before you are in a Level Scene!
@@ -70,13 +89,17 @@ public class GameManager : MonoBehaviour
 			level++;
 		switch (level)
 		{
-			case 1: maxLemminge = 10;
+			case 1:
+				MaxLevelLemming = 7;
 				break;
-			case 2: maxLemminge = 7;
+			case 2:
+				MaxLevelLemming = 4;
 				break;
-			case 3: maxLemminge = 6;
+			case 3:
+				MaxLevelLemming = 3;
 				break;
-			case 4: maxLemminge = 6;
+			case 4:
+				MaxLevelLemming = 3;
 				break;
 			default:
 				break;
@@ -84,9 +107,13 @@ public class GameManager : MonoBehaviour
 
 		PlayerPrefs.SetInt("level", level);
 		PlayerPrefs.SetInt("currentLemmings", currentLemmings);
-		PlayerPrefs.SetInt("maxLemminge", maxLemminge);
+		PlayerPrefs.SetInt("maxLemminge", MaxLevelLemming);
+		PlayerPrefs.SetInt("FireP",BoolToIntFromDic(UnlockedAbilities["Fire"]));
+		PlayerPrefs.SetInt("BombP",BoolToIntFromDic(UnlockedAbilities["Power"]));
+		PlayerPrefs.SetInt("JumpP",BoolToIntFromDic(UnlockedAbilities["SuperJump"]));
 		PlayerPrefs.Save();
 
+		currentLemmingText.text = "Leben: " + currentLemmings;
 		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
 	}
 
@@ -100,6 +127,25 @@ public class GameManager : MonoBehaviour
 	{
 		interactebaleSwitch = switchScript;
 		actionButton.enabled = b;
+		if(b == false)
+		{
+
+		}
+	}
+
+	public void FireButtonEnabled()
+	{
+		fireButton.enabled = true;
+	}
+
+	public void BombButtonEnabled()
+	{
+		bombButton.enabled = true;
+	}
+
+	public void JumpButtonEnabled()
+	{
+		jumpButton.enabled = true;
 	}
 
 	public void UnlockAbility(string ability)
@@ -119,12 +165,59 @@ public class GameManager : MonoBehaviour
 		EnableIngameUI(false);
 	}
 
+	//public static IEnumerator FadeOut(AudioSource audioSource, float FadeTime)
+	//{
+	//	float startVolume = audioSource.volume;
+
+	//	while (audioSource.volume > 0)
+	//	{
+	//		audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
+
+	//		yield return null;
+	//	}
+
+	//	audioSource.Stop();
+	//	audioSource.volume = startVolume;
+	//}
+
 	public void MenuButton_Click()
 	{
+
+		//FadeOut(playMusic, 0.5f);
+		playMusic.Stop();
+
+
+		/*GroupController groupController = FindObjectOfType<GroupController>();
+		MenuController menu = FindObjectOfType<MenuController>();
+		menu.ChangeContinueText("Zurück zum Spiel");
+
+		if (existSingleLemming)
+			menu.singlePosition = groupController.ActiveLemming.transform.position;
+		menu.groupPosition = groupController.transform.position;
+		*/
 		SceneManager.LoadScene("TitleMenu", LoadSceneMode.Single);
+
+		/*Button continueButton = menu.transform.GetChild(1).GetComponent<Button>();
+		continueButton.enabled = true;
+		*/
 		EnableIngameUI(false);
 	}
+	/*
+	public void BackToGame_Click(Vector3 gp, Vector3 sp)
+	{
+		Debug.Log("Back to Game");
 
+		GroupController groupController = FindObjectOfType<GroupController>();
+		if (sp != Vector3.zero)
+			groupController.ActiveLemming.transform.position = sp;
+		groupController.transform.position = gp;
+
+		MenuController menu = FindObjectOfType<MenuController>();
+		menu.ChangeContinueText("Zurück zum Spiel");
+		menu.singlePosition = Vector3.zero;
+		menu.groupPosition = Vector3.zero;
+	}
+	*/
 
 	public void ActionButton_Click()
 	{
@@ -162,8 +255,11 @@ public class GameManager : MonoBehaviour
 	{
 		
 		PlayerPrefs.SetInt("level", level=1);
-		PlayerPrefs.SetInt("currentLemmings", currentLemmings=10);
-		PlayerPrefs.SetInt("maxLemminge", maxLemminge=10);
+		PlayerPrefs.SetInt("currentLemmings", currentLemmings=7);
+		PlayerPrefs.SetInt("maxLemminge", MaxLevelLemming = 7);
+		PlayerPrefs.SetInt("FireP",0);
+		PlayerPrefs.SetInt("BombP",0);
+		PlayerPrefs.SetInt("JumpP",0);
 		PlayerPrefs.Save();
 
 	}
@@ -171,6 +267,63 @@ public class GameManager : MonoBehaviour
 	public void GameOver()
 	{
 		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
-		currentLemmings = maxLemminge;
+		currentLemmings = MaxLevelLemming;
+	}
+
+	public void useFire()
+	{
+		if (existSingleLemming)
+		{
+
+
+			if (groupControllerUseable == null)
+			{
+				groupControllerUseable = FindObjectOfType<GroupController>();
+				
+			}
+			groupControllerUseable.useFire();
+		}
+	}
+
+	public void useBomb()
+	{
+		if (existSingleLemming)
+		{
+
+			if (groupControllerUseable == null)
+			{
+				groupControllerUseable = FindObjectOfType<GroupController>();
+				
+			}
+
+			groupControllerUseable.useBomb();
+		}
+	}
+
+
+	public int BoolToIntFromDic(bool a)
+	{
+		if (a)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+		
+	}
+
+	public bool IntToBoolForDic(int a)
+	{
+		if (a==1)
+		{
+			return true;
+
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

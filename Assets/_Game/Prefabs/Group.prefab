@@ -132,11 +132,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3450176123358320515}
   jumpForce: 1.1
-  speed: 2
-  landingDelay: 50
+  speed: 2.2
   superJumpForce: 2
   IsGrounded: 0
-  landingTimer: 0
 --- !u!114 &6405176231726730212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +161,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groupController: {fileID: 6516250755021112255}
+  buttonsCollider:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!61 &142731631146565872
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -750,7 +755,7 @@ PrefabInstance:
     - target: {fileID: 3154503392202662244, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: speed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662247, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
@@ -875,7 +880,7 @@ PrefabInstance:
     - target: {fileID: 3154503392202662244, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: speed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662246, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
@@ -985,7 +990,7 @@ PrefabInstance:
     - target: {fileID: 3154503392202662244, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: speed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662247, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
@@ -1115,7 +1120,7 @@ PrefabInstance:
     - target: {fileID: 3154503392202662244, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: speed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662247, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
@@ -1240,7 +1245,7 @@ PrefabInstance:
     - target: {fileID: 3154503392202662244, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: speed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662246, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
@@ -1350,7 +1355,7 @@ PrefabInstance:
     - target: {fileID: 3154503392202662244, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: speed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662246, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
@@ -1460,7 +1465,7 @@ PrefabInstance:
     - target: {fileID: 3154503392202662244, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}
       propertyPath: speed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3154503392202662247, guid: d60af0043699aaf44a1e028585e60427,
         type: 3}

@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class JumpPotion : MonoBehaviour
 {
-    private GameManager gameManager;
+   // private GameManager gameManager;
     private string abilityName;
-    private void Awake()
-    {
-    }
-
+   
+    private GameManager gameManagerScript;
 
     void Start()
     {
 
-        gameManager = FindObjectOfType<GameManager>(); 
+       // gameManager = FindObjectOfType<GameManager>(); 
         abilityName = "SuperJump";
         
-            
+        gameManagerScript = GameObject.FindWithTag("GameManager").GetComponent<GameManager>(); 
 
     }
 
@@ -25,7 +23,8 @@ public class JumpPotion : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        gameManager.UnlockAbility(abilityName);
+        gameManagerScript.UnlockAbility(abilityName);
+        gameManagerScript.JumpButtonEnabled();
         Destroy(gameObject);
 
     }
