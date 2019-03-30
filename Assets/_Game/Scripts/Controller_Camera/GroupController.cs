@@ -38,6 +38,11 @@ public class GroupController : MonoBehaviour, IKillTarget
 	// Start is called before the first frame update
 	void Awake()
 	{
+
+	}
+
+	private void Start()
+	{
 		gameManager = FindObjectOfType<GameManager>();
 		gameManager.getInstance().currentLemmings = 7;
 
@@ -72,13 +77,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 		CamController = GetComponent<CamController>();
 		CamController.initTargets(this);
-
 	}
-
-	void Start()
-	{
-		//gameManager = FindObjectOfType<GameManager>();
-		}
 
 	private void FixedUpdate()
 	{
@@ -148,7 +147,6 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void RemoveLemmingFromGroup()
 	{
-
 		gameManager.getInstance().currentLemmingText.text = "Leben: " + --gameManager.getInstance().currentLemmings;
 		if (ActiveLemmingIndex + 1 < PlayableLemmings.Length)
 		{
@@ -199,18 +197,17 @@ public class GroupController : MonoBehaviour, IKillTarget
 		ActiveLemming.GetComponent<SpriteRenderer>().color = ActiveLemmingColor;
 
 		ActiveLemmingStatus(false);
-
 	}
 
 	public void LemmingExitGroup(float z)
 	{
 		gameManager.getInstance().groupButton.enabled = true;
 
-		ActiveLemming.transform.localPosition = new Vector3(ActiveLemming.transform.localPosition.x, ActiveLemming.transform.localPosition.y, 0);
+		ActiveLemming.transform.localPosition = new Vector3(ActiveLemming.transform.localPosition.x,
+			ActiveLemming.transform.localPosition.y, 0);
 		ActiveLemming.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
 
 		ActiveLemmingStatus(true);
-
 	}
 
 	private void ActiveLemmingStatus(bool status)
@@ -224,10 +221,14 @@ public class GroupController : MonoBehaviour, IKillTarget
 		CoffinAnimator.SetBool("InGroup", !status);
 		gameManager.getInstance().existSingleLemming = status;
 
+		if (CamController == null)
+		{
+			CamController = GetComponent<CamController>();
+		}
 		CamController.FocusChange = true;
 
 		if (status)
-		{	
+		{
 			gameManager.getInstance().groupText.text = "Single";
 		}
 		else
@@ -242,6 +243,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 		{
 			isDirectionPositiv = direction > 0;
 		}
+
 		if (IsGroupSelected && !blockedInput)
 		{
 			groupMovement.MoveHorizontal(direction);
@@ -271,6 +273,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 			{
 				isDirectionPositiv = direction > 0;
 			}
+
 			groupMovement.MoveHorizontal(direction);
 		}
 		else if (!blockedInput)
@@ -280,6 +283,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 			{
 				isDirectionPositiv = direction > 0;
 			}
+
 			ActiveLemmingMovement.MoveHorizontal(direction);
 			//ActiveLemmingAnimator.SetFloat("Speed", Mathf.Abs(direction));
 			ActiveLemmingAnimator.SetBool("Walke", ActiveLemmingRb.velocity.x != 0);
@@ -330,13 +334,13 @@ public class GroupController : MonoBehaviour, IKillTarget
 		}
 		else
 		{
-			ActiveLemming.transform.position = Vector3.MoveTowards(ActiveLemming.transform.position, waypoint.transform.position, 1f * Time.deltaTime);
+			ActiveLemming.transform.position = Vector3.MoveTowards(ActiveLemming.transform.position,
+				waypoint.transform.position, 1f * Time.deltaTime);
 			ActiveLemmingAnimator.SetBool("Walke", true);
 			ActiveLemmingAnimator.SetBool("IsGrounded", true);
 			ActiveLemmingAnimator.SetFloat("Speed", 1);
 			ActiveLemming.GetComponent<SpriteRenderer>().flipX = ActiveLemmingRb.velocity.x >= 0;
 		}
-
 	}
 
 	public void MoveActiveEnter()
@@ -349,7 +353,8 @@ public class GroupController : MonoBehaviour, IKillTarget
 		}
 		else
 		{
-			ActiveLemming.transform.localPosition = Vector3.MoveTowards(ActiveLemming.transform.localPosition, ActiveLemmingGroupPosition, 1f * Time.deltaTime);
+			ActiveLemming.transform.localPosition = Vector3.MoveTowards(ActiveLemming.transform.localPosition,
+				ActiveLemmingGroupPosition, 1f * Time.deltaTime);
 			ActiveLemmingAnimator.SetBool("Walke", true);
 			ActiveLemmingAnimator.SetBool("IsGrounded", true);
 			ActiveLemmingAnimator.SetFloat("Speed", 1);
@@ -359,7 +364,6 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void Die(GameObject other)
 	{
-
 		gameManager.getInstance().GameOver();
 	}
 
@@ -368,9 +372,9 @@ public class GroupController : MonoBehaviour, IKillTarget
 	{
 		ActiveLemmingAbilities.Fire();
 	}
-	
-	public void useBomb(){
-	
+
+	public void useBomb()
+	{
 		ActiveLemmingAbilities.Bomb();
 	}
 }
