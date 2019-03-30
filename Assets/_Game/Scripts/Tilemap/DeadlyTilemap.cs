@@ -7,12 +7,13 @@ public class DeadlyTilemap : MonoBehaviour
 	private Tilemap deadlyMap;
 	private Tilemap groundMap;
 	private Tile unDeadlyTile;
+	[SerializeField] private int childTile = 0;
 
 	private void Start()
 	{
 		unDeadlyTile = Resources.Load<Tile>("UnDeadly");
 		deadlyMap = GetComponent<Tilemap>();
-		groundMap = transform.parent.GetChild(0).GetComponent<Tilemap>();
+		groundMap = transform.parent.GetChild(childTile).GetComponent<Tilemap>();
 	}
 
 	private void OnCollisionEnter2D(Collision2D other)
@@ -41,6 +42,7 @@ public class DeadlyTilemap : MonoBehaviour
 			Vector3Int posOnDeadly = deadlyMap.WorldToCell(pos);
 			deadlyMap.SetTile(posOnDeadly, null);
 		}
+		
 
 		if (other.transform.CompareTag("Player") || other.transform.CompareTag("Group"))
 		{

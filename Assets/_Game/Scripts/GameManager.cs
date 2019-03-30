@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 	public int level = 1;
 	public int currentLemmings = 7;
 	public bool existSingleLemming = false;
-	public int maxLemming = 10;
+	public int maxLemming = 7;
 
 	public Dictionary<string, bool> UnlockedAbilities { get; private set; }
 	public bool SuperJumpActivated { get; set; }
@@ -61,9 +61,11 @@ public class GameManager : MonoBehaviour
 				UnlockedAbilities["SuperJump"] = IntToBoolForDic(PlayerPrefs.GetInt("JumpP"));
 			if (PlayerPrefs.HasKey("BombP"))
 				UnlockedAbilities["Power"] = IntToBoolForDic(PlayerPrefs.GetInt("BombP"));
-			
+
 			if (level == 1)
-			FireButtonDisable();
+			{
+				FireButtonDisable();
+			}
 			else if (level==2)
 			{
 				BombButtonDisable();
@@ -85,9 +87,13 @@ public class GameManager : MonoBehaviour
 				instance.UnlockedAbilities["Power"] = IntToBoolForDic(PlayerPrefs.GetInt("BombP"));
 
 
-			if (level == 1)
-				instance.FireButtonDisable();
-			else if (level==2)
+			if (instance.level == 1)
+			{
+			//Debug.Log(level);
+			instance.FireButtonDisable();
+			
+			}
+		else if (instance.level==2)
 			{
 				instance.BombButtonDisable();
 			}
@@ -99,7 +105,7 @@ public class GameManager : MonoBehaviour
 		//Sets this to not be destroyed when reloading scene
 		DontDestroyOnLoad(gameObject);
 
-		MaxLevelLemming = 7;
+		maxLemming= MaxLevelLemming;
 	}
 
 	private void Start()
@@ -122,7 +128,7 @@ public class GameManager : MonoBehaviour
 
 	public void LoadNextLevel()
 	{
-		if (level < 3)
+		if (level < 4)
 			level++;
 		switch (level)
 		{
@@ -136,7 +142,8 @@ public class GameManager : MonoBehaviour
 				MaxLevelLemming = 4;
 				break;
 			case 4:
-				MaxLevelLemming = 3;
+				SceneManager.LoadScene("Ending", LoadSceneMode.Single);
+				ResetProgress();
 				break;
 			default:
 				break;
@@ -151,6 +158,7 @@ public class GameManager : MonoBehaviour
 		PlayerPrefs.Save();
 
 		currentLemmingText.text = "Leben: " + currentLemmings;
+		if(level<4)
 		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
 	}
 
@@ -241,6 +249,29 @@ public class GameManager : MonoBehaviour
 	//	audioSource.volume = startVolume;
 	//}
 
+	public void CreditScene()
+	{
+		playMusic.Stop();
+		EnableIngameUI(false);
+
+		//SceneManager.sceneLoaded += MenueLoad;
+		SceneManager.LoadScene("TitleMenu", LoadSceneMode.Single);
+
+	}
+
+	void MenueLoad(Scene scene, LoadSceneMode mode)
+	{
+
+		if (SceneManager.GetActiveScene().name.Equals("TitleMenu"))
+		{
+			Debug.Log("LoadCredit");
+			MenuController mC = FindObjectOfType<MenuController>();
+			mC.Credit_Click();
+
+		}
+		SceneManager.sceneLoaded -= MenueLoad;
+	}
+
 	public void MenuButton_Click()
 	{
 
@@ -301,6 +332,7 @@ public class GameManager : MonoBehaviour
 			gameOverContinue.onClick.AddListener(ContinueGame_Click);
 			gameOverMainMenue.onClick.AddListener(MenuButton_Click);
 		}
+		
 		SceneManager.sceneLoaded -= OnSceneLoaded;
 }
 
