@@ -45,11 +45,11 @@ public class InteractibleLadder : MonoBehaviour, IInteractible
 		if (lemmingRb != null)
 		{
 			Vector3 playerPos = lemmingRb.transform.position;
-			lemmingRb.velocity = Vector2.up * climbingSpeed;
+			lemmingRb.velocity = new Vector2(lemmingRb.velocity.x, climbingSpeed);
 
 			if (upperEnd.y - playerPos.y < 0.1f)
 			{
-				lemmingRb.velocity = Vector2.zero;
+				lemmingRb.velocity = new Vector2(lemmingRb.velocity.x, 0f);
 				lemmingRb = null;
 				topCollider.isTrigger = false;
 			}

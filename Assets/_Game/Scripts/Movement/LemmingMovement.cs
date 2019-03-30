@@ -7,37 +7,21 @@ public class LemmingMovement : MonoBehaviour
 {
 	[SerializeField] public Rigidbody2D rb;
 	[SerializeField] public float jumpForce = 1.1f;
-	[SerializeField] public float speed = 5;
-	[SerializeField] public float landingDelay = 50;
+	[SerializeField] public float speed = 3;
 	[SerializeField] public float superJumpForce = 2;
 
 	[SerializeField] public bool IsGrounded;
-	public bool IsCrouching { get; set; }
 	public Vector2 WindConstant { get; set; }
-	private Animator anim;
-
-	[SerializeField] private float landingTimer;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		rb.freezeRotation = true;
-		anim = GetComponent<Animator>();
 	}
 
 	void FixedUpdate()
 	{
 		//rb.AddForce(WindConstant + AdditionalVelocity);
-
-		if (IsGrounded)
-		{
-			if (landingTimer >= 0f)
-			{
-				landingTimer -= Time.deltaTime;
-			}
-
-			//if (rb.velocity < )
-		}
 	}
 
 	public void Jump(bool superJumpActivated)
@@ -52,11 +36,10 @@ public class LemmingMovement : MonoBehaviour
 			jump = new Vector2(0, jumpForce * 5f);
 		}
 
-		if (landingTimer <= 0f && IsGrounded)
+		if (IsGrounded)
 		{
 			rb.velocity = jump;
 			IsGrounded = false;
-			landingTimer = landingDelay / 1000;
 		}
 	}
 
@@ -75,6 +58,11 @@ public class LemmingMovement : MonoBehaviour
 
 	public void MoveHorizontal(float direction)
 	{
+		if (direction == 0)
+		{
+			BrakeMovement();
+			return;
+		}
 		// Clamp input to -1 / 1
 		if (direction > 0.1f)
 		{
@@ -99,7 +87,7 @@ public class LemmingMovement : MonoBehaviour
 
 		if (IsGrounded)
 		{
-			rb.velocity = new Vector2(direction * speed, 0f);
+			rb.velocity = new Vector2(direction * speed, rb.velocity.y);
 		}
 		else
 		{

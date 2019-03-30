@@ -39,6 +39,7 @@ public class InputPC : MonoBehaviour
 			ActionCoolDown = 1.0f;
 		}
 
+		/*
 		if (horizontal != 0)
 		{
 			nonZeroHorizontal = true;
@@ -48,6 +49,15 @@ public class InputPC : MonoBehaviour
 		{
 			groupController.MoveHorizontal(horizontal);
 			nonZeroHorizontal = false;
+		}
+		*/
+		if (horizontal > 0.1f || horizontal < -0.1f)
+		{
+			groupController.MoveHorizontal(horizontal);
+		}
+		else
+		{
+			groupController.MoveHorizontal(0f);
 		}
 
 		float vertical = Input.GetAxis("Vertical");
