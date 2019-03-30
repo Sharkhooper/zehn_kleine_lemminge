@@ -184,7 +184,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void LemmingEnterGroup()
 	{
-		gameManager.groupButton.enabled = false;
+		gameManager.getInstance().groupButton.enabled = false;
 
 
 		//LemmingEnter = true;
@@ -199,11 +199,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	private void LemmingExitGroup(float z)
 	{
-		gameManager.groupButton.enabled = true;
-
-		//MoveActiveExit();
-		//LemmingExit = true;
-
+		gameManager.getInstance().groupButton.enabled = true;
 		ActiveLemming.transform.localPosition = new Vector3(ActiveLemming.transform.localPosition.x, ActiveLemming.transform.localPosition.y, 0);
 		ActiveLemming.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
 

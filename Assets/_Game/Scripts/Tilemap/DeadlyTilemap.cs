@@ -26,9 +26,11 @@ public class DeadlyTilemap : MonoBehaviour
 			Vector3 pos = new Vector3(pos2D.x, pos2D.y, 0f);
 
 			Vector3Int posOnDeadly = deadlyMap.WorldToCell(pos);
+			Matrix4x4 tempMatrix = deadlyMap.GetTransformMatrix(posOnDeadly);
 			deadlyMap.SetTile(posOnDeadly, null);
 
 			Vector3Int posOnGround = groundMap.WorldToCell(pos);
+			unDeadlyTile.transform = tempMatrix;
 			groundMap.SetTile(posOnGround, unDeadlyTile);
 		}
 
