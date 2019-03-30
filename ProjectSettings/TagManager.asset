@@ -11,6 +11,7 @@ TagManager:
   - Fire
   - Explosivable
   - Bomb
+  - MenuController
   - Explosion
   layers:
   - Default
