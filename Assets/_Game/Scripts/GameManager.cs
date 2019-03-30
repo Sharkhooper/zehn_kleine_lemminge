@@ -4,12 +4,14 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using _Game.Scripts.GameObjects;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
 	public static GameManager instance = null;
 
 	[SerializeField] public TextMeshProUGUI groupText;
+	[SerializeField] private AudioSource playMusic;
 
 	public int level = 1;
 	public int currentLemmings = 7;
@@ -104,6 +106,10 @@ public class GameManager : MonoBehaviour
 	{
 		interactebaleSwitch = switchScript;
 		actionButton.enabled = b;
+		if(b == false)
+		{
+
+		}
 	}
 
 	public void UnlockAbility(string ability)
@@ -123,8 +129,28 @@ public class GameManager : MonoBehaviour
 		EnableIngameUI(false);
 	}
 
+	//public static IEnumerator FadeOut(AudioSource audioSource, float FadeTime)
+	//{
+	//	float startVolume = audioSource.volume;
+
+	//	while (audioSource.volume > 0)
+	//	{
+	//		audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
+
+	//		yield return null;
+	//	}
+
+	//	audioSource.Stop();
+	//	audioSource.volume = startVolume;
+	//}
+
 	public void MenuButton_Click()
 	{
+
+		//FadeOut(playMusic, 0.5f);
+		playMusic.Stop();
+
+
 		/*GroupController groupController = FindObjectOfType<GroupController>();
 		MenuController menu = FindObjectOfType<MenuController>();
 		menu.ChangeContinueText("Zurück zum Spiel");

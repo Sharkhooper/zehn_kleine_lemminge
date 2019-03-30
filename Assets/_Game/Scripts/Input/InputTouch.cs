@@ -11,7 +11,7 @@ public class InputTouch : MonoBehaviour
 	Vector3 start, end, movement, richtungsVector, touchStart, tempStart, originStart;
 	Touch touch;
 	[SerializeField] public GroupController groupController;
-
+	[SerializeField] private Collider2D[] buttonsCollider;
 
 
 	private void Start()
@@ -24,21 +24,16 @@ public class InputTouch : MonoBehaviour
 	{
 		if (Input.touchCount > 0)
 		{
-	/*		Ray ray = Camera.main.ScreenPointToRay(touch.position);
-			RaycastHit2D vHit = Physics2D.Raycast(ray.origin, ray.direction);
-			if (vHit.collider != null)
-			{
-				if (vHit.transform.tag == "Button")
-				{
-					vHit.transform.GetComponent<GroupController>().ActivateGroup(false);
-				}
-			}
-
-	*/
-
-
 
 			touch = Input.GetTouch(0);
+
+			//if (hitsButton(touch.position))
+			//{
+			//	return;
+			//}
+
+
+
 			if (Input.GetTouch(0).phase == TouchPhase.Began)
 			{
 
@@ -147,6 +142,14 @@ public class InputTouch : MonoBehaviour
 
 	}//Update
 
+	private bool hitsButton(Vector2 touch)
+	{
+		foreach(Collider2D col in buttonsCollider)
+		{
+			if (col.OverlapPoint(Camera.main.ScreenToWorldPoint(new Vector3(touch.x, touch.y, 10)))) return true;
+		}
+		return false;
+	}
 
 }//class
 
