@@ -17,7 +17,7 @@ public class CamController : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		
+		groupController = FindObjectOfType<GroupController>();
 
 	}
 
