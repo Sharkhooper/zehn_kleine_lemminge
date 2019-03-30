@@ -1,19 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
-using Tile = UnityEngine.WSA.Tile;
 
 public class DeadlyTilemap : MonoBehaviour
 {
 	private Tilemap deadlyMap;
 	private Tilemap groundMap;
-	private UnityEngine.Tilemaps.Tile unDeadlyTile;
+	private Tile unDeadlyTile;
 
 	private void Start()
 	{
-		unDeadlyTile = Resources.Load<UnityEngine.Tilemaps.Tile>("UnDeadly");
+		unDeadlyTile = Resources.Load<Tile>("UnDeadly");
 		deadlyMap = GetComponent<Tilemap>();
 		groundMap = transform.parent.GetChild(0).GetComponent<Tilemap>();
 	}
