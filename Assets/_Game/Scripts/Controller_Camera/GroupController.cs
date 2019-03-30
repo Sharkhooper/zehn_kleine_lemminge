@@ -36,10 +36,6 @@ public class GroupController : MonoBehaviour, IKillTarget
 	[SerializeField] public GameObject[] Waypoints;
 
 	// Start is called before the first frame update
-	void Start()
-	{
-
-	}
 
 	private void Start()
 	{
