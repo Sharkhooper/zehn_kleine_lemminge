@@ -24,12 +24,27 @@ public class InputTouch : MonoBehaviour
 	{
 		if (Input.touchCount > 0)
 		{
+	/*		Ray ray = Camera.main.ScreenPointToRay(touch.position);
+			RaycastHit2D vHit = Physics2D.Raycast(ray.origin, ray.direction);
+			if (vHit.collider != null)
+			{
+				if (vHit.transform.tag == "Button")
+				{
+					vHit.transform.GetComponent<GroupController>().ActivateGroup(false);
+				}
+			}
+
+	*/
+
+
+
 			touch = Input.GetTouch(0);
 			if (Input.GetTouch(0).phase == TouchPhase.Began)
 			{
 
 				start = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
 				originStart = start;
+				groupController.MoveHorizontal(start);
 
 				if (doubleTap == 0)
 				{
@@ -67,7 +82,7 @@ public class InputTouch : MonoBehaviour
 					else
 					{
 						doubleTap = 0;
-						groupController.MoveHorizontal(0);
+						//groupController.MoveHorizontal(end);
 						startZeit = tempTime;
 						touchStart = tempStart;
 					}
@@ -82,9 +97,9 @@ public class InputTouch : MonoBehaviour
 						float tan = richtungsVector.y / richtungsVector.x;
 						if (!(tan < 1 && tan > -1 && tan != 0))
 						{
+							groupController.ActiveLemmingMovement.BrakeMovement();
 							groupController.Jump();
-
-							//Aufstehen
+							groupController.MoveHorizontal(richtungsVector);
 						}
 					}
 					//Vlt nicht auf nem Button möglich sein
@@ -93,13 +108,16 @@ public class InputTouch : MonoBehaviour
 						groupController.MoveHorizontal(end);
 					}
 				}
-				groupController.MoveHorizontal(0);
+				//groupController.MoveHorizontal(0);
 
 			}
 
 			else if (Input.GetTouch(0).phase == TouchPhase.Moved)
 			{
-				if ((Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10)) - movement).x > 0) start = movement;
+				if ((Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10)) - movement).x > 0.5) start = movement;
+
+				else if ((Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10)) - movement).x < -0.5) start = movement;
+
 
 				movement = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
 				groupController.MoveHorizontal((movement.x - start.x));
@@ -110,8 +128,9 @@ public class InputTouch : MonoBehaviour
 					float tan = movement.y - originStart.y / movement.x - originStart.x;
 					if (!(tan < 1 && tan > -1 && tan != 0))
 					{
+						groupController.ActiveLemmingMovement.BrakeMovement();
 						groupController.Jump();
-						//lemming.MoveHorizontal(movement.y - originStart.y);
+						groupController.MoveHorizontal(movement);
 					}
 				}
 			}

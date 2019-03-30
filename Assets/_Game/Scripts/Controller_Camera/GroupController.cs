@@ -177,7 +177,8 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	private void LemmingExitGroup(float z)
 	{
-
+		Debug.Log(gameManager.name);
+		Debug.Log(gameManager.groupButton.name);
 		gameManager.groupButton.enabled = true;
 
 
