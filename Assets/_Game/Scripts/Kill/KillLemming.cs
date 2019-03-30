@@ -16,6 +16,7 @@ public class KillLemming : MonoBehaviour, IKillTarget
 
 	public void Die(GameObject other)
 	{
+		GetComponent<Rigidbody2D>().simulated = false;
 		animator.SetBool("Life", false);
 	}
 
