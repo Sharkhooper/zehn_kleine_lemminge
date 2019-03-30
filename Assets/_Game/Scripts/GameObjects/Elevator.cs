@@ -46,7 +46,7 @@ public class Elevator  : MonoBehaviour
     void FixedUpdate()
     {
      
-        Debug.Log(delayBeforeStart);
+//        Debug.Log(delayBeforeStart);
         if (entered)
         {
             delayBeforeStart -= Time.fixedDeltaTime;

@@ -59,6 +59,13 @@ public class GameManager : MonoBehaviour
 				UnlockedAbilities["SuperJump"] = IntToBoolForDic(PlayerPrefs.GetInt("JumpP"));
 			if (PlayerPrefs.HasKey("BombP"))
 				UnlockedAbilities["Power"] = IntToBoolForDic(PlayerPrefs.GetInt("BombP"));
+			
+			if (level == 1)
+			FireButtonDisable();
+			else if (level==2)
+			{
+				BombButtonDisable();
+			}
 		}
 		else if (instance != this)
 		{
@@ -76,6 +83,12 @@ public class GameManager : MonoBehaviour
 				instance.UnlockedAbilities["Power"] = IntToBoolForDic(PlayerPrefs.GetInt("BombP"));
 
 
+			if (level == 1)
+				instance.FireButtonDisable();
+			else if (level==2)
+			{
+				instance.BombButtonDisable();
+			}
 			instance.gameOverContinue = gameOverContinue;
 			instance.gameOverMainMenue = gameOverMainMenue;
 
@@ -165,16 +178,33 @@ public class GameManager : MonoBehaviour
 		fireButton.GetComponentInChildren<TextMeshProUGUI>().text = "Fire";
 	}
 
+	public void FireButtonDisable()
+	{
+		fireButton.enabled = false;
+		fireButton.GetComponentInChildren<TextMeshProUGUI>().text = "";
+	}
+
 	public void BombButtonEnabled()
 	{
 		bombButton.enabled = true;
 		bombButton.GetComponentInChildren<TextMeshProUGUI>().text = "Bomb";
+	}
+	public void BombButtonDisable()
+	{
+		bombButton.enabled = false;
+		bombButton.GetComponentInChildren<TextMeshProUGUI>().text = "";
 	}
 
 	public void JumpButtonEnabled()
 	{
 		jumpButton.enabled = true;
 		jumpButton.GetComponentInChildren<TextMeshProUGUI>().text = "Jump";
+	}
+	
+	public void JumpButtonDisable()
+	{
+		jumpButton.enabled = false;
+		jumpButton.GetComponentInChildren<TextMeshProUGUI>().text = "";
 	}
 
 	public void UnlockAbility(string ability)
@@ -313,6 +343,10 @@ public class GameManager : MonoBehaviour
 		PlayerPrefs.SetInt("FireP",0);
 		PlayerPrefs.SetInt("BombP",0);
 		PlayerPrefs.SetInt("JumpP",0);
+
+		FireButtonDisable();
+		BombButtonDisable();
+		JumpButtonDisable();
 		PlayerPrefs.Save();
 
 		playMusic.Play();

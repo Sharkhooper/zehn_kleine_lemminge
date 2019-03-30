@@ -36,7 +36,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 	[SerializeField] public GameObject[] Waypoints;
 
 	// Start is called before the first frame update
-	void Awake()
+	void Start()
 	{
 		gameManager = FindObjectOfType<GameManager>();
 		gameManager.getInstance().currentLemmings = 7;
