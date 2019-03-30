@@ -49,7 +49,7 @@ public class InteractibleLadder : MonoBehaviour, IInteractible
 
 			if (upperEnd.y - playerPos.y < 0.1f)
 			{
-				lemmingRb.velocity = new Vector2(lemmingRb.velocity.x, 0f);
+				lemmingRb.velocity = new Vector2(lemmingRb.velocity.x / 5f, 0f);
 				lemmingRb = null;
 				topCollider.isTrigger = false;
 			}
