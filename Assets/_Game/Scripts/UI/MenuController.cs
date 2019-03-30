@@ -118,6 +118,12 @@ public class MenuController : MonoBehaviour
 	    menuUI.SetActive(true);
     }
 
+
+	public void Exit_Click()
+	{
+		Debug.Log("Exit");
+		Application.Quit();
+	}
     public void OnButtonPressed(int index)
     {
 	    TextMeshProUGUI text = transform.GetChild(index).GetChild(0).GetComponent<TextMeshProUGUI>();

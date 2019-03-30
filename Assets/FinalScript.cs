@@ -31,6 +31,8 @@ public class FinalScript : MonoBehaviour
 	public void StartCutScene()
 	{
 		StartCoroutine(Final());
+		//GameManager gM = FindObjectOfType<GameManager>();
+		//gM.CreditScene();
 	}
 
 	IEnumerator Final()
@@ -85,7 +87,11 @@ public class FinalScript : MonoBehaviour
 		yield return new WaitForSeconds(5);
 		cam2.SetActive(true);
 		cam1.SetActive(false);
-		yield return new WaitForSeconds(9);
+		yield return new WaitForSeconds(11);
 		BabyAnim.SetBool("End", true);
+
+		GameManager gM = FindObjectOfType<GameManager>();
+		gM.CreditScene();
+
 	}
 }
