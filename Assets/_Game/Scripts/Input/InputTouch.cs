@@ -12,7 +12,7 @@ public class InputTouch : MonoBehaviour
 	Touch touch;
 	[SerializeField] public GroupController groupController;
 
-	
+
 
 	private void Start()
 	{
@@ -27,10 +27,10 @@ public class InputTouch : MonoBehaviour
 			touch = Input.GetTouch(0);
 			if (Input.GetTouch(0).phase == TouchPhase.Began)
 			{
-				
+
 				start = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
 				originStart = start;
-				
+
 				if (doubleTap == 0)
 				{
 					startZeit = Time.time;
@@ -52,7 +52,7 @@ public class InputTouch : MonoBehaviour
 			else if (Input.GetTouch(0).phase == TouchPhase.Ended)
 			{
 				end = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 10));
-			
+
 				//DoubleTap
 				{
 					if (doubleTap == 0)
@@ -72,7 +72,7 @@ public class InputTouch : MonoBehaviour
 						touchStart = tempStart;
 					}
 				}
-				
+
 				richtungsVector = end - originStart;
 
 				//Jump
@@ -83,7 +83,7 @@ public class InputTouch : MonoBehaviour
 						if (!(tan < 1 && tan > -1 && tan != 0))
 						{
 							groupController.Jump();
-							
+
 							//Aufstehen
 						}
 					}
@@ -115,6 +115,10 @@ public class InputTouch : MonoBehaviour
 					}
 				}
 			}
+		}
+		else
+		{
+			groupController.MoveHorizontal(0);
 		}
 
 		if(Input.touchCount==4)
