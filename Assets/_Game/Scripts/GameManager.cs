@@ -16,10 +16,12 @@ public class GameManager : MonoBehaviour
 	public int level = 1;
 	public int currentLemmings = 7;
 	public bool existSingleLemming = false;
+	public int maxLemming = 10;
 
 	public Dictionary<string, bool> UnlockedAbilities { get; private set; }
 	public bool SuperJumpActivated { get; set; }
 	public int MaxLevelLemming { get; set; }
+
 
 	public Button actionButton;
 	public Button groupButton;
@@ -43,7 +45,7 @@ public class GameManager : MonoBehaviour
 		UnlockedAbilities = new Dictionary<string, bool>
 			{{"Fire", false}, {"SuperJump", false}, {"Power", false}};
 
-
+		MaxLevelLemming = maxLemming;
 		if (instance == null)
 		{
 			instance = this;
@@ -118,7 +120,7 @@ public class GameManager : MonoBehaviour
 				MaxLevelLemming = 4;
 				break;
 			case 3:
-				MaxLevelLemming = 3;
+				MaxLevelLemming = 4;
 				break;
 			case 4:
 				MaxLevelLemming = 3;
@@ -276,6 +278,8 @@ public class GameManager : MonoBehaviour
 
 	public GameManager getInstance()
 	{
+		if (instance == null)
+			instance = this;
 		return instance;
 	}
 

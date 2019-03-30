@@ -38,14 +38,50 @@ public class GroupController : MonoBehaviour, IKillTarget
 	// Start is called before the first frame update
 	void Awake()
 	{
+		gameManager = FindObjectOfType<GameManager>();
+		if (gameManager.getInstance() == null)
+			return;
+		else
+		{	AllLemmingAnimator = GetComponentsInChildren<Animator>();
+		AllLemmingSpriteRenderer = GetComponentsInChildren<SpriteRenderer>();
 
+		int lemmingsCount = transform.GetChild(0).transform.childCount;
+		PlayableLemmings = new GameObject[lemmingsCount];
+
+		for (int i = 0; i < lemmingsCount; i++)
+		{
+			PlayableLemmings[i] = transform.GetChild(0).transform.GetChild(i).gameObject;
+		}
+
+		lemmingsCount = transform.GetChild(1).transform.childCount;
+		DummyLemmings = new GameObject[lemmingsCount];
+
+		for (int i = 0; i < lemmingsCount; i++)
+		{
+			DummyLemmings[i] = transform.GetChild(1).transform.GetChild(i).gameObject;
+		}
+
+		ActiveLemmingIndex = 0;
+		SetActiveLemming(ActiveLemmingIndex);
+			
+			while (gameManager.getInstance().currentLemmings+3 > gameManager.getInstance().maxLemming)
+			{
+				RemoveLemmingFromGroup();
+			}
+			gameManager.getInstance().currentLemmings = gameManager.getInstance().maxLemming;
+			gameManager.currentLemmingText.text = "Leben: " + gameManager.getInstance().currentLemmings;
+
+		rbGroup = GetComponent<Rigidbody2D>();
+
+		CamController = GetComponent<CamController>();
+		CamController.initTargets(this);
+	}
 	}
 
 	private void Start()
 	{
-		gameManager = FindObjectOfType<GameManager>();
-		gameManager.getInstance().currentLemmings = 7;
-
+		if(gameManager==null)
+		{	gameManager = FindObjectOfType<GameManager>();
 		AllLemmingAnimator = GetComponentsInChildren<Animator>();
 		AllLemmingSpriteRenderer = GetComponentsInChildren<SpriteRenderer>();
 
@@ -77,6 +113,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 		CamController = GetComponent<CamController>();
 		CamController.initTargets(this);
+	}
 	}
 
 	private void FixedUpdate()
