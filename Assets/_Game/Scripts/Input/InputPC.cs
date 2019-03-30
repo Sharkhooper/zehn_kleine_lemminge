@@ -2,13 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InputPC : MonoBehaviour
 {
 	[SerializeField] public GroupController groupController;
+	private GameManager gameManager;
 	private Rigidbody2D rb;
 	private bool nonZeroHorizontal;
 	private float ActionCoolDown { get; set; }
+
 
 	void Awake()
 	{
@@ -20,6 +23,7 @@ public class InputPC : MonoBehaviour
     {
 	    rb = GetComponent<Rigidbody2D>();
 		ActionCoolDown = 0;
+		gameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -66,5 +70,42 @@ public class InputPC : MonoBehaviour
 			groupController.Jump();
 		}
 
-    }
+		if (Input.GetButton("Reset")) {
+			if (!SceneManager.GetActiveScene().name.Equals("GameOver"))
+				SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+			else
+				SceneManager.LoadScene("TitleMenu", LoadSceneMode.Single);
+		}
+
+		if (Input.GetButton("Action"))
+		{
+			gameManager.getInstance().ActionButton_Click();
+		}
+
+		if (Input.GetButton("Bomb"))
+		{
+			gameManager.getInstance().useBomb();
+		}
+
+		if (Input.GetButton("Fire"))
+		{
+			gameManager.getInstance().useFire();
+		}
+
+		if(Input.GetButton("Super Jump"))
+		{
+			gameManager.getInstance().SuperJumpActivated = !gameManager.getInstance().SuperJumpActivated;
+		}
+
+		if (Input.GetButton("Cancel"))
+		{
+			gameManager.MenuButton_Click();
+		}
+
+		if(Input.GetButton("Jump to Group"))
+		{
+			gameManager.GroupButton_Click();
+		}
+
+	}
 }
