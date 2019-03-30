@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
 	[SerializeField] public TextMeshProUGUI groupText;
 
 	public int level = 1;
-	public int maxLemminge = 10;
 	public int currentLemmings = 7;
 	public bool existSingleLemming = false;
 
@@ -33,7 +32,7 @@ public class GameManager : MonoBehaviour
 		if (PlayerPrefs.HasKey("currentLemmings"))
 			currentLemmings = PlayerPrefs.GetInt("currentLemmings");
 		if (PlayerPrefs.HasKey("maxLemminge"))
-			maxLemminge = PlayerPrefs.GetInt("maxLemminge");
+			MaxLevelLemming = PlayerPrefs.GetInt("maxLemminge");
 
 		if (instance == null)
 			instance = this;
@@ -50,7 +49,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	private void Start()
-	{ 
+	{
 		groupButton.enabled = false;
 		actionButton.enabled = false;
 	}
@@ -70,13 +69,17 @@ public class GameManager : MonoBehaviour
 			level++;
 		switch (level)
 		{
-			case 1: maxLemminge = 10;
+			case 1:
+				MaxLevelLemming = 7;
 				break;
-			case 2: maxLemminge = 7;
+			case 2:
+				MaxLevelLemming = 4;
 				break;
-			case 3: maxLemminge = 6;
+			case 3:
+				MaxLevelLemming = 3;
 				break;
-			case 4: maxLemminge = 6;
+			case 4:
+				MaxLevelLemming = 3;
 				break;
 			default:
 				break;
@@ -84,9 +87,10 @@ public class GameManager : MonoBehaviour
 
 		PlayerPrefs.SetInt("level", level);
 		PlayerPrefs.SetInt("currentLemmings", currentLemmings);
-		PlayerPrefs.SetInt("maxLemminge", maxLemminge);
+		PlayerPrefs.SetInt("maxLemminge", MaxLevelLemming);
 		PlayerPrefs.Save();
 
+		currentLemmingText.text = "Leben: " + currentLemmings;
 		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
 	}
 
@@ -121,10 +125,37 @@ public class GameManager : MonoBehaviour
 
 	public void MenuButton_Click()
 	{
+		/*GroupController groupController = FindObjectOfType<GroupController>();
+		MenuController menu = FindObjectOfType<MenuController>();
+		menu.ChangeContinueText("Zurück zum Spiel");
+
+		if (existSingleLemming)
+			menu.singlePosition = groupController.ActiveLemming.transform.position;
+		menu.groupPosition = groupController.transform.position;
+		*/
 		SceneManager.LoadScene("TitleMenu", LoadSceneMode.Single);
+
+		/*Button continueButton = menu.transform.GetChild(1).GetComponent<Button>();
+		continueButton.enabled = true;
+		*/
 		EnableIngameUI(false);
 	}
+	/*
+	public void BackToGame_Click(Vector3 gp, Vector3 sp)
+	{
+		Debug.Log("Back to Game");
 
+		GroupController groupController = FindObjectOfType<GroupController>();
+		if (sp != Vector3.zero)
+			groupController.ActiveLemming.transform.position = sp;
+		groupController.transform.position = gp;
+
+		MenuController menu = FindObjectOfType<MenuController>();
+		menu.ChangeContinueText("Zurück zum Spiel");
+		menu.singlePosition = Vector3.zero;
+		menu.groupPosition = Vector3.zero;
+	}
+	*/
 
 	public void ActionButton_Click()
 	{
@@ -162,8 +193,8 @@ public class GameManager : MonoBehaviour
 	{
 		
 		PlayerPrefs.SetInt("level", level=1);
-		PlayerPrefs.SetInt("currentLemmings", currentLemmings=10);
-		PlayerPrefs.SetInt("maxLemminge", maxLemminge=10);
+		PlayerPrefs.SetInt("currentLemmings", currentLemmings=7);
+		PlayerPrefs.SetInt("maxLemminge", MaxLevelLemming = 7);
 		PlayerPrefs.Save();
 
 	}
@@ -171,6 +202,6 @@ public class GameManager : MonoBehaviour
 	public void GameOver()
 	{
 		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
-		currentLemmings = maxLemminge;
+		currentLemmings = MaxLevelLemming;
 	}
 }

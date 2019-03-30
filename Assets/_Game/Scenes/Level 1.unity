@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -363,6 +363,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19556386157785872, guid: e804e536083fc83499f1ea6ca298f699,
+        type: 3}
+      propertyPath: m_TagString
+      value: MainCamera
       objectReference: {fileID: 0}
     - target: {fileID: 19556384512477799, guid: e804e536083fc83499f1ea6ca298f699,
         type: 3}
@@ -8913,6 +8918,21 @@ PrefabInstance:
     - target: {fileID: 434592542853494592, guid: bf18cb00ef043184eb50a0f82e61aba6,
         type: 3}
       propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 434592542853494592, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: m_text
+      value: 'Leben: 7'
+      objectReference: {fileID: 0}
+    - target: {fileID: 434592542853494592, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 434592542853494592, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -18513,15 +18533,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3450176123358320518, guid: 27452f8a6ee77ca41b798823eab9710e,
-        type: 3}
-      propertyPath: m_Name
-      value: Group
-      objectReference: {fileID: 0}
     - target: {fileID: 3450176123358320517, guid: 27452f8a6ee77ca41b798823eab9710e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.96
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 3450176123358320517, guid: 27452f8a6ee77ca41b798823eab9710e,
         type: 3}
@@ -18573,6 +18588,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3450176123358320518, guid: 27452f8a6ee77ca41b798823eab9710e,
+        type: 3}
+      propertyPath: m_Name
+      value: Group
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813081734632747610, guid: 27452f8a6ee77ca41b798823eab9710e,
+        type: 3}
+      propertyPath: groupController
+      value: 
+      objectReference: {fileID: 1806163548}
     - target: {fileID: 549620252031169816, guid: 27452f8a6ee77ca41b798823eab9710e,
         type: 3}
       propertyPath: groupController
@@ -18584,11 +18609,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1806163548}
     - target: {fileID: 5232346440098688574, guid: 27452f8a6ee77ca41b798823eab9710e,
-        type: 3}
-      propertyPath: groupController
-      value: 
-      objectReference: {fileID: 1806163548}
-    - target: {fileID: 4813081734632747610, guid: 27452f8a6ee77ca41b798823eab9710e,
         type: 3}
       propertyPath: groupController
       value: 
