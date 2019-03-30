@@ -31,6 +31,10 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	private Abilities ActiveLemmingAbilities { get; set; }
 
+	private bool LemmingEnter { get; set; }
+	private bool LemmingExit { get; set; }
+	[SerializeField] public GameObject[] Waypoints;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -59,7 +63,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 		ActiveLemmingIndex = 0;
 		SetActiveLemming(ActiveLemmingIndex);
 
-		while(gameManager.currentLemmings > gameManager.MaxLevelLemming)
+		while (gameManager.currentLemmings > gameManager.MaxLevelLemming)
 		{
 			RemoveLemmingFromGroup();
 		}
@@ -72,44 +76,57 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	private void FixedUpdate()
 	{
-		foreach (var animator in AllLemmingAnimator)
+		if (!LemmingExit && !LemmingEnter)
 		{
-			if (animator != null)
+			foreach (var animator in AllLemmingAnimator)
 			{
-				//animator.SetFloat("Speed", Mathf.Abs(direction));
-				animator.SetFloat("Speed", Mathf.Abs(rbGroup.velocity.x));
-				animator.SetBool("Walke", rbGroup.velocity.x != 0);
-			}
-		}
-
-		CoffinAnimator.SetFloat("Speed", Mathf.Abs(rbGroup.velocity.x));
-		CoffinAnimator.SetBool("Walke", rbGroup.velocity.x != 0);
-
-		if (IsGroupSelected)
-		{
-			foreach (var sprite in AllLemmingSpriteRenderer)
-			{
-				if (sprite != null)
+				if (animator != null)
 				{
-					sprite.flipX = isDirectionPositiv;
+					//animator.SetFloat("Speed", Mathf.Abs(direction));
+					animator.SetFloat("Speed", Mathf.Abs(rbGroup.velocity.x));
+					animator.SetBool("Walke", rbGroup.velocity.x != 0);
 				}
 			}
 
-			CoffinSprite.flipX = isDirectionPositiv;
+			CoffinAnimator.SetFloat("Speed", Mathf.Abs(rbGroup.velocity.x));
+			CoffinAnimator.SetBool("Walke", rbGroup.velocity.x != 0);
+
+			if (IsGroupSelected)
+			{
+				foreach (var sprite in AllLemmingSpriteRenderer)
+				{
+					if (sprite != null)
+					{
+						sprite.flipX = isDirectionPositiv;
+					}
+				}
+
+				CoffinSprite.flipX = isDirectionPositiv;
+			}
+			else
+			{
+				ActiveLemmingAnimator.SetFloat("Speed", Mathf.Abs(ActiveLemmingRb.velocity.x));
+				ActiveLemmingAnimator.SetBool("Walke", ActiveLemmingRb.velocity.x != 0);
+				ActiveLemmingAnimator.SetFloat("JumpDirection", ActiveLemmingRb.velocity.y);
+				ActiveLemmingAnimator.SetBool("IsGrounded", ActiveLemmingMovement.IsGrounded);
+
+				if (ActiveLemmingRb.velocity.y <= 0.1f)
+				{
+					//ActiveLemmingAnimator.SetBool("Jumping", false);
+				}
+			}
 		}
 		else
 		{
-			ActiveLemmingAnimator.SetFloat("Speed", Mathf.Abs(ActiveLemmingRb.velocity.x));
-			ActiveLemmingAnimator.SetBool("Walke", ActiveLemmingRb.velocity.x != 0);
-			ActiveLemmingAnimator.SetFloat("JumpDirection", ActiveLemmingRb.velocity.y);
-			ActiveLemmingAnimator.SetBool("IsGrounded", ActiveLemmingMovement.IsGrounded);
-
-			if(ActiveLemmingRb.velocity.y <= 0.1f)
+			if (LemmingEnter)
 			{
-				//ActiveLemmingAnimator.SetBool("Jumping", false);
+				MoveActiveEnter();
+			}
+			else
+			{
+				MoveActiveExit();
 			}
 		}
-
 	}
 
 	public void SetActiveLemming(float index)
@@ -125,7 +142,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void RemoveLemmingFromGroup()
 	{
-		
+
 		gameManager.currentLemmingText.text = "Leben: " + --gameManager.currentLemmings;
 		if (ActiveLemmingIndex + 1 < PlayableLemmings.Length)
 		{
@@ -157,7 +174,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 		{
 			LemmingEnterGroup();
 		}
-		else if(zCoordinate!=0)
+		else if (zCoordinate != 0)
 		{
 			LemmingExitGroup(zCoordinate);
 		}
@@ -167,22 +184,23 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 	public void LemmingEnterGroup()
 	{
-		gameManager.groupButton.enabled = false;
+		gameManager.getInstance().groupButton.enabled = false;
+
+
+		//LemmingEnter = true;
+		//MoveActiveEnter();
 
 		ActiveLemming.transform.localPosition = ActiveLemmingGroupPosition;
 		ActiveLemming.GetComponent<SpriteRenderer>().color = ActiveLemmingColor;
 
 		ActiveLemmingStatus(false);
+
 	}
 
 	private void LemmingExitGroup(float z)
 	{
-		Debug.Log(gameManager.name);
-		Debug.Log(gameManager.groupButton.name);
-		gameManager.groupButton.enabled = true;
-
-
-		ActiveLemming.transform.localPosition = new Vector3(2, 0, 0);
+		gameManager.getInstance().groupButton.enabled = true;
+		ActiveLemming.transform.localPosition = new Vector3(ActiveLemming.transform.localPosition.x, ActiveLemming.transform.localPosition.y, 0);
 		ActiveLemming.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f);
 
 		ActiveLemmingStatus(true);
@@ -283,6 +301,53 @@ public class GroupController : MonoBehaviour, IKillTarget
 			{
 				vHit.transform.GetComponent<GroupController>().ActivateGroup(false);
 			}
+		}
+	}
+
+	public void MoveActiveExit()
+	{
+		GameObject waypoint;
+		if (ActiveLemmingGroupPosition.x > 0)
+		{
+			waypoint = Waypoints[1];
+		}
+		else
+		{
+			waypoint = Waypoints[0];
+		}
+
+		if (Vector3.Distance(waypoint.transform.position, ActiveLemming.transform.position) < 0.2f)
+		{
+			ActiveLemmingAnimator.SetBool("Walke", false);
+			ActiveLemmingAnimator.SetFloat("Speed", 0);
+			LemmingExit = false;
+		}
+		else
+		{
+			ActiveLemming.transform.position = Vector3.MoveTowards(ActiveLemming.transform.position, waypoint.transform.position, 1f * Time.deltaTime);
+			ActiveLemmingAnimator.SetBool("Walke", true);
+			ActiveLemmingAnimator.SetBool("IsGrounded", true);
+			ActiveLemmingAnimator.SetFloat("Speed", 1);
+			ActiveLemming.GetComponent<SpriteRenderer>().flipX = ActiveLemmingRb.velocity.x >= 0;
+		}
+
+	}
+
+	public void MoveActiveEnter()
+	{
+		if (Vector3.Distance(ActiveLemmingGroupPosition, ActiveLemming.transform.localPosition) == 0)
+		{
+			ActiveLemmingAnimator.SetBool("Walke", false);
+			ActiveLemmingAnimator.SetFloat("Speed", 0);
+			LemmingEnter = false;
+		}
+		else
+		{
+			ActiveLemming.transform.localPosition = Vector3.MoveTowards(ActiveLemming.transform.localPosition, ActiveLemmingGroupPosition, 1f * Time.deltaTime);
+			ActiveLemmingAnimator.SetBool("Walke", true);
+			ActiveLemmingAnimator.SetBool("IsGrounded", true);
+			ActiveLemmingAnimator.SetFloat("Speed", 1);
+			ActiveLemming.GetComponent<SpriteRenderer>().flipX = ActiveLemmingRb.velocity.x >= 0;
 		}
 	}
 
