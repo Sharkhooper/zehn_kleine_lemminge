@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4690084536887695565}
   m_Layer: 5
   m_Name: FindGroupButton
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 8815723887717183530}
   m_Layer: 5
   m_Name: FireButton
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 4719037892076706817}
   m_Layer: 5
   m_Name: SuperJumpButton
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 2877233180917328516}
   m_Layer: 5
   m_Name: BombButton
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -988,7 +988,7 @@ GameObject:
   - component: {fileID: 8462022603242337191}
   m_Layer: 5
   m_Name: AktionsButton
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1117,7 +1117,7 @@ GameObject:
   - component: {fileID: 704971226542493582}
   m_Layer: 5
   m_Name: MenuButton
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1704,7 +1704,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groupText: {fileID: 7393841134299425669}
   level: 1
-  maxLemminge: 10
   currentLemmings: 10
   existSingleLemming: 0
   actionButton: {fileID: 8462022603242337191}

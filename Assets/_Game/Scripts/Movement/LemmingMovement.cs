@@ -43,7 +43,7 @@ public class LemmingMovement : MonoBehaviour
 		}
 	}
 
-	private void BrakeMovement()
+	public void BrakeMovement()
 	{
 		if (rb.velocity.x < -0.1f && rb.velocity.x > 0.1f)
 		{
@@ -58,17 +58,12 @@ public class LemmingMovement : MonoBehaviour
 
 	public void MoveHorizontal(float direction)
 	{
-		if (direction == 0)
-		{
-			BrakeMovement();
-			return;
-		}
 		// Clamp input to -1 / 1
-		if (direction > 0.1f)
+		if (direction > 0)
 		{
 			direction = 1;
 		}
-		else if(direction < -0.1f)
+		else if(direction < 0)
 		{
 			direction = -1;
 		}
