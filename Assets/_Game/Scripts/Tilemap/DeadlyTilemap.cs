@@ -36,4 +36,12 @@ public class DeadlyTilemap : MonoBehaviour
 			ExecuteEvents.Execute<IKillTarget>(other.gameObject, null, (x, y) => x.Die(gameObject));
 		}
 	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.transform.CompareTag("Group"))
+		{
+			ExecuteEvents.Execute<IKillTarget>(other.gameObject, null, (x, y) => x.Die(gameObject));
+		}
+	}
 }
