@@ -110,6 +110,11 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
+		if(Application.platform == RuntimePlatform.Android)
+		{
+			Screen.SetResolution(800, 480, true);
+		}
+
 		groupButton.enabled = false;
 		actionButton.enabled = false;
 		fireButton.enabled= UnlockedAbilities["Fire"];

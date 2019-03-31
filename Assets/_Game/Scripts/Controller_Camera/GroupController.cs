@@ -64,7 +64,7 @@ public class GroupController : MonoBehaviour, IKillTarget
 		ActiveLemmingIndex = 0;
 		SetActiveLemming(ActiveLemmingIndex);
 			
-			while (gameManager.getInstance().currentLemmings+3 > gameManager.getInstance().maxLemming)
+			while (gameManager.getInstance().currentLemmings > gameManager.getInstance().maxLemming)
 			{
 				RemoveLemmingFromGroup();
 			}

@@ -16478,26 +16478,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 6970042148868717515, guid: bf18cb00ef043184eb50a0f82e61aba6,
-        type: 3}
-      propertyPath: level
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6970042148868717515, guid: bf18cb00ef043184eb50a0f82e61aba6,
-        type: 3}
-      propertyPath: maxLemming
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6970042148868717515, guid: bf18cb00ef043184eb50a0f82e61aba6,
-        type: 3}
-      propertyPath: currentLemmings
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5039903204970821658, guid: bf18cb00ef043184eb50a0f82e61aba6,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6970042148868717514, guid: bf18cb00ef043184eb50a0f82e61aba6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16553,6 +16533,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5039903204970821658, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7393841134299425669, guid: bf18cb00ef043184eb50a0f82e61aba6,
         type: 3}
       propertyPath: m_text
@@ -16594,6 +16579,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.spaceCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970042148868717515, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: level
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970042148868717515, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: maxLemming
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970042148868717515, guid: bf18cb00ef043184eb50a0f82e61aba6,
+        type: 3}
+      propertyPath: currentLemmings
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf18cb00ef043184eb50a0f82e61aba6, type: 3}
@@ -17631,12 +17631,12 @@ PrefabInstance:
     - target: {fileID: 19556386157785875, guid: e804e536083fc83499f1ea6ca298f699,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.3331184
       objectReference: {fileID: 0}
     - target: {fileID: 19556386157785875, guid: e804e536083fc83499f1ea6ca298f699,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.016998947
       objectReference: {fileID: 0}
     - target: {fileID: 19556386157785875, guid: e804e536083fc83499f1ea6ca298f699,
         type: 3}
@@ -19343,6 +19343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88f077fe5d375e468cec39724778166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  childTile: 0
 --- !u!483693784 &1875358047
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -20046,15 +20047,15 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 4248358192071150866, guid: dfb1138e6b7a4844ebd523cf63723f2e,
-        type: 3}
-      propertyPath: duration
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4248358192071150867, guid: dfb1138e6b7a4844ebd523cf63723f2e,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248358192071150866, guid: dfb1138e6b7a4844ebd523cf63723f2e,
+        type: 3}
+      propertyPath: duration
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfb1138e6b7a4844ebd523cf63723f2e, type: 3}
