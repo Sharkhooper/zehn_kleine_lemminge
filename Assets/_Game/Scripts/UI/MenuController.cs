@@ -76,6 +76,7 @@ public class MenuController : MonoBehaviour
     public void ContinueGame_Click()
     {
 		//menuUI.SetActive(false);
+		SceneManager.sceneLoaded += gameManager.OnLevelLoaded;
 		SceneManager.LoadScene("Level " + gameManager.level, LoadSceneMode.Single);
 		gameManager.currentLemmingText.text = "Leben: " + gameManager.currentLemmings;
 		gameManager.playMusic.enabled = true;

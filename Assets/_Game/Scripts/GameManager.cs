@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 			instance.FireButtonDisable();
 			
 			}
-		else if (instance.level==2)
+			else if (instance.level==2)
 			{
 				instance.BombButtonDisable();
 			}
@@ -104,13 +104,15 @@ public class GameManager : MonoBehaviour
 		}
 		//Sets this to not be destroyed when reloading scene
 		DontDestroyOnLoad(gameObject);
+		if (SceneManager.GetActiveScene().name.Contains("Level"))
+			playMusic.Play();
 
-		maxLemming= MaxLevelLemming;
+		maxLemming = MaxLevelLemming;
 	}
 
 	private void Start()
 	{
-		if(Application.platform == RuntimePlatform.Android)
+		if (Application.platform == RuntimePlatform.Android)
 		{
 			Screen.SetResolution(800, 480, true);
 		}
@@ -138,13 +140,13 @@ public class GameManager : MonoBehaviour
 		switch (level)
 		{
 			case 1:
-				MaxLevelLemming = 7;
+				getInstance().MaxLevelLemming = 7;
 				break;
 			case 2:
-				MaxLevelLemming = 4;
+				getInstance().MaxLevelLemming = 4;
 				break;
 			case 3:
-				MaxLevelLemming = 4;
+				getInstance().MaxLevelLemming = 4;
 				break;
 			case 4:
 				SceneManager.LoadScene("Ending", LoadSceneMode.Single);
@@ -153,6 +155,8 @@ public class GameManager : MonoBehaviour
 			default:
 				break;
 		}
+
+		getInstance().maxLemming = getInstance().MaxLevelLemming;
 
 		PlayerPrefs.SetInt("level", level);
 		PlayerPrefs.SetInt("currentLemmings", currentLemmings);
@@ -165,8 +169,21 @@ public class GameManager : MonoBehaviour
 		currentLemmingText.text = "Leben: " + currentLemmings;
 		if(level<4)
 		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
+
+		SceneManager.sceneLoaded += OnLevelLoaded;
 	}
 
+	public void OnLevelLoaded(Scene scene, LoadSceneMode mode)
+	{
+		GroupController groupController = FindObjectOfType<GroupController>();
+		if (SceneManager.GetActiveScene().name.Equals("Level " + level))
+		{
+			while (currentLemmings > MaxLevelLemming)
+				groupController.RemoveLemmingFromGroup();
+		}
+
+		SceneManager.sceneLoaded -= OnLevelLoaded;
+	}
 
 	public void EnableIngameUI(bool enable)
 	{
@@ -382,6 +399,10 @@ public class GameManager : MonoBehaviour
 
 	public void ResetProgress()
 	{
+		instance.currentLemmings = 7;
+		instance.MaxLevelLemming = 7;
+		instance.level = 1;
+		instance.maxLemming = 7;
 		PlayerPrefs.SetInt("level", instance.level = 1);
 		PlayerPrefs.SetInt("currentLemmings", instance.currentLemmings =7);
 		PlayerPrefs.SetInt("maxLemminge", instance.MaxLevelLemming = 7);
