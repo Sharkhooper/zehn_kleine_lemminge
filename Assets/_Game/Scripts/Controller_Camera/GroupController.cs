@@ -63,11 +63,12 @@ public class GroupController : MonoBehaviour, IKillTarget
 
 		ActiveLemmingIndex = 0;
 		SetActiveLemming(ActiveLemmingIndex);
-			
-			while (gameManager.getInstance().currentLemmings > gameManager.getInstance().maxLemming)
-			{
-				RemoveLemmingFromGroup();
-			}
+
+			//while (gameManager.getInstance().currentLemmings > gameManager.getInstance().maxLemming)
+			//{
+			//	Debug.Log("Remove im Awake");
+			//	RemoveLemmingFromGroup();
+			//}
 			gameManager.getInstance().currentLemmings = gameManager.getInstance().maxLemming;
 			gameManager.currentLemmingText.text = "Leben: " + gameManager.getInstance().currentLemmings;
 
@@ -104,17 +105,19 @@ public class GroupController : MonoBehaviour, IKillTarget
 		ActiveLemmingIndex = 0;
 		SetActiveLemming(ActiveLemmingIndex);
 
-		while (gameManager.getInstance().currentLemmings > gameManager.getInstance().MaxLevelLemming)
-		{
-			RemoveLemmingFromGroup();
-		}
+		//while (gameManager.getInstance().currentLemmings > gameManager.getInstance().MaxLevelLemming)
+		//{
+		//		Debug.Log("Remove im Start");
+		//		RemoveLemmingFromGroup();
+		//}
 
 		rbGroup = GetComponent<Rigidbody2D>();
 
 		CamController = GetComponent<CamController>();
 		CamController.initTargets(this);
+		}
 	}
-	}
+	
 
 	private void FixedUpdate()
 	{
