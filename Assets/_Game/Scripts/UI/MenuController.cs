@@ -51,6 +51,14 @@ public class MenuController : MonoBehaviour
 	  //  gm.EnableIngameUI(false);
     }
 
+	void FixedUpdate()
+	{
+		if (Input.GetKey("l"))
+		{
+			SceneManager.LoadScene("Ending", LoadSceneMode.Single);
+		}
+	}
+
 
 	public void NewGameButton_Click()
 	{

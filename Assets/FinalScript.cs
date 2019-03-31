@@ -89,6 +89,7 @@ public class FinalScript : MonoBehaviour
 		cam1.SetActive(false);
 		yield return new WaitForSeconds(11);
 		BabyAnim.SetBool("End", true);
+		yield return new WaitForSeconds(2);
 
 		GameManager gM = FindObjectOfType<GameManager>();
 		gM.CreditScene();
