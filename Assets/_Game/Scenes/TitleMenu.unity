@@ -1450,11 +1450,11 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: "Zum Einzelnden Abspalten der Gruppe Doppeltap auf die Gruppe, zum wieder
-    hinzuf\xFCgen zur Gruppe gehen und Doppeltap draufmachen.\nZum Bewegen in jeweilige
-    Richtung wischen oder tappen.\nZum Springen nach oben wichen, die Gruppe kann
-    aber nicht springen.\n\nZum F\xE4higkeiten nutzen entsprechende Buttons benutzen.\n\nZum
-    neu Laden des Levels mit vier Fingern den Bildschirm ber\xFChren.\n\nAb und an
-    muss man auch mal sterben :("
+    hinzuf\xFCgen zur Gruppe gehen und Doppeltap draufmachen.  Bzw. Q auf der Tastertur.\nZum
+    Bewegen in jeweilige Richtung wischen oder tappen. (A-D)\nZum Springen nach oben
+    wichen, die Gruppe kann aber nicht springen.  (W)\n\nZum F\xE4higkeiten nutzen
+    entsprechende Buttons benutzen.\n\nZum neu Laden des Levels mit vier Fingern den
+    Bildschirm ber\xFChren.  (R)\n\nAb und an muss man auch mal sterben :("
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}

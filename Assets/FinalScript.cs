@@ -22,6 +22,9 @@ public class FinalScript : MonoBehaviour
 	[SerializeField] private GameObject BabyGroup;
 	[SerializeField] private AudioSource audio;
 
+	[SerializeField] private GameObject text;
+	[SerializeField] private GameObject text2;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -39,7 +42,7 @@ public class FinalScript : MonoBehaviour
 	{
 		audio.Play();
 
-		yield return new WaitForSeconds(40);
+		yield return new WaitForSeconds(50);
 
 		//Lemming1.SetActive(true);
 
@@ -78,8 +81,17 @@ public class FinalScript : MonoBehaviour
 		BabyGroup.SetActive(true);
 		Group.SetActive(false);
 
-		yield return new WaitForSeconds(65);
+		text.SetActive(true);
 
+		yield return new WaitForSeconds(30);
+
+		text.SetActive(false);
+
+		yield return new WaitForSeconds(12);
+
+		text2.SetActive(true);
+
+		yield return new WaitForSeconds(11);
 
 
 		//	End

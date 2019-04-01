@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -46,6 +46,7 @@ public class InteractibleLadder : MonoBehaviour, IInteractible
 		{
 			Vector3 playerPos = lemmingRb.transform.position;
 			lemmingRb.velocity = new Vector2(lemmingRb.velocity.x / 5f, climbingSpeed);
+			lemmingRb.transform.position = new Vector2(transform.position.x, lemmingRb.transform.position.y);
 
 			if (upperEnd.y - playerPos.y < 0.1f)
 			{
