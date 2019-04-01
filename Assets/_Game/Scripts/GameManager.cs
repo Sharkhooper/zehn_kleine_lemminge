@@ -368,6 +368,8 @@ public class GameManager : MonoBehaviour
 			instance.singlePosition = Vector3.zero;
 			instance.groupPosition = Vector3.zero;
 		}
+
+		//Geht wohl doch noch nicht ganz
 		if (SceneManager.GetActiveScene().name.Equals("GameOver"))
 		{
 			gameOverContinue.onClick.AddListener(ContinueGame_Click);

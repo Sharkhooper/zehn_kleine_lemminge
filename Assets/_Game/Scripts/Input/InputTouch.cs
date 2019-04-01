@@ -146,6 +146,7 @@ public class InputTouch : MonoBehaviour
 
 		if (Input.touchCount == 6)
 		{
+			//GameManager muss sound noch ausmachen
 				SceneManager.LoadScene("Ending", LoadSceneMode.Single);
 		}
 
