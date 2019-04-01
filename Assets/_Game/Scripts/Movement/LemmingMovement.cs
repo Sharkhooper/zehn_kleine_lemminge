@@ -7,7 +7,7 @@ public class LemmingMovement : MonoBehaviour
 {
 	[SerializeField] public Rigidbody2D rb;
 	[SerializeField] public float jumpForce = 1.1f;
-	[SerializeField] public float speed = 3;
+	[SerializeField] public float speed = 1.5f;
 	[SerializeField] public float superJumpForce = 2;
 
 	[SerializeField] public bool IsGrounded;
@@ -16,6 +16,9 @@ public class LemmingMovement : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+		if (Application.platform == RuntimePlatform.Android)
+			speed = 2.7f;
+
 		rb.freezeRotation = true;
 	}
 

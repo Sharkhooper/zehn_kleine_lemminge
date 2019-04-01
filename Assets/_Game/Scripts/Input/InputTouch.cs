@@ -144,6 +144,11 @@ public class InputTouch : MonoBehaviour
 
 		}
 
+		if (Input.touchCount == 6)
+		{
+				SceneManager.LoadScene("Ending", LoadSceneMode.Single);
+		}
+
 	}//Update
 
 	private bool hitsButton(Vector2 touch)

@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
 				getInstance().MaxLevelLemming = 4;
 				break;
 			case 3:
-				getInstance().MaxLevelLemming = 4;
+				getInstance().MaxLevelLemming = 3;
 				break;
 			case 4:
 				SceneManager.LoadScene("Ending", LoadSceneMode.Single);
@@ -158,6 +158,7 @@ public class GameManager : MonoBehaviour
 
 		getInstance().maxLemming = getInstance().MaxLevelLemming;
 
+		//speichern überprüfen auf Fehler??
 		PlayerPrefs.SetInt("level", level);
 		PlayerPrefs.SetInt("currentLemmings", currentLemmings);
 		PlayerPrefs.SetInt("maxLemminge", MaxLevelLemming);
@@ -167,19 +168,37 @@ public class GameManager : MonoBehaviour
 		PlayerPrefs.Save();
 
 		currentLemmingText.text = "Leben: " + currentLemmings;
-		if(level<4)
-		SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
+		if (level < 4)
+		{
+			SceneManager.sceneLoaded += OnLevelLoaded;
+			SceneManager.LoadScene("Level " + level, LoadSceneMode.Single);
+		}
 
 		SceneManager.sceneLoaded += OnLevelLoaded;
 	}
 
+	//Entfernen zu vieler Lemminge.
 	public void OnLevelLoaded(Scene scene, LoadSceneMode mode)
 	{
 		GroupController groupController = FindObjectOfType<GroupController>();
 		if (SceneManager.GetActiveScene().name.Equals("Level " + level))
 		{
-			while (currentLemmings > MaxLevelLemming)
-				groupController.RemoveLemmingFromGroup();
+			if (currentLemmings > MaxLevelLemming)
+			{
+				currentLemmings = 7;
+				while (currentLemmings > MaxLevelLemming)
+					groupController.RemoveLemmingFromGroup();
+			}
+			else
+			{
+				int lastLemminglevel = currentLemmings;
+				currentLemmings = 7;
+				while (lastLemminglevel >= currentLemmings)
+					groupController.RemoveLemmingFromGroup();
+				
+			}
+
+
 		}
 
 		SceneManager.sceneLoaded -= OnLevelLoaded;
