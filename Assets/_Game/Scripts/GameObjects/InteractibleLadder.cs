@@ -102,7 +102,7 @@ public class InteractibleLadder : MonoBehaviour, IInteractible
 
 	public void ActionButtonPressed()
 	{
-		Debug.Log("Button pressed");
+		//Debug.Log("Button pressed");
 
 		if (playerIn)
 		{

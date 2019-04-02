@@ -304,32 +304,32 @@ public class GroupController : MonoBehaviour, IKillTarget
 		}
 	}
 
-	public void MoveHorizontal(Vector3 position)
-	{
-		if (IsGroupSelected && !blockedInput)
-		{
-			float direction = -((transform.position - position).x);
-			if (direction != 0)
-			{
-				isDirectionPositiv = direction > 0;
-			}
+	//public void MoveHorizontal(Vector3 position)
+	//{
+	//	if (IsGroupSelected && !blockedInput)
+	//	{
+	//		float direction = -((transform.position - position).x);
+	//		if (direction != 0)
+	//		{
+	//			isDirectionPositiv = direction > 0;
+	//		}
 
-			groupMovement.MoveHorizontal(direction);
-		}
-		else if (!blockedInput)
-		{
-			float direction = -((ActiveLemmingMovement.transform.position - position).x);
-			if (direction != 0)
-			{
-				isDirectionPositiv = direction > 0;
-			}
+	//		groupMovement.MoveHorizontal(direction);
+	//	}
+	//	else if (!blockedInput)
+	//	{
+	//		float direction = -((ActiveLemmingMovement.transform.position - position).x);
+	//		if (direction != 0)
+	//		{
+	//			isDirectionPositiv = direction > 0;
+	//		}
 
-			ActiveLemmingMovement.MoveHorizontal(direction);
-			//ActiveLemmingAnimator.SetFloat("Speed", Mathf.Abs(direction));
-			ActiveLemmingAnimator.SetBool("Walke", ActiveLemmingRb.velocity.x != 0);
-			ActiveLemming.GetComponent<SpriteRenderer>().flipX = isDirectionPositiv;
-		}
-	}
+	//		ActiveLemmingMovement.MoveHorizontal(direction);
+	//		//ActiveLemmingAnimator.SetFloat("Speed", Mathf.Abs(direction));
+	//		ActiveLemmingAnimator.SetBool("Walke", ActiveLemmingRb.velocity.x != 0);
+	//		ActiveLemming.GetComponent<SpriteRenderer>().flipX = isDirectionPositiv;
+	//	}
+	//}
 
 	public void Jump()
 	{

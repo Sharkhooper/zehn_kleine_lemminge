@@ -317,6 +317,9 @@ public class GameManager : MonoBehaviour
 	{
 
 		//FadeOut(playMusic, 0.5f);
+
+		//aktuellePosition der Zeit
+		//playMusic.time;
 		playMusic.Stop();
 
 

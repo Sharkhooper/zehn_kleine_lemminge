@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
@@ -34,6 +34,14 @@ public class DeadlyTilemap : MonoBehaviour
 			groundMap.SetTile(posOnGround, unDeadlyTile);
 		}
 		// Last minute fix
+		else if (other.transform.parent.name.Equals("DeadBlock"))
+		{
+			Vector2 pos2D = other.GetContact(0).point;
+			Vector3 pos = new Vector3(pos2D.x, pos2D.y, 0f);
+
+			Vector3Int posOnDeadly = deadlyMap.WorldToCell(pos);
+			deadlyMap.SetTile(posOnDeadly, null);
+		}
 		else if (other.transform.parent.parent.parent.name.Equals("DeadBlock"))
 		{
 			Vector2 pos2D = other.GetContact(0).point;
