@@ -224,10 +224,14 @@ public class InputTouch : MonoBehaviour
 						}
 					}
 					//Vlt nicht auf nem Button möglich sein
-					//else if (Mathf.Abs(richtungsVector.x) <= 2 && Mathf.Abs(richtungsVector.y) <= 2)
-					//{
-					//	groupController.MoveHorizontal(end.y-start.y);
-					//}
+					else if (Mathf.Abs(richtungsVector.x) <= Screen.height * 10 / 100 && Mathf.Abs(richtungsVector.y) <= Screen.height * 10 / 100)
+					{
+						if(end.x<Screen.width /2)
+						groupController.MoveHorizontal(-1);
+						else
+							groupController.MoveHorizontal(1);
+
+					}
 				}
 				//groupController.MoveHorizontal(0);
 
@@ -236,9 +240,9 @@ public class InputTouch : MonoBehaviour
 			else if (Input.GetTouch(0).phase == TouchPhase.Moved)
 			{
 				Vector3 currentTouch = touch.position;
-				if ((currentTouch - movement).x > 0) start = movement;
+				if ((currentTouch - movement).x > 5) start = movement;
 
-				else if ((currentTouch - movement).x < 0) start = movement;
+				else if ((currentTouch - movement).x < -5) start = movement;
 
 
 				movement = touch.position;
